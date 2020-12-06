@@ -8,19 +8,15 @@ public class Player : MonoBehaviour
     public float speed = 10;
     public float JumpSpeed = 100.0f;
     public float runMultiplier = 1.2f;
+    private float runAdjustment = 1.0f;
 
-    private Rigidbody rb;
     private Vector3 movementVec;
     private int nJumps = 0;
-    public float runAdjustment = 1.0f;
 
-    InputAction runAction;
-
-
+    private Rigidbody rb;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        runAction = GetComponent<PlayerInput>().actions["Run"];
 
     }
 
