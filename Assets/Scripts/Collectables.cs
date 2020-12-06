@@ -17,7 +17,7 @@ public class Collectables : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider col)
     {
         Level.score++;
         Debug.Log(Level.score);
