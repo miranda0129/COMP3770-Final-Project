@@ -1,50 +1,64 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
     public float speed = 10;
     public float JumpSpeed = 100.0f;
-    public float thrust = 1.0f;
-    private Rigidbody rb;
+    public float runMultiplier = 1.2f;
 
-    public bool setVelocity;
-    public Vector3 velocity;
-    public Vector3 currentVelocity;
+    private Rigidbody rb;
+    private Vector3 movementVec;
+    private int nJumps = 0;
+    public float runAdjustment = 1.0f;
+
+    InputAction runAction;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        runAction = GetComponent<PlayerInput>().actions["Run"];
+
     }
 
-    private void Update()
+    void Update()
     {
-        if (setVelocity)
-        {
-            setVelocity = false;
-            rb.velocity = velocity;
+
+    }
+
+    void FixedUpdate() {
+
+        // Apply movement
+        rb.AddForce(movementVec * speed * runAdjustment);
+
+    }
+
+    void OnCollisionEnter(Collision col) {
+
+        nJumps = 0;     // TODO: this will change as we have different colliders to do different things.
+	}
+
+    /* Controls */
+    public void OnJump() {
+        if(nJumps < 2) {
+            rb.AddForce(Vector3.up * JumpSpeed, ForceMode.Impulse);
+            nJumps++;
         }
+	}
 
-        if (Input.GetKeyUp(KeyCode.Space))
-            Jump();
-    }
+    public void OnMove(InputValue input) {
 
-    void FixedUpdate()
-    {
-        if (Input.GetKey(KeyCode.A))
-            rb.AddForce(Vector3.left * thrust, ForceMode.Impulse);
-        if (Input.GetKey(KeyCode.D))
-            rb.AddForce(Vector3.right * thrust, ForceMode.Impulse);
-        if (Input.GetKey(KeyCode.W))
-            rb.AddForce(Vector3.forward * thrust, ForceMode.Impulse);
-        if (Input.GetKey(KeyCode.S))
-            rb.AddForce(Vector3.back * thrust, ForceMode.Impulse);
-    }
+        Vector2 inputVec = input.Get<Vector2>();
+        movementVec = new Vector3(inputVec.x, 0, inputVec.y);       // translate 2D vector into 3D space
+        
+	}
 
-    void Jump()
-    {
-        rb.AddForce(new Vector3(0, 1, 0) * JumpSpeed, ForceMode.Impulse);
-    }
+    public void OnRun(InputValue input) {
+
+        if(input.isPressed) runAdjustment = runMultiplier;
+        else runAdjustment = 1.0f;
+	}
 }
