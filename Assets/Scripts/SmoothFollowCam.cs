@@ -2,20 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmoothFollowCam : MonoBehaviour
-{
+public class SmoothFollowCam : MonoBehaviour {
     public Transform target;
+    private Vector3 endPos;
+    private Vector3 startPos;
+
     public float smoothTime = 0.3f;
-    private Vector3 velocity = Vector3.zero;
+    private float elapsedTime = 0.0f;
     public float cameraHeight = 0;
 
-    private Vector3 previousPosition;
 
-    void LateUpdate() {
-        Vector3 targetPosition = target.TransformPoint(new Vector3(0, cameraHeight, -10));
-        Vector3 desiredPosition = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
-        transform.position = new Vector3(Mathf.Clamp(desiredPosition.x, previousPosition.x, targetPosition.x + 20f), desiredPosition.y, desiredPosition.z);
-        previousPosition = transform.position;
+    void Start() {
+        endPos = target.TransformPoint(new Vector3(0, cameraHeight, -10));
+        transform.position = endPos;
+        startPos = transform.position;
     }
 
+    // Use fixed update because we are following an object affected by physics: 
+    // (Late Update will cause jittery behaviour since multiple fixed update frames will have completed while late update only once.)
+    void FixedUpdate() {
+        elapsedTime += Time.deltaTime;
+
+        transform.position = Vector3.Lerp(startPos, endPos, (elapsedTime / smoothTime));
+
+        if(Vector3.Distance(transform.position, endPos) <= 0.1f || elapsedTime >= smoothTime) {
+            startPos = transform.position;
+            Vector3 desiredPosition = target.TransformPoint(new Vector3(0, cameraHeight, -10));
+            endPos = new Vector3(Mathf.Clamp(desiredPosition.x, startPos.x, startPos.x + 10), desiredPosition.y, desiredPosition.z);
+            elapsedTime = 0.0f;
+        }
+    }
 }
