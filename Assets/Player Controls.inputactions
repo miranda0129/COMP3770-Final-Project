@@ -11,7 +11,7 @@
                     "id": "da9c83ad-fe07-465c-ab2d-6389ee7fdba4",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(behavior=2)"
                 },
                 {
                     "name": "Move",
