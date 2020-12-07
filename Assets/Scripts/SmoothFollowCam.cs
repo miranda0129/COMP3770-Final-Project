@@ -13,14 +13,19 @@ public class SmoothFollowCam : MonoBehaviour {
 
 
     void Start() {
-        endPos = target.TransformPoint(new Vector3(0, cameraHeight, -10));
-        transform.position = endPos;
-        startPos = transform.position;
+        init();
     }
 
     // Use fixed update because we are following an object affected by physics: 
     // (Late Update will cause jittery behaviour since multiple fixed update frames will have completed while late update only once.)
     void FixedUpdate() {
+
+        // refind the player on player death.
+        if(target == null) {
+            target = GameObject.Find("Player").transform;
+            init();
+        }
+
         elapsedTime += Time.deltaTime;
 
         transform.position = Vector3.Lerp(startPos, endPos, (elapsedTime / smoothTime));
@@ -31,5 +36,13 @@ public class SmoothFollowCam : MonoBehaviour {
             endPos = new Vector3(Mathf.Clamp(desiredPosition.x, startPos.x, startPos.x + 10), desiredPosition.y, desiredPosition.z);
             elapsedTime = 0.0f;
         }
+    }
+
+    void init() {
+        endPos = target.TransformPoint(new Vector3(0, cameraHeight, -10));
+        transform.position = endPos;
+        startPos = transform.position;
+        elapsedTime = 0;
+
     }
 }

@@ -112,8 +112,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  JumpSpeed: 20
-  runMultiplier: 1.2
+  JumpSpeed: 3.16
+  fallMultiplier: 3.41
+  lowJumpMultiplier: 2
+  runMultiplier: 2
+  jumpTime: 0.15
+  nJumps: 0
+  isSafe: 0
 --- !u!54 &4146604465921474012
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -124,7 +129,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 3
   m_Drag: 0.3
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.56
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0

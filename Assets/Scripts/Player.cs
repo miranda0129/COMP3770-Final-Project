@@ -34,32 +34,33 @@ public class Player : MonoBehaviour
 
     void FixedUpdate() {
 
+        // Apply movement
+        rb.AddForce(movementVec * speed * runAdjustment, ForceMode.Force);
 
         // Apply Jumps
         currentJumpTime += Time.deltaTime;
         if(currentJumpTime < jumpTime) {
-            rb.AddForce(jumpVec * JumpSpeed, ForceMode.Impulse);   
+            rb.AddForce(jumpVec * JumpSpeed, ForceMode.Impulse);
+
         }
 
         //faster falling
         if(rb.velocity.y < 0) {
-            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1);
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
 
         //control jump height by length of time jump button held
         if(jumpVec == Vector3.zero && rb.velocity.y > 0) {
-            rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1);
+            rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
-
-        // Apply movement
-        rb.AddForce(movementVec * speed * runAdjustment, ForceMode.Force);
+        
 
     }
 
     void OnCollisionEnter(Collision col) {
 
         nJumps = 0;     // TODO: this will change as we have different colliders to do different things.
-        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        // rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
     }
 
     /* Controls */

@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7503775933087940932}
-  m_Layer: 0
-  m_Name: 1x2
+  m_Layer: 9
+  m_Name: 2x1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 2924231611573906514}
   - component: {fileID: 3269151318673567472}
   - component: {fileID: 3871742439512911333}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: geometry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
