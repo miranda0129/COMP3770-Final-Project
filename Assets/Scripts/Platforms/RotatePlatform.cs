@@ -5,7 +5,7 @@ using UnityEngine;
 public class RotatePlatform : MonoBehaviour
 {
 
-     public float timer = 1.0f;
+     public float timeToRotate = 1.0f;
 
      private float elapsedTime = 0.0f;
      public Vector3 eulerRotation;
@@ -25,9 +25,9 @@ public class RotatePlatform : MonoBehaviour
           elapsedTime += Time.deltaTime;
 
 
-          transform.rotation = Quaternion.Lerp(currentRotation, currentRotation * targetRotation, (elapsedTime / timer));
+          transform.rotation = Quaternion.Lerp(currentRotation, currentRotation * targetRotation, (elapsedTime / timeToRotate));
 
-          if (elapsedTime >= timer) {
+          if (elapsedTime >= timeToRotate) {
                currentRotation = transform.rotation;
                elapsedTime = 0.0f;
           }
