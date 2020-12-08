@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8151646093856583238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalPosition: {x: 6, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9139199975993903752}
@@ -72,13 +72,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9f792a07794ac47ae578b5111b83e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 3
+  timeToDestination: 5
   pauseLength: 0.5
-  startPos: {x: 0, y: 0, z: 0}
-  endPos: {x: 0, y: 0, z: 0}
   startWaypoint: {fileID: 4692828548483110353}
   endWaypoint: {fileID: 8151646093856583238}
-  width: 2
+  leftToRight: 1
+  refreshGizmos: 1
 --- !u!1001 &4275682970779293465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -86,9 +85,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2211210796338924526, guid: 248ade7143a8e0144929f997e1ca5eed, type: 3}
+      propertyPath: rightAnchor.x
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5008762508460989840, guid: 248ade7143a8e0144929f997e1ca5eed, type: 3}
       propertyPath: m_Name
-      value: Moving Platform 2x0.5 Variant
+      value: Moving Platform 2x2
       objectReference: {fileID: 0}
     - target: {fileID: 5008762508460989841, guid: 248ade7143a8e0144929f997e1ca5eed, type: 3}
       propertyPath: m_LocalPosition.x

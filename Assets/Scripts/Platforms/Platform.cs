@@ -30,7 +30,10 @@ public class Platform : MonoBehaviour
     }
 
     public void SetLeftAnchor(Vector3 left) { leftAnchor = left; }
+    public Vector3 GetLeftAnchor() { return leftAnchor; }
     public void SetRightAnchor(Vector3 right) { rightAnchor = right; }
+    public Vector3 GetRightAnchor() { return rightAnchor; }
+    public int GetWidth() { return width; }
 
     void OnDrawGizmosSelected() {
 
