@@ -61,6 +61,22 @@ public class Player : MonoBehaviour
 
         nJumps = 0;     // TODO: this will change as we have different colliders to do different things.
         // rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+
+        if(col.gameObject.name == "Teleport Powerup")
+        {
+            Debug.Log("Player hit teleport powerup");
+            GameObject.Destroy(col.gameObject);
+
+            gameObject.AddComponent<TeleportPowerup>();
+        }
+
+        if (col.gameObject.name == "Lazerbeam Powerup")
+        {
+            Debug.Log("Player hit lazerbeam powerup");
+            GameObject.Destroy(col.gameObject);
+
+            gameObject.AddComponent<LazerBeamPowerup>();
+        }
     }
 
     /* Controls */
