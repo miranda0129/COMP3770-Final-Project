@@ -33,7 +33,10 @@ public class SmoothFollowCam : MonoBehaviour {
         if(Vector3.Distance(transform.position, endPos) <= 0.1f || elapsedTime >= smoothTime) {
             startPos = transform.position;
             Vector3 desiredPosition = target.TransformPoint(new Vector3(0, cameraHeight, -10));
-            endPos = new Vector3(Mathf.Clamp(desiredPosition.x, startPos.x, startPos.x + 10), desiredPosition.y, desiredPosition.z);
+
+            // This line is causing the weird behaviour... need to figure out a fix while maintaining the intended behaviour.
+            endPos = new Vector3(Mathf.Clamp(desiredPosition.x, startPos.x, Mathf.Infinity), desiredPosition.y, desiredPosition.z);
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             elapsedTime = 0.0f;
         }
     }
