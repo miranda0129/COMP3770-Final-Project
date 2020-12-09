@@ -21,10 +21,18 @@ public class Player : MonoBehaviour
 
     private Rigidbody rb;
     public bool isSafe = false;
+    private LineRenderer lineRenderer;
+    private Vector3 mousePosition;
+
+    private int teleCountRemaining;
+    private PlayerInput inputManager;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         currentJumpTime = jumpTime;
+        lineRenderer = GameObject.Find("Line Renderer").GetComponent<LineRenderer>();
+        inputManager = gameObject.GetComponent<PlayerInput>();
     }
 
     void Update()
@@ -62,20 +70,28 @@ public class Player : MonoBehaviour
         nJumps = 0;     // TODO: this will change as we have different colliders to do different things.
         // rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
-        if(col.gameObject.name == "Teleport Powerup")
-        {
+        
+
+        
+    }
+
+    void OnTriggerEnter(Collider col) {
+
+        // Teleport Pickup
+        if(col.gameObject.name == "Teleport Powerup") {
             Debug.Log("Player hit teleport powerup");
             GameObject.Destroy(col.gameObject);
 
-            gameObject.AddComponent<TeleportPowerup>();
+            teleCountRemaining = 5;
+            inputManager.SwitchCurrentActionMap("TeleportMode");
         }
 
-        if (col.gameObject.name == "Lazerbeam Powerup")
-        {
+        // Lazer Pickup
+        if(col.gameObject.name == "Lazerbeam Powerup") {
             Debug.Log("Player hit lazerbeam powerup");
             GameObject.Destroy(col.gameObject);
 
-            gameObject.AddComponent<LazerBeamPowerup>();
+            StartCoroutine(LazerTimer());
         }
     }
 
@@ -103,4 +119,63 @@ public class Player : MonoBehaviour
         if(input.isPressed) runAdjustment = runMultiplier;
         else runAdjustment = 1.0f;
 	}
+
+    public void OnLazer(InputValue input) {
+
+        if(input.isPressed) {
+            lineRenderer.enabled = true;
+            mousePosition = Mouse.current.position.ReadValue();
+            Vector3 clickPosition = Camera.main.ScreenToWorldPoint(mousePosition + new Vector3(0, 0, 10)); //get click position
+            clickPosition = new Vector3(clickPosition.x, clickPosition.y, 0);
+            Vector3 direction = clickPosition - transform.position; //calculate ray direction from player to click point
+            float maxDistance = direction.magnitude; // distance from player to click for raycast maxDistance
+
+            //render laser 
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(1, clickPosition);
+            lineRenderer.enabled = true;
+
+            //play audio clip if available
+            // if(pew != null) { AudioSource.PlayClipAtPoint(pew, transform.position); }
+
+            //stores all hit objects
+            RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, maxDistance); //cast ray
+
+            //destory every enemy hit in between player & max distance
+            for(int i = 0; i < hits.Length; i++) {
+                RaycastHit hit = hits[i];
+                Debug.Log("Hit object: " + hit.collider.gameObject.name);
+
+                //destory only if tagged as enemy
+                if(hit.collider.gameObject.tag == "Enemy") { Destroy(hit.collider.gameObject); }
+            }
+        } else {
+            lineRenderer.enabled = false;
+		}
+    }
+
+    public void OnTeleport() {
+        //play audio clip if available
+        // if(pop != null) { AudioSource.PlayClipAtPoint(pop, transform.position); }
+
+        //get mouse position and set transform there
+        mousePosition = Mouse.current.position.ReadValue();
+        Vector3 clickPosition = Camera.main.ScreenToWorldPoint(mousePosition + new Vector3(0, 0, 10)); //get click position
+        Debug.Log(clickPosition);
+        transform.position = clickPosition;
+        teleCountRemaining--;
+
+        if(teleCountRemaining <= 0) {
+            inputManager.SwitchCurrentActionMap("Normal (No Powerups)");
+        }
+    } 
+
+    /* Powerup Timers */
+    IEnumerator LazerTimer() {
+        inputManager.SwitchCurrentActionMap("LazerMode");
+        yield return new WaitForSeconds(30);
+        inputManager.SwitchCurrentActionMap("Normal (No Powerups)");
+        Debug.Log("Laserbeam powerup time out");
+    }
+
 }
