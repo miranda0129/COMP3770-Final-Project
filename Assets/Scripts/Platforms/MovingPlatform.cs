@@ -8,7 +8,7 @@ public class MovingPlatform : MonoBehaviour
 
     private Platform platform;
     [Header("Timers")]
-    private int width;
+    private float width;
     public float timeToDestination = 5.0f;
     public float pauseLength = 1.0f;
     private float elapsedTime = 0f;
@@ -21,6 +21,7 @@ public class MovingPlatform : MonoBehaviour
 
     [Tooltip("Should the platform start at the starting waypoint, or the ending waypoint?")]
     public bool leftToRight = true;
+    public bool verticalMovement = false;
 
     // platform position information
     private Vector3 startPos = Vector3.zero;
@@ -37,15 +38,33 @@ public class MovingPlatform : MonoBehaviour
     void Start()
     {
         platform = gameObject.GetComponent<Platform>();
+        width = platform.GetWidth();
 
-        if (startWaypoint != null) startPos = startWaypoint.transform.position;
-        if (endWaypoint != null) endPos = endWaypoint.transform.position;
-        currPos = transform.position;
+
+        if(platform.moveWaypointToAnchor) {
+
+            startPos = platform.GetLeftAnchor();
+            Vector3 newWaypoint = platform.GetRightAnchor();
+            if(!verticalMovement) newWaypoint.x -= width;
+            endWaypoint.transform.position = newWaypoint;
+
+        } else {
+
+            startPos = startWaypoint.transform.position;
+            endPos = endWaypoint.transform.position;
+
+            platform.SetLeftAnchor(startPos);
+
+        }
 
         endingEdge = endPos;
         endingEdge.x += width;
 
         platform.SetRightAnchor(endingEdge);
+
+        currPos = transform.position;
+        endPos = endWaypoint.transform.position;
+
     }
 
     // Update is called once per frame
@@ -65,7 +84,7 @@ public class MovingPlatform : MonoBehaviour
 
             transform.position = Vector3.Lerp(startPos, endPos, (elapsedTime / timeToDestination));
 
-            if (Vector3.Distance(transform.position, endPos) <= 0.1f || elapsedTime >= timeToDestination) {
+            if (Vector3.Distance(transform.position, endPos) <= 0.01f || elapsedTime >= timeToDestination) {
 
                 leftToRight = false;
                 elapsedTime = 0.0f;
@@ -98,7 +117,6 @@ public class MovingPlatform : MonoBehaviour
         if(leftToRight) Gizmos.color = Color.green;
         else Gizmos.color = Color.white;
         Vector3 endingEdge = endPos;
-        endingEdge.x += width;
         Gizmos.DrawSphere(endingEdge, 0.1f);
 
         Gizmos.color = Color.white;
@@ -109,14 +127,33 @@ public class MovingPlatform : MonoBehaviour
     // update position values on editor change.
     void OnValidate() {
 
-        if(startWaypoint != null) startPos = startWaypoint.transform.position;
-        if(endWaypoint != null)     endPos = endWaypoint.transform.position;
-
         platform = gameObject.GetComponent<Platform>();
-        width = platform.width;
+        width = platform.GetWidth();
+        
+
+        if(platform.moveWaypointToAnchor) {
+            
+            startPos = platform.GetLeftAnchor();
+            Vector3 newWaypoint = platform.GetRightAnchor();
+            if(!verticalMovement) newWaypoint.x -= width;
+            endWaypoint.transform.position = newWaypoint;
+
+        } else {
+
+            startPos = startWaypoint.transform.position;
+            endPos = endWaypoint.transform.position;
+
+            platform.SetLeftAnchor(startPos);
+           
+        }
+
         endingEdge = endPos;
         endingEdge.x += width;
 
         platform.SetRightAnchor(endingEdge);
+
+        currPos = transform.position;
+        endPos = endWaypoint.transform.position;
+
     }
 }

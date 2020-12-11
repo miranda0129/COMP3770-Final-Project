@@ -8,19 +8,24 @@ public class Platform : MonoBehaviour
 
 
     [Header("Spawn Location")]
-    public Vector3 spawnPoint;
-
+    public Vector3 spawnPoint;          // Relative position of the spawn point.
+    private Vector3 spawnPosition;      // world position of the spawn point.   (needed so we aren't constantly transforming the point out of position)
 
     [Header("Attachment Points")]
     public Vector3 leftAnchor;
     public Vector3 rightAnchor;
+    [Tooltip("For use with Moving Platform - false = default: anchors are set by moving platform. true = waypoints on moving platform are positioned by anchors.")]
+    public bool moveWaypointToAnchor = false;
 
-    public int width = 1;
+    [Tooltip("How wide is the physical platform?")]
+    public float width = 1;
+    public float height = 1;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        spawnPosition = transform.TransformPoint(spawnPoint);
     }
 
     // Update is called once per frame
@@ -30,20 +35,38 @@ public class Platform : MonoBehaviour
     }
 
     public void SetLeftAnchor(Vector3 left) { leftAnchor = left; }
-    public Vector3 GetLeftAnchor() { return leftAnchor; }
+    public Vector3 GetLeftAnchor() { return transform.TransformPoint(leftAnchor); }
     public void SetRightAnchor(Vector3 right) { rightAnchor = right; }
-    public Vector3 GetRightAnchor() { return rightAnchor; }
-    public int GetWidth() { return width; }
+    public Vector3 GetRightAnchor() { return transform.TransformPoint(rightAnchor); }
+    public float GetWidth() { return width; }
+    public float GetHeight() { return height; }
+
+    public Vector3 CalculateBottomAnchor() {
+        return new Vector3(GetRightAnchor().x - (width / 2), GetLeftAnchor().y - height, 0);
+	}
+
+    public Vector3 GetSpawnPoint() {
+        spawnPosition = transform.TransformPoint(spawnPoint);
+        return spawnPosition; 
+    }
+
+    public Vector3 GetCenterPoint() {
+        return (rightAnchor + leftAnchor) / 2.0f;
+	}
 
     void OnDrawGizmosSelected() {
 
         // Draw Player Spawn
         Gizmos.color = Color.magenta;
-        Gizmos.DrawSphere(spawnPoint, 0.5f);
+        Gizmos.DrawSphere(spawnPosition, 0.5f);
 
         // Draw connection points
         Gizmos.color = Color.cyan;
         Gizmos.DrawSphere(leftAnchor, 0.2f);
         Gizmos.DrawSphere(rightAnchor, 0.2f);
     }
+
+	private void OnValidate() {
+        spawnPosition = transform.TransformPoint(spawnPoint);
+	}
 }

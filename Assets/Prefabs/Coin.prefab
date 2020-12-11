@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 7177518784024305052}
   - component: {fileID: 7177518784024305027}
   - component: {fileID: 7177518784024305026}
-  - component: {fileID: 7177518784024305053}
   - component: {fileID: 7620064999910553184}
   - component: {fileID: 7177518784024305054}
   - component: {fileID: 7177518784024305025}
+  - component: {fileID: -8854111987524289590}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -85,20 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7177518784024305053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7177518784024305024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2dbd39b5e4cb414f8d12b4824ecbeeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: 1
-  eulerRotation: {x: 30, y: 15, z: 45}
 --- !u!114 &7620064999910553184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,3 +171,17 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &-8854111987524289590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7177518784024305024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4562b8a716cd1224a83407a2ed2c5e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToRotate: 1
+  eulerRotation: {x: 0, y: 30, z: 0}

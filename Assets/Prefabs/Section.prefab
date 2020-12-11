@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5974990554420347699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2245891783492316958}
+  - component: {fileID: 1051529834813510058}
+  m_Layer: 0
+  m_Name: Section
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2245891783492316958
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5974990554420347699}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2009929149524270508}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1051529834813510058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5974990554420347699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bd01e200c970e4419ee50abaccdcb4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpawn: {x: 0, y: 0, z: 0}
+  collectables: []
+  enemies: []
+  leftAnchor: {x: 0, y: 0, z: 0}
+  rightAnchor: {x: 0, y: 0, z: 0}
+  toptionalAnchor: {x: -Infinity, y: -Infinity, z: -Infinity}
+  botionalAnchor: {x: -Infinity, y: -Infinity, z: -Infinity}
+  midpoint: {x: -Infinity, y: -Infinity, z: -Infinity}
+  topAnchorAvailable: 0
+  bottomAnchorAvailable: 0
+  platformsPerSection: 50
+--- !u!1 &9131912917256462795
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2009929149524270508}
+  - component: {fileID: 7620267227894287445}
+  m_Layer: 0
+  m_Name: Platform Generator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2009929149524270508
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9131912917256462795}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2245891783492316958}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7620267227894287445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9131912917256462795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22edadf1b151de145a1a1ce7a044f298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staticPlatforms:
+  - {fileID: 7825709659395962790, guid: 999d4091080dc4643a30eeae121d9dfd, type: 3}
+  - {fileID: 7246088422011410858, guid: bf048c80fa0c20b4eab040e510daea19, type: 3}
+  - {fileID: 8239286950761467161, guid: e02261a7d9fe5474eafc97b0222dc350, type: 3}
+  - {fileID: 5008762508460989840, guid: 248ade7143a8e0144929f997e1ca5eed, type: 3}
+  - {fileID: 1151941276738357326, guid: 0e0c5309adaec1d42aab59fe90aedc58, type: 3}
+  - {fileID: 6694904816786388712, guid: b0174b8e04e01064fb2722412f605bb2, type: 3}
+  - {fileID: 2307758895635479960, guid: 3169e0706a002ad4d91750387e661c6b, type: 3}
+  - {fileID: 5736057811185428383, guid: 2ad460880d2cb4345a497cab55adfcba, type: 3}
+  - {fileID: 3086496886497976997, guid: a5feb921978c1704a8cdb43e5ad3e400, type: 3}
+  elevators:
+  - {fileID: 9139199975993903753, guid: b741a150ed834b74182033b70e88e968, type: 3}
+  movingPlatforms:
+  - {fileID: 9139199975993903753, guid: 744e40ef13364df4ba6e032d4e569b92, type: 3}
+  - {fileID: 9139199975993903753, guid: 4f6c6da187a6cb84b8ff34114c405ebb, type: 3}
+  rotators:
+  - {fileID: 32146821441832098, guid: 94cc90eae11543946877ae592b058a6c, type: 3}
+  gaps:
+  - {fileID: 6243475957490285755, guid: 2cfe14f95e825b34faebbcdf86076e06, type: 3}

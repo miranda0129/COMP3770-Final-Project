@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(LevelGenerator))]
 public class Level : MonoBehaviour
 {
 
@@ -12,17 +13,56 @@ public class Level : MonoBehaviour
      */
 
     // keeps track of players collectable score
+    private SmoothFollowCam cam;
+    public GameObject playerPrefab;
+    public Player player;
     public static int score;
+
+    private LevelGenerator levelGenerator;
+
 
     // Start is called before the first frame update
     void Start()
     {
-
+        levelGenerator = gameObject.GetComponent<LevelGenerator>();
+        LoadLevel();
     }
 
     // Update is called once per frame
     void Update()
     {
 
+        /*
+        if(player.transform.position.x > levelGenerator.GetCurrentMidpoint().x) {
+            levelGenerator.DeleteLastSections();
+            // levelGenerator.SpawnNewSection(Section.SectionType.MIDDLE);                  TODO: Stackable Sections
+            levelGenerator.SpawnNewSection();
+		}
+
+        */
     }
+
+	private void LoadLevel() {
+
+        // Initialize camera
+        cam = Camera.main.gameObject.GetComponent<SmoothFollowCam>();
+        cam.gameObject.SetActive(false);
+
+        
+        
+        // Initialize the first section and load the player into the scene:
+        levelGenerator.SpawnNewSection();
+        RespawnPlayer();
+        cam.SetTarget(player.transform);
+        cam.gameObject.SetActive(true);
+	}
+
+    public void RespawnPlayer() {
+
+        GameObject newObj = Instantiate(playerPrefab);
+        player = newObj.GetComponent<Player>();
+        cam.SetTarget(player.transform);
+        newObj.transform.position = levelGenerator.GetPlayerSpawnPosition();
+	}
+
 }

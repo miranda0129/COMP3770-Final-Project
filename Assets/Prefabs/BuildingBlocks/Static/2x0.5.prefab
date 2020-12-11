@@ -142,4 +142,6 @@ MonoBehaviour:
   spawnPoint: {x: 1, y: 1, z: 0}
   leftAnchor: {x: 0, y: 0, z: 0}
   rightAnchor: {x: 2, y: 0, z: 0}
+  moveWaypointToAnchor: 0
   width: 2
+  height: 0.5

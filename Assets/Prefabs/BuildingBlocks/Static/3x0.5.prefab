@@ -47,7 +47,9 @@ MonoBehaviour:
   spawnPoint: {x: 1.5, y: 1, z: 0}
   leftAnchor: {x: 0, y: 0, z: 0}
   rightAnchor: {x: 3, y: 0, z: 0}
+  moveWaypointToAnchor: 0
   width: 3
+  height: 0.5
 --- !u!1 &2307758897097273900
 GameObject:
   m_ObjectHideFlags: 0
