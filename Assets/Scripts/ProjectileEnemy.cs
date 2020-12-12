@@ -9,6 +9,7 @@ public class ProjectileEnemy : MonoBehaviour
     public float aggroDistance;
     public GameObject bulletPrefab;
     public float gunCooldown;
+    public LayerMask layersToIgnore; // Not sure if there was a better way to do this is so the raycast doesn't get blocked by other parts of the enemy
 
     private LineRenderer aimLine; // Visual line of where the enemy is looking, can remove later if we want
     private bool reloading;
@@ -46,7 +47,7 @@ public class ProjectileEnemy : MonoBehaviour
         Ray ray = new Ray(transform.position, playerPosition - transform.position); // Raycasts towards player position
         aimLine.SetPosition(0, transform.position);
 
-        if (Physics.Raycast(ray, out hit, aggroDistance) && hit.collider.name == "Player") // If no obstacles between enemy and player, start shooting
+        if (Physics.Raycast(ray, out hit, aggroDistance, ~layersToIgnore) && hit.collider.name == "Player") // If no obstacles between enemy and player, start shooting
         {           
             aimLine.SetPosition(1, playerPosition);
 

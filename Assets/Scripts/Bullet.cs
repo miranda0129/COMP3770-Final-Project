@@ -16,16 +16,9 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            // Damage player here
-
-            Destroy(gameObject);
-        }
-
         bouncecount--;
 
-        if (bouncecount <= 0)
+        if (bouncecount <= 0) // Only allow a certain number of bounces
             Destroy(gameObject);
     }
 

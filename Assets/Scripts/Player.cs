@@ -61,6 +61,23 @@ public class Player : MonoBehaviour
 
         nJumps = 0;     // TODO: this will change as we have different colliders to do different things.
         // rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+
+        if (col.gameObject.layer == 11) // Originally had this in the bullet script but moved it here to have them all in one place.
+        {
+            Debug.Log("Player was damaged by projectile.");
+            Destroy(col.gameObject);
+        }
+
+        if (col.gameObject.name == "HeadHitbox") // Destroy an enemy if we jump on it's head
+        {
+            Destroy(col.transform.parent.gameObject);
+        }
+
+        else if (col.gameObject.name == "DamageHitbox")
+        {
+            // Damage the player
+            Debug.Log("Player was damaged by enemy contact.");
+        }
     }
 
     /* Controls */
