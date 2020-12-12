@@ -20,7 +20,7 @@ public class Level : MonoBehaviour
     public static int score;
 
     private LevelGenerator levelGenerator;
-
+    public GameObject floorPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +50,7 @@ public class Level : MonoBehaviour
 
                 // Spawn special section (levelcomplete)
                 if(levelGenerator.GetSectionCount() == 9) {
-                    //levelGenerator.SpawnSpecialSection();
+                    levelGenerator.SpawnEndingSection();
 
                 // Regular section spawn everywhere else 
                 } else if(levelGenerator.GetSectionCount() < 10) {
@@ -75,6 +75,11 @@ public class Level : MonoBehaviour
         levelGenerator.SpawnNewSection();
         RespawnPlayer();
         cam.gameObject.SetActive(true);
+
+        Vector3 floorPos = transform.position;
+        floorPos.y -= 50;
+        GameObject levelFloor = Instantiate(floorPrefab);
+        levelFloor.transform.position = floorPos;
 	}
 
     public void RespawnPlayer() {

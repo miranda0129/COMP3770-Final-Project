@@ -61,6 +61,14 @@ public class LevelGenerator : MonoBehaviour
         
     }
 
+    public void SpawnEndingSection() {
+        GameObject newObject = Instantiate(specialSectionPrefabs[0]);
+        newObject.transform.SetParent(sectionParent.transform);
+        newObject.transform.position = nextSectionSpawnPosition;
+
+        sectionCount++;
+	}
+
 
     // TODO: Stackable Section Spawn
     /*

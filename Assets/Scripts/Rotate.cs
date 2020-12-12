@@ -32,4 +32,6 @@ public class Rotate : MonoBehaviour
             elapsedTime = 0.0f;
         }
     }
+
+    public void SetRotation(Vector3 eulerRotation) { targetRotation = Quaternion.Euler(eulerRotation); }
 }
