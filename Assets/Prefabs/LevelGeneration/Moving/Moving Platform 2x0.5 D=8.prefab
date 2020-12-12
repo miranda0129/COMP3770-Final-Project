@@ -98,6 +98,10 @@ PrefabInstance:
       propertyPath: rightAnchor.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2211210796338924526, guid: 248ade7143a8e0144929f997e1ca5eed, type: 3}
+      propertyPath: platformRenderer
+      value: 
+      objectReference: {fileID: 9139199974948172726}
     - target: {fileID: 3473244739285556392, guid: 248ade7143a8e0144929f997e1ca5eed, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -169,5 +173,10 @@ GameObject:
 --- !u!4 &9139199975993903752 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5008762508460989841, guid: 248ade7143a8e0144929f997e1ca5eed, type: 3}
+  m_PrefabInstance: {fileID: 4275682970779293465}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &9139199974948172726 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5008762507426784431, guid: 248ade7143a8e0144929f997e1ca5eed, type: 3}
   m_PrefabInstance: {fileID: 4275682970779293465}
   m_PrefabAsset: {fileID: 0}

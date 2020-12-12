@@ -50,6 +50,7 @@ MonoBehaviour:
   moveWaypointToAnchor: 0
   width: 3
   height: 2
+  platformRenderer: {fileID: 1478911939606948380}
 --- !u!1 &4073364161203599392
 GameObject:
   m_ObjectHideFlags: 0

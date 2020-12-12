@@ -32,15 +32,35 @@ public class Level : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(levelGenerator.GetActiveSection() != null) {
 
-        /*
-        if(player.transform.position.x > levelGenerator.GetCurrentMidpoint().x) {
-            levelGenerator.DeleteLastSections();
-            // levelGenerator.SpawnNewSection(Section.SectionType.MIDDLE);                  TODO: Stackable Sections
-            levelGenerator.SpawnNewSection();
-		}
+            // Delete old sections and update playerSpawn
+            
+            if(levelGenerator.GetActiveSection().GetRightAnchor().x < player.transform.position.x) {
 
-        */
+                if(levelGenerator.GetActiveSection().GetRightAnchor().x + 10 < cam.transform.position.x) 
+                    levelGenerator.DeleteLastSections();
+
+                else levelGenerator.PlayerHitCheckpoint();
+
+            }
+
+            // Spawn new section when passing the midpoint
+            if(player.transform.position.x > levelGenerator.GetCurrentMidpoint().x) {
+
+                // Spawn special section (levelcomplete)
+                if(levelGenerator.GetSectionCount() == 9) {
+                    //levelGenerator.SpawnSpecialSection();
+
+                // Regular section spawn everywhere else 
+                } else if(levelGenerator.GetSectionCount() < 10) {
+
+                    levelGenerator.SpawnNewSection();
+
+                }
+            }
+        }
+        
     }
 
 	private void LoadLevel() {
@@ -54,7 +74,6 @@ public class Level : MonoBehaviour
         // Initialize the first section and load the player into the scene:
         levelGenerator.SpawnNewSection();
         RespawnPlayer();
-        cam.SetTarget(player.transform);
         cam.gameObject.SetActive(true);
 	}
 
@@ -62,16 +81,16 @@ public class Level : MonoBehaviour
 
         GameObject newObj = Instantiate(playerPrefab);
         player = newObj.GetComponent<Player>();
-        cam.SetTarget(player.transform);
         newObj.transform.position = levelGenerator.GetPlayerSpawnPosition();
+        cam.SetTarget(player.transform);
 	}
 
-	public void OnDrawGizmosSelected() {
+	public void OnDrawGizmos() {
 
         Gizmos.color = midPointShow;
 
         Gizmos.DrawSphere((Vector3)levelGenerator.GetCurrentMidpoint(), 1f);
-        Debug.Log(levelGenerator.GetCurrentMidpoint());
+        
 	}
 
 	private void OnValidate() {

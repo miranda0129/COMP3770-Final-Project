@@ -54,7 +54,7 @@ MonoBehaviour:
   midpoint: {x: -Infinity, y: -Infinity, z: -Infinity}
   topAnchorAvailable: 0
   bottomAnchorAvailable: 0
-  platformsPerSection: 50
+  platformsPerSection: 20
 --- !u!1 &9131912917256462795
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,23 +108,38 @@ MonoBehaviour:
   - {fileID: 2307758895635479960, guid: 3169e0706a002ad4d91750387e661c6b, type: 3}
   - {fileID: 5736057811185428383, guid: 2ad460880d2cb4345a497cab55adfcba, type: 3}
   - {fileID: 3086496886497976997, guid: a5feb921978c1704a8cdb43e5ad3e400, type: 3}
-  staticChance: 0.4
+  staticChance: 0.3
   elevators:
   - {fileID: 9139199975993903753, guid: b741a150ed834b74182033b70e88e968, type: 3}
   - {fileID: 9139199975993903753, guid: e95a41acbc78bd641b40cff80d5e8957, type: 3}
-  elevatorChance: 0.1
+  elevatorChance: 0.2
   movingPlatforms:
   - {fileID: 9139199975993903753, guid: 744e40ef13364df4ba6e032d4e569b92, type: 3}
   - {fileID: 9139199975993903753, guid: 4f6c6da187a6cb84b8ff34114c405ebb, type: 3}
-  movingPlatformChance: 0.15
+  movingPlatformChance: 0.2
   rotators:
   - {fileID: 32146821441832098, guid: 94cc90eae11543946877ae592b058a6c, type: 3}
   rotatingChance: 0.1
   gaps:
   - {fileID: 6243475957490285755, guid: 2cfe14f95e825b34faebbcdf86076e06, type: 3}
-  gapChance: 0.2
+  gapChance: 0.1
   deathzones:
   - {fileID: 7296807776936655094, guid: 9f8993d05b0a4bd44936cafaca5edc85, type: 3}
   - {fileID: 7296807776936655094, guid: 179077fb98e014a489c4d203a0a2e12d, type: 3}
-  deathChance: 0.05
+  deathChance: 0.1
+  minTime: 0.5
+  maxTime: 5
+  minPause: 0
+  maxPause: 2
   normalizeDebug: 0
+  sectionMaterials:
+  - {fileID: 2100000, guid: fbfa38410bd2bed49927c9698ba3f411, type: 2}
+  - {fileID: 2100000, guid: 2bb0684c2ca30204fbfe63f7949f0ec0, type: 2}
+  - {fileID: 2100000, guid: d734a05060a04504cbb2eb57fe8bc50f, type: 2}
+  - {fileID: 2100000, guid: f2b072a2c6139d747ab1bf42decd32cc, type: 2}
+  - {fileID: 2100000, guid: 9a19f1c1126ea8347b4783106e3df53d, type: 2}
+  - {fileID: 2100000, guid: 2a5a6bfab21999c4c84404d36558378b, type: 2}
+  - {fileID: 2100000, guid: 0b9f2a2e35189ea4a968308eff0e400c, type: 2}
+  - {fileID: 2100000, guid: 19ab2ca5f50414642b7fe67358065696, type: 2}
+  - {fileID: 2100000, guid: 2ad726cf552e874489b98d66a6bb3905, type: 2}
+  - {fileID: 2100000, guid: 075f4ba1bb0c394429674856ce6cc450, type: 2}

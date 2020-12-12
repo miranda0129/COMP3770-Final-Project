@@ -82,47 +82,36 @@ public class Section : MonoBehaviour {
         leftAnchor = attachPoint;
         int midPointIndex = platformsPerSection / 2;                                        // Cache it to save from recalculating in the for loop.
 
+        generator.SetAnchorPoint(leftAnchor);
+        generator.SetID(id);
         // randomly generate a safe static platform, assign the player spawn here.          Note: It really aught to be a static platform so the player doesn't fall off the level.
-        GameObject newPlatform = generator.GenerateRandomStaticPlatform(id);
+        GameObject newPlatform = generator.GenerateRandomStaticPlatform();
         Platform platformScript = newPlatform.GetComponent<Platform>();
         
         playerSpawn = platformScript.GetSpawnPoint();                                       // Set the spawn position of the player to the first platform in this section
         platforms.Add(newPlatform);                                                         // keep track of the platform in this section
-        newPlatform.transform.parent = generator.transform;                                 // make the generated platform a child of this section.
+                                         // make the generated platform a child of this section.
 
         // randomly generate the other 'platformsPerSection', picking randomly from the different types of platforms.
         for(int i = 1; i < platformsPerSection; i++) {
 
-            // New Way
-            newPlatform = generator.GenerateRandomPlatform(id);
-
-            /* OLD Way
-            int rand = UnityEngine.Random.Range(0, 5);          // type of platform to generate: 0 = static, 1 = moving, 2 = elevator, 3 = rotating, 4 = gap
-
-            switch(rand) {
-                case 0: newPlatform = generator.GenerateRandomStaticPlatform(ID);
-                break;
-                case 1: newPlatform = generator.GenerateRandomMover(ID);                                   
-                break;
-                case 2: newPlatform = generator.GenerateRandomElevator(ID);                                   
-                break;
-                case 3: newPlatform = generator.GenerateRandomRotator(ID);
-                break;
-                case 4: newPlatform = generator.GenerateRandomGap(ID);                         
-                break;
-
-                default: Debug.Log("Invalid Platform Type");
-                break;
-			}
-            */ 
+            // Generate Random platform.
+            newPlatform = generator.GenerateRandomPlatform();
+            platformScript = newPlatform.GetComponent<Platform>();
             platforms.Add(newPlatform);
-            newPlatform.transform.parent = generator.transform;
+            
 
+            // set midpoint
             if(i == midPointIndex) {
                 midpoint = newPlatform.transform.TransformPoint(platformScript.GetCenterPoint());
             }
+
+            // set rightmost anchor
+            rightAnchor = platformScript.transform.TransformPoint(platformScript.GetRightAnchor());
+            
         }
 
+        
         // TODO (If we want stackable sections)
         // elevator platforms going up generate a top anchor point. -> going down generate a bottom anchor (as do gap platforms)
         // if (gapPlatform -> vec3 bottomAnchor = platform.CalculateBottomAnchor(); boptionalAnchor = true;

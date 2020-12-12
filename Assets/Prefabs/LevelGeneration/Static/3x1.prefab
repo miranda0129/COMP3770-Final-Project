@@ -145,3 +145,4 @@ MonoBehaviour:
   moveWaypointToAnchor: 0
   width: 3
   height: 1
+  platformRenderer: {fileID: 2442544349259787532}

@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fbfa38410bd2bed49927c9698ba3f411, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -241,3 +241,5 @@ MonoBehaviour:
   moveWaypointToAnchor: 0
   width: 6
   height: 1
+  platformRenderer: {fileID: 6243475957461675533}
+  optionalRenderer: {fileID: 6243475956871363439}

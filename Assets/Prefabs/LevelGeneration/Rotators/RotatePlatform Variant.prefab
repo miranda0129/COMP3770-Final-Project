@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &6903032978085807581
+--- !u!114 &4679644717053721166
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,12 +75,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3295494703669984874, guid: 3169e0706a002ad4d91750387e661c6b, type: 3}
       propertyPath: spawnPoint.x
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3295494703669984874, guid: 3169e0706a002ad4d91750387e661c6b, type: 3}
+      propertyPath: platformRenderer
+      value: 
+      objectReference: {fileID: 32146822395955985}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3169e0706a002ad4d91750387e661c6b, type: 3}
 --- !u!1 &32146821441832098 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2307758895635479960, guid: 3169e0706a002ad4d91750387e661c6b, type: 3}
+  m_PrefabInstance: {fileID: 2338770222194587962}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &32146822395955985 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2307758897097273899, guid: 3169e0706a002ad4d91750387e661c6b, type: 3}
   m_PrefabInstance: {fileID: 2338770222194587962}
   m_PrefabAsset: {fileID: 0}

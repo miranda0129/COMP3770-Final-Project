@@ -110,6 +110,7 @@ public class MovingPlatform : MonoBehaviour
     // Just editor things.
     void OnDrawGizmosSelected() {
 
+
         if(leftToRight) Gizmos.color = Color.white;
         else Gizmos.color = Color.green;
         Gizmos.DrawSphere(startPos, 0.1f);
@@ -121,6 +122,8 @@ public class MovingPlatform : MonoBehaviour
 
         Gizmos.color = Color.white;
         Gizmos.DrawLine(startPos, endingEdge);
+
+        
         
 	}
 

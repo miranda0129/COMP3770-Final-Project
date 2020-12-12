@@ -11,6 +11,7 @@ public class SmoothFollowCam : MonoBehaviour {
     private float smoothTime = 0.3f;
     private float elapsedTime = 0.0f;
     public float cameraHeight = 0;
+    public float cameraOffsetX = 0;
 
     public bool normalSpeed = true;
     public bool willUpdate = true;
@@ -58,10 +59,10 @@ public class SmoothFollowCam : MonoBehaviour {
     }
 
     void init() {
-        endPos = target.TransformPoint(new Vector3(0, cameraHeight, -10));
+        elapsedTime = 0;
+        endPos = target.TransformPoint(new Vector3(9.6f, cameraHeight, -10));
         transform.position = endPos;
         startPos = transform.position;
-        elapsedTime = 0;
 
     }
 

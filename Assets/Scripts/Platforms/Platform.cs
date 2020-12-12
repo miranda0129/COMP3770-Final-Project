@@ -21,6 +21,8 @@ public class Platform : MonoBehaviour
     public float width = 1;
     public float height = 1;
 
+    public Renderer platformRenderer;
+    public Renderer optionalRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -62,8 +64,23 @@ public class Platform : MonoBehaviour
 
         // Draw connection points
         Gizmos.color = Color.cyan;
-        Gizmos.DrawSphere(transform.TransformPoint(leftAnchor), 0.2f);
-        Gizmos.DrawSphere(transform.TransformPoint(rightAnchor), 0.2f);
+
+        if(gameObject.GetComponent<MovingPlatform>()) {
+
+            Gizmos.DrawSphere((leftAnchor), 0.2f);
+            Gizmos.DrawSphere((rightAnchor), 0.2f);
+
+        } else if(gameObject.GetComponent<RotatePlatform>()) {
+
+            Vector3 positionBeforeMoving = leftAnchor;
+            positionBeforeMoving.x -= width;
+            Gizmos.DrawSphere(transform.TransformPoint(positionBeforeMoving), 0.2f);
+            Gizmos.DrawSphere(transform.TransformPoint(rightAnchor), 0.2f);
+        } else {
+            Gizmos.DrawSphere(transform.TransformPoint(leftAnchor), 0.2f);
+            Gizmos.DrawSphere(transform.TransformPoint(rightAnchor), 0.2f);
+        }
+        
     }
 
 	private void OnValidate() {

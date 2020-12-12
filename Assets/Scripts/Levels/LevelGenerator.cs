@@ -11,20 +11,24 @@ public class LevelGenerator : MonoBehaviour
     public GameObject emptySectionPrefab;                   // Prefab for spawning the section
     public GameObject[] specialSectionPrefabs;              // Ending and boss sections
 
-    private List<Section>currentSections;                   // The newest group of sections (can be middle, top, and bottom)
-    private List<Section> lastSections;                     // The sections waiting to be destroyed
+    public List<Section>currentSections;                   // The newest group of sections (can be middle, top, and bottom)
+    public List<Section> lastSections;                     // The sections waiting to be destroyed
     private Section activeSection;                          // The section that the player is currently on
+    public Section nextSection;
     private bool nextSectionGenerated;
 
-    private Vector3 nextSectionSpawnPosition;               // get the world position of the right anchor in currentSection
+    public Vector3 nextSectionSpawnPosition = Vector3.zero; // get the world position of the right anchor in currentSection
     private Vector3 lastSectionSpawnPosition;               // world position of the last section -> want to make sure the sections are still moving along postive x-axis
     private Vector3 playerSpawn;                            // spawnpoint located on the first platform of a section.
-    private int sectionCount = 0;                           // total active sections: 10 sections then final section.
+    public int sectionCount = 0;                           // total active sections: 10 sections then final section.
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentSections = new List<Section>();
+        lastSections = new List<Section>();
+
     }
 
     // Update is called once per frame
@@ -38,20 +42,23 @@ public class LevelGenerator : MonoBehaviour
         GameObject newObject = Instantiate(emptySectionPrefab);
         Section newSection = newObject.GetComponent<Section>();
 
-        newObject.transform.parent = sectionParent.transform;
-
-
-        if(sectionCount == 0) {
-            nextSectionSpawnPosition = Vector3.zero;
-		}
+        newObject.transform.SetParent(sectionParent.transform);
+        newObject.transform.position = nextSectionSpawnPosition;
 
         // Initialize the platforms, then get the next (even if it's not needed.) spawn positions
         newSection.InitializePlatforms(sectionCount, nextSectionSpawnPosition);
-        playerSpawn = newSection.playerSpawn;
         nextSectionSpawnPosition = newSection.GetRightAnchor();
 
-        activeSection = newSection;
+        if(sectionCount == 0) {
+            activeSection = newSection;
+            playerSpawn = newSection.playerSpawn;
+        }
+
+        nextSection = newSection;
+        currentSections.Add(newSection);
         sectionCount++;
+
+        
     }
 
 
@@ -104,19 +111,20 @@ public class LevelGenerator : MonoBehaviour
     /// Called when we generate new sections. (we hit the mid point of the current section.)
     /// </summary>
     public void DeleteLastSections() {
-        foreach(Section section in lastSections) {
 
-            lastSections.Remove(section);
-            Destroy(section.gameObject);
-		}
-	}
+        // Delete old section.
+        Destroy(activeSection.gameObject);
+       
 
-    public void MoveToLastSections() {
-
-        foreach(Section section in currentSections) {
-            lastSections.Add(section);
-            currentSections.Remove(section);
+        // Set the active section to the next section in line
+        if(nextSection != null) {
+            activeSection = nextSection;
+            nextSection = null;
         }
+    }
+
+    public void PlayerHitCheckpoint() {
+        if(nextSection != null) playerSpawn = nextSection.playerSpawn;
     }
 
     public void SetFirstSpawnPosition(Vector3 spawn) { nextSectionSpawnPosition = spawn; }
@@ -128,7 +136,11 @@ public class LevelGenerator : MonoBehaviour
 	}
 
     public Vector2 GetCurrentMidpoint() {
-        if (activeSection != null)  return activeSection.midpoint;
-        else                        return Vector3.zero;
+        if(nextSection != null) return nextSection.midpoint;
+        else if(activeSection != null) return activeSection.midpoint;
+        else return Vector3.zero;
     }
+
+    public int GetSectionCount() { return sectionCount; }
+    public Section GetActiveSection() { return activeSection; }
 }

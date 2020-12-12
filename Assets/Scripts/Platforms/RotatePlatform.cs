@@ -20,9 +20,10 @@ public class RotatePlatform : Rotate
 
     }
 
-    public void Start() {
+    public new void Start() {
         base.Start();
         transform.Translate(Vector3.right * platform.GetWidth());
+        platform.SetRightAnchor(platform.GetRightAnchor() - (Vector3.right * platform.GetWidth()));
     }
 
 
