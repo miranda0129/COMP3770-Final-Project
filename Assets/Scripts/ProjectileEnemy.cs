@@ -10,15 +10,11 @@ public class ProjectileEnemy : MonoBehaviour
     public GameObject bulletPrefab;
     public float gunCooldown;
 
-    private LineRenderer aimLine;
+    private LineRenderer aimLine; // Visual line of where the enemy is looking, can remove later if we want
     private bool reloading;
     private GameObject bullet;
 
     Vector3 playerPosition;
-
-    Rigidbody rb;
-
-   
 
     // Start is called before the first frame update
     void Start()
@@ -64,48 +60,3 @@ public class ProjectileEnemy : MonoBehaviour
     }
 
 }
-
-/*
- * using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Enemy : MonoBehaviour
-{
-    public int damage;
-    public int bulletSpeed;
-    public float aggroDistance;
-    public LayerMask mask;
-
-    Vector3 playerPosition;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        playerPosition = GameObject.Find("Player").transform.position;
-
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, (playerPosition - transform.position), out hit, aggroDistance, mask))
-        {
-            print("I see player");
-            Debug.DrawRay(transform.position, (playerPosition - transform.position) * hit.distance, Color.red);
-        }
-
-        else
-        {
-            print("No player detected");
-        }
-            
-
-
-    }
-
-}
-
- */
