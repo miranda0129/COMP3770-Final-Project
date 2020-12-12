@@ -13,6 +13,7 @@ public class Level : MonoBehaviour
      */
 
     // keeps track of players collectable score
+    public Color midPointShow;
     private SmoothFollowCam cam;
     public GameObject playerPrefab;
     public Player player;
@@ -63,6 +64,18 @@ public class Level : MonoBehaviour
         player = newObj.GetComponent<Player>();
         cam.SetTarget(player.transform);
         newObj.transform.position = levelGenerator.GetPlayerSpawnPosition();
+	}
+
+	public void OnDrawGizmosSelected() {
+
+        Gizmos.color = midPointShow;
+
+        Gizmos.DrawSphere((Vector3)levelGenerator.GetCurrentMidpoint(), 1f);
+        Debug.Log(levelGenerator.GetCurrentMidpoint());
+	}
+
+	private void OnValidate() {
+        levelGenerator = gameObject.GetComponent<LevelGenerator>();
 	}
 
 }

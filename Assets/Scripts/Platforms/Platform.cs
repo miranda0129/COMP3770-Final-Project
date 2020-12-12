@@ -35,9 +35,9 @@ public class Platform : MonoBehaviour
     }
 
     public void SetLeftAnchor(Vector3 left) { leftAnchor = left; }
-    public Vector3 GetLeftAnchor() { return transform.TransformPoint(leftAnchor); }
+    public Vector3 GetLeftAnchor() { return leftAnchor; }
     public void SetRightAnchor(Vector3 right) { rightAnchor = right; }
-    public Vector3 GetRightAnchor() { return transform.TransformPoint(rightAnchor); }
+    public Vector3 GetRightAnchor() { return rightAnchor; }
     public float GetWidth() { return width; }
     public float GetHeight() { return height; }
 
@@ -51,19 +51,19 @@ public class Platform : MonoBehaviour
     }
 
     public Vector3 GetCenterPoint() {
-        return (rightAnchor + leftAnchor) / 2.0f;
+        return ((leftAnchor + rightAnchor) / 2.0f);
 	}
 
     void OnDrawGizmosSelected() {
 
         // Draw Player Spawn
         Gizmos.color = Color.magenta;
-        Gizmos.DrawSphere(spawnPosition, 0.5f);
+        Gizmos.DrawSphere(GetSpawnPoint(), 0.5f);
 
         // Draw connection points
         Gizmos.color = Color.cyan;
-        Gizmos.DrawSphere(leftAnchor, 0.2f);
-        Gizmos.DrawSphere(rightAnchor, 0.2f);
+        Gizmos.DrawSphere(transform.TransformPoint(leftAnchor), 0.2f);
+        Gizmos.DrawSphere(transform.TransformPoint(rightAnchor), 0.2f);
     }
 
 	private void OnValidate() {

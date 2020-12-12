@@ -81,7 +81,7 @@ public class Section : MonoBehaviour {
         ID = id;
         leftAnchor = attachPoint;
         int midPointIndex = platformsPerSection / 2;                                        // Cache it to save from recalculating in the for loop.
-        
+
         // randomly generate a safe static platform, assign the player spawn here.          Note: It really aught to be a static platform so the player doesn't fall off the level.
         GameObject newPlatform = generator.GenerateRandomStaticPlatform(id);
         Platform platformScript = newPlatform.GetComponent<Platform>();
@@ -93,9 +93,11 @@ public class Section : MonoBehaviour {
         // randomly generate the other 'platformsPerSection', picking randomly from the different types of platforms.
         for(int i = 1; i < platformsPerSection; i++) {
 
-            if(i == midPointIndex) midpoint = platformScript.GetCenterPoint();
+            // New Way
+            newPlatform = generator.GenerateRandomPlatform(id);
 
-            int rand = UnityEngine.Random.Range(0, 4);          // type of platform to generate: 0 = static, 1 = moving, 2 = elevator, 3 = rotating, 4 = gap
+            /* OLD Way
+            int rand = UnityEngine.Random.Range(0, 5);          // type of platform to generate: 0 = static, 1 = moving, 2 = elevator, 3 = rotating, 4 = gap
 
             switch(rand) {
                 case 0: newPlatform = generator.GenerateRandomStaticPlatform(ID);
@@ -108,10 +110,17 @@ public class Section : MonoBehaviour {
                 break;
                 case 4: newPlatform = generator.GenerateRandomGap(ID);                         
                 break;
-			}
 
+                default: Debug.Log("Invalid Platform Type");
+                break;
+			}
+            */ 
             platforms.Add(newPlatform);
             newPlatform.transform.parent = generator.transform;
+
+            if(i == midPointIndex) {
+                midpoint = newPlatform.transform.TransformPoint(platformScript.GetCenterPoint());
+            }
         }
 
         // TODO (If we want stackable sections)

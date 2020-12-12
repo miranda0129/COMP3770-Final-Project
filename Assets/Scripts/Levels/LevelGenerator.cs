@@ -127,5 +127,8 @@ public class LevelGenerator : MonoBehaviour
         return playerSpawn;
 	}
 
-    public Vector2 GetCurrentMidpoint() { return activeSection.midpoint; }
+    public Vector2 GetCurrentMidpoint() {
+        if (activeSection != null)  return activeSection.midpoint;
+        else                        return Vector3.zero;
+    }
 }

@@ -108,12 +108,23 @@ MonoBehaviour:
   - {fileID: 2307758895635479960, guid: 3169e0706a002ad4d91750387e661c6b, type: 3}
   - {fileID: 5736057811185428383, guid: 2ad460880d2cb4345a497cab55adfcba, type: 3}
   - {fileID: 3086496886497976997, guid: a5feb921978c1704a8cdb43e5ad3e400, type: 3}
+  staticChance: 0.4
   elevators:
   - {fileID: 9139199975993903753, guid: b741a150ed834b74182033b70e88e968, type: 3}
+  - {fileID: 9139199975993903753, guid: e95a41acbc78bd641b40cff80d5e8957, type: 3}
+  elevatorChance: 0.1
   movingPlatforms:
   - {fileID: 9139199975993903753, guid: 744e40ef13364df4ba6e032d4e569b92, type: 3}
   - {fileID: 9139199975993903753, guid: 4f6c6da187a6cb84b8ff34114c405ebb, type: 3}
+  movingPlatformChance: 0.15
   rotators:
   - {fileID: 32146821441832098, guid: 94cc90eae11543946877ae592b058a6c, type: 3}
+  rotatingChance: 0.1
   gaps:
   - {fileID: 6243475957490285755, guid: 2cfe14f95e825b34faebbcdf86076e06, type: 3}
+  gapChance: 0.2
+  deathzones:
+  - {fileID: 7296807776936655094, guid: 9f8993d05b0a4bd44936cafaca5edc85, type: 3}
+  - {fileID: 7296807776936655094, guid: 179077fb98e014a489c4d203a0a2e12d, type: 3}
+  deathChance: 0.05
+  normalizeDebug: 0

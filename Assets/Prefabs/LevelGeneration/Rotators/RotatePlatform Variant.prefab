@@ -23,7 +23,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2307758895635479960, guid: 3169e0706a002ad4d91750387e661c6b, type: 3}
       propertyPath: m_Name
-      value: RotatePlatform
+      value: RotatePlatform Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2307758895635479961, guid: 3169e0706a002ad4d91750387e661c6b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -68,6 +68,10 @@ PrefabInstance:
     - target: {fileID: 2307758895635479961, guid: 3169e0706a002ad4d91750387e661c6b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2307758897097273901, guid: 3169e0706a002ad4d91750387e661c6b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 3295494703669984874, guid: 3169e0706a002ad4d91750387e661c6b, type: 3}
       propertyPath: spawnPoint.x

@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6243475956871363434}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: -0.5, z: 0}
+  m_LocalPosition: {x: 5, y: 0.5, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 6243475957490285757}
@@ -122,7 +122,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6243475957461675528}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: -0.5, z: 0}
+  m_LocalPosition: {x: 1, y: 0.5, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 6243475957490285757}
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 6243475957490285757}
   - component: {fileID: 6243475957490285754}
   m_Layer: 0
-  m_Name: Gap 6
+  m_Name: Gap 2x1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640a62a263600734d9d816b8cd4148e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {x: 1, y: 1, z: 0}
+  spawnPoint: {x: 1, y: 2, z: 0}
   leftAnchor: {x: 0, y: 0, z: 0}
   rightAnchor: {x: 6, y: 0, z: 0}
   moveWaypointToAnchor: 0
