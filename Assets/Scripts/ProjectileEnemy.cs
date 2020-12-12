@@ -9,7 +9,7 @@ public class ProjectileEnemy : MonoBehaviour
     public float aggroDistance;
     public GameObject bulletPrefab;
     public float gunCooldown;
-    public LayerMask layersToIgnore; // Not sure if there was a better way to do this is so the raycast doesn't get blocked by other parts of the enemy
+    public LayerMask layersToIgnore; // Not sure if there was a better way to do this but this is so the raycast doesn't get blocked by other parts of the enemy
 
     private LineRenderer aimLine; // Visual line of where the enemy is looking, can remove later if we want
     private bool reloading;
@@ -25,17 +25,16 @@ public class ProjectileEnemy : MonoBehaviour
         reloading = false;
 
     }
-    IEnumerator FireGun(Ray ray)
+    IEnumerator FireGun(Ray ray) // Fires a bullet along the raycast line which bounces
     {
         bullet = Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.LookRotation(ray.direction));
         //bullet.GetComponent<Rigidbody>().AddForce(ray.direction * bulletSpeed);
         bullet.GetComponent<Rigidbody>().velocity = ray.direction * bulletSpeed;
         reloading = true;
-        print("Started Reloading...");
+
         yield return new WaitForSeconds(gunCooldown);
 
         reloading = false;
-        print("Finished Reloading...");
     }
 
     // Update is called once per frame
