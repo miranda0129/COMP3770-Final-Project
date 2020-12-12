@@ -92,6 +92,24 @@ public class Player : MonoBehaviour
             GameObject.Destroy(col.gameObject);
 
             StartCoroutine(LazerTimer());
+
+        }
+        
+        if (col.gameObject.layer == 11) // Originally had this in the bullet script but moved it here to have them all in one place.
+        {
+            Debug.Log("Player was damaged by projectile.");
+            Destroy(col.gameObject);
+        }
+
+        if (col.gameObject.name == "HeadHitbox") // Destroy an enemy if we jump on it's head
+        {
+            Destroy(col.transform.parent.gameObject);
+        }
+
+        else if (col.gameObject.name == "DamageHitbox")
+        {
+            // Damage the player
+            Debug.Log("Player was damaged by enemy contact.");
         }
     }
 
