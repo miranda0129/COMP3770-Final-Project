@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class ProjectileEnemy : MonoBehaviour
 {
     public int damage;
     public int bulletSpeed;
     public float aggroDistance;
-    public GameObject bullet;
+    public GameObject bulletPrefab;
     public float gunCooldown;
 
     private LineRenderer aimLine;
     private bool reloading;
+    private GameObject bullet;
 
     Vector3 playerPosition;
 
@@ -29,7 +30,7 @@ public class Enemy : MonoBehaviour
     }
     IEnumerator FireGun(Ray ray)
     {
-        bullet = Instantiate(bullet, gameObject.transform.position, Quaternion.LookRotation(ray.direction));
+        bullet = Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.LookRotation(ray.direction));
         //bullet.GetComponent<Rigidbody>().AddForce(ray.direction * bulletSpeed);
         bullet.GetComponent<Rigidbody>().velocity = ray.direction * bulletSpeed;
         reloading = true;

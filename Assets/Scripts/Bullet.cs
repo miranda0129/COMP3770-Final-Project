@@ -5,24 +5,28 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     Rigidbody body;
+    public int bouncecount;
+    public float lifetime;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Destroy(gameObject, lifetime); // Despawns the bullet after a set amount of time
     }
 
-    private void onCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter(Collision collision)
     {
-        print(collision.collider.name);
-        print(collision.collider.tag);
-        print(collision.gameObject.tag);
-      /*  if (other.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
-            // damage player here
-            print("Hit Player");
+            // Damage player here
 
             Destroy(gameObject);
-        }*/
+        }
+
+        bouncecount--;
+
+        if (bouncecount <= 0)
+            Destroy(gameObject);
     }
 
 
