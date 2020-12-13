@@ -120,6 +120,7 @@ public class LevelGenerator : MonoBehaviour
     public void DeleteLastSections() {
 
         // Delete old section.
+        currentSections.Remove(activeSection);
         Destroy(activeSection.gameObject);
        
 

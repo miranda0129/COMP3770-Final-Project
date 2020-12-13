@@ -110,4 +110,9 @@ public class Level : MonoBehaviour
         levelGenerator = gameObject.GetComponent<LevelGenerator>();
 	}
 
+    public Transform GetPlayer() { 
+        if(player != null) return player.transform;
+        else return null;
+    }
+
 }

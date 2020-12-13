@@ -32,7 +32,8 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         currentJumpTime = jumpTime;
-        lineRenderer = GameObject.Find("Line Renderer").GetComponent<LineRenderer>();
+        lineRenderer = gameObject.GetComponent<LineRenderer>();
+        lineRenderer.enabled = false;
         inputManager = gameObject.GetComponent<PlayerInput>();
     }
 

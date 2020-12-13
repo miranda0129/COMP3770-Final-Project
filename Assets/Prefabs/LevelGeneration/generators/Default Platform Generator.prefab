@@ -50,7 +50,7 @@ MonoBehaviour:
   - 1
   collectibleSCPP: 0.2
   enemies:
-  - {fileID: 7175621955394003894, guid: 4941a1d973ad2154aa5937c19c4d1ea3, type: 3}
+  - {fileID: 5933782159455206769, guid: c04cb62f124bdb147a9749292a2d90a1, type: 3}
   enemyChances:
   - 1
   enemySCPP: 0.05
