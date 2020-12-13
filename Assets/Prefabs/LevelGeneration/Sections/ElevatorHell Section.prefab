@@ -51,5 +51,7 @@ MonoBehaviour:
   leftAnchor: {x: 0, y: 0, z: 0}
   rightAnchor: {x: 0, y: 0, z: 0}
   midpoint: {x: -Infinity, y: -Infinity, z: -Infinity}
+  lowestPoint: {x: 0, y: 0, z: 0}
   platformsPerSection: 25
   platformGeneratorPrefab: {fileID: 8672841060902999855, guid: 5ddd70f33c80793409673c1142f14218, type: 3}
+  floorPrefab: {fileID: 2310224893705447164, guid: c32f8c74c270e2743a27af4cff9bdec6, type: 3}

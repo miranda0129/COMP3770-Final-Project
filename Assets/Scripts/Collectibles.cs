@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collectables : MonoBehaviour
+public class Collectibles : MonoBehaviour
 {
+    private Level levelManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        levelManager = GameObject.Find("Level").GetComponent<Level>();
     }
 
     // Update is called once per frame
@@ -19,8 +20,7 @@ public class Collectables : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        Level.score++;
-        Debug.Log(Level.score);
+        levelManager.IncreaseScore(1);
         Destroy(gameObject);
     }
 }

@@ -55,7 +55,7 @@ public class ExplosionEnemy : MonoBehaviour
     {
         //one second is a bit too short
         //TO CHANGE
-        StartCoroutine(waitSeconds(3f));
+        StartCoroutine(waitSeconds(1f));
     }
 
     //waits any number of seconds

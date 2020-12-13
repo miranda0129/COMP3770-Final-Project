@@ -17,6 +17,7 @@ public class Section : MonoBehaviour {
     public Vector3 leftAnchor;
     public Vector3 rightAnchor;
     public Vector3 midpoint = Vector3.negativeInfinity;
+    public Vector3 lowestPoint;
 
 
     [Header("Platform settings")]
@@ -24,7 +25,8 @@ public class Section : MonoBehaviour {
     private PlatformGenerator generator;                    // Randomly spawns the platforms in a given section.
     public GameObject platformGeneratorPrefab;
     private List<GameObject> platforms;
-    
+
+    public GameObject floorPrefab;
     private int ID = -1;
 
     void OnEnable() {
@@ -64,6 +66,7 @@ public class Section : MonoBehaviour {
     public void InitializePlatforms(int id, Vector3 attachPoint) {
         ID = id;
         leftAnchor = attachPoint;
+        lowestPoint = leftAnchor;
         int midPointIndex = platformsPerSection / 2;                                        // Cache it to save from recalculating in the for loop.
        
 
@@ -104,12 +107,23 @@ public class Section : MonoBehaviour {
             }
 
             if(i == 1) generator.followsSpawn = false;
+            if(rightAnchor.y < lowestPoint.y) lowestPoint = rightAnchor;
         }
 
+        SpawnFloor();
 	}
 
 
+    void SpawnFloor() {
 
+        float width = Vector3.Distance(leftAnchor, rightAnchor);
+        Vector3 floorPos = leftAnchor;
+        floorPos.y =  lowestPoint.y - 2f;
+        GameObject newFloor = Instantiate(floorPrefab);
+        newFloor.transform.position = floorPos;
+        newFloor.transform.localScale = new Vector3(width, 1, 4);
+        newFloor.transform.SetParent(transform);
+	}
 
     // In scene view, display the position of various things to make it quicker/easier to iterate.
     void OnDrawGizmosSelected() {

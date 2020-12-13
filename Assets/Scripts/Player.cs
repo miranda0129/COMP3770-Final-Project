@@ -62,7 +62,20 @@ public class Player : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision col) {
+	private void LateUpdate() {
+
+        // Clamp player to screen
+        Vector3 minScreenBounds = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 10));
+        Vector3 maxScreenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, 10));
+
+        Vector3 viewPos = transform.position;
+        viewPos.x = Mathf.Clamp(viewPos.x, minScreenBounds.x, maxScreenBounds.x);
+        viewPos.y = Mathf.Clamp(viewPos.y, minScreenBounds.y, maxScreenBounds.y);
+        transform.position = viewPos;
+
+	}
+
+	void OnCollisionEnter(Collision col) {
 
         nJumps = 0;     // TODO: this will change as we have different colliders to do different things.
      // rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
@@ -71,7 +84,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Player was damaged by projectile.");
             Destroy(col.gameObject);
-            //StartCoroutine(iFrames());
+            //StartCoroutine(iFrames(invincibilityTimeOnHit));
         }
 
         if (col.gameObject.name == "HeadHitbox" ) // Destroy an enemy if we jump on it's head
@@ -88,7 +101,7 @@ public class Player : MonoBehaviour
             // Damage the player
             Debug.Log("Player was damaged by enemy contact.");
 
-            //StartCoroutine(iFrames());
+            //StartCoroutine(iFrames(invincibilityTimeOnHit));
         }
 
 
@@ -201,11 +214,11 @@ public class Player : MonoBehaviour
     }
 
     /* Invincibility Frames - still a WIP*/
-    IEnumerator iFrames()
+    IEnumerator iFrames(float invincibilityTime)
     {
         Debug.Log("Invincibility period started");
-        gameObject.layer = 10; // Changes the players layer to ignore enemies/projectiles during the invincibility period
-        yield return new WaitForSeconds(invincibilityTimeOnHit);
+        gameObject.layer = 10; // Changes the players layer to ignore enemies/projectiles during the invincibility period           TODO: Change from layer int to LayerMask.LayerFromName() or w.e.
+        yield return new WaitForSeconds(invincibilityTime);
         gameObject.layer = 8; // Invincibility ends
 
         Debug.Log("Invincibility period ended");
