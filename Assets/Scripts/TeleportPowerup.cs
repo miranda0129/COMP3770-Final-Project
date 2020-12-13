@@ -21,7 +21,8 @@ public class TeleportPowerup : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 //play audio clip if available
-                if (pop != null) { AudioSource.PlayClipAtPoint(pop, transform.position); }
+                if (pop != null) { AudioSource.PlayClipAtPoint(pop, transform.position);
+                    Debug.Log("played sound"); }
 
                 //get mouse position and set transform there
                 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, 10)); //get click position
