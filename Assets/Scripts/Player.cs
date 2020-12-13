@@ -74,10 +74,14 @@ public class Player : MonoBehaviour
             //StartCoroutine(iFrames());
         }
 
-        if (col.gameObject.name == "HeadHitbox") // Destroy an enemy if we jump on it's head
+        if (col.gameObject.name == "HeadHitbox" ) // Destroy an enemy if we jump on it's head
         {
             Destroy(col.transform.parent.gameObject);
         }
+
+        if(col.gameObject.layer == LayerMask.NameToLayer("Weak Point")) {
+            Destroy(col.gameObject);
+		}
 
         else if (col.gameObject.name == "DamageHitbox")
         {
@@ -102,7 +106,7 @@ public class Player : MonoBehaviour
         }
 
         // Lazer Pickup
-        if(col.gameObject.name == "Lazerbeam Powerup") {
+        if(col.gameObject.name == "Lazerbeam Powerup(Clone)") {
             Debug.Log("Player hit lazerbeam powerup");
             GameObject.Destroy(col.gameObject);
 

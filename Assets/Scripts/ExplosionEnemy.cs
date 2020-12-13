@@ -6,15 +6,26 @@ public class ExplosionEnemy : MonoBehaviour
 {
     public float health;
     public float damage;
-    private Vector3 playerPosition;
+    public Level levelManager;
+    private Transform player;
 
-    public GameObject explodingBall;
-    public GameObject explodingRadius;
+    private Renderer enemyRenderer;
+    public Renderer explodingRadiusRenderer;
+    public PlayerInSphere explosionCollider;
+    private SphereCollider enemyCollider;
     public ParticleSystem boom;
+
+    public Material[] mats;             // 0 = see through, 1 = can be damaged.
 
     private bool exploding = false;
 
     float countdown = 5f;
+
+    void Start() {
+        enemyCollider = gameObject.GetComponent<SphereCollider>();
+        enemyCollider.enabled = false;
+        levelManager = GameObject.Find("Level").GetComponent<Level>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -24,11 +35,17 @@ public class ExplosionEnemy : MonoBehaviour
         if (countdown <= 0 && !exploding)
         {
             exploding = true;
+            if(enemyRenderer == null) enemyRenderer = gameObject.GetComponent<Renderer>();
+            enemyRenderer.material = mats[0];
+            enemyCollider.enabled = false;
 
             //get player location and move there and show explosion radius
-            playerPosition = GameObject.Find("Player").transform.position;
-            explodingBall.transform.position = playerPosition;
-            explodingRadius.SetActive(true);
+            if(player == null) player = levelManager.GetPlayer();
+            else if(levelManager == null) player = GameObject.Find("Player").transform;      // for playground
+
+            transform.position = player.position;
+            explodingRadiusRenderer.enabled = true;
+            Debug.Log("Im in here");
 
             Explode();
         }
@@ -45,16 +62,16 @@ public class ExplosionEnemy : MonoBehaviour
     IEnumerator waitSeconds(float seconds) { 
         yield return new WaitForSeconds(seconds);
 
+        explodingRadiusRenderer.enabled = false;
         boom.Play();
 
-        if (Physics.CheckSphere(playerPosition, 1.5f))
-        {
-            Rigidbody rb = GameObject.Find("Player").GetComponent<Rigidbody>();
-            rb.AddExplosionForce(3000f, playerPosition, 1.5f, 1.0f);
-
+        if(explosionCollider.playerInSphere) {
+            Rigidbody rb = player.GetComponent<Rigidbody>();
+            rb.AddExplosionForce(3000f, player.position, 1.5f, 1.0f);
         }
 
-        explodingRadius.SetActive(false);
+        enemyRenderer.material = mats[1];
+        enemyCollider.enabled = true;
         countdown = 5f;
         exploding = false;
     }
