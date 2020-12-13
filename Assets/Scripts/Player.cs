@@ -27,11 +27,6 @@ public class Player : MonoBehaviour
         currentJumpTime = jumpTime;
     }
 
-    void Update()
-    {
-
-    }
-
     void FixedUpdate() {
 
         // Apply movement

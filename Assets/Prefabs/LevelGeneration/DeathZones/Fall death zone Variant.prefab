@@ -9,11 +9,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1037306082943335707, guid: 179077fb98e014a489c4d203a0a2e12d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1037306082943335707, guid: 179077fb98e014a489c4d203a0a2e12d, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037306082943335707, guid: 179077fb98e014a489c4d203a0a2e12d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -104.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4159635888290804205, guid: 179077fb98e014a489c4d203a0a2e12d, type: 3}
+      propertyPath: canSpawnAdd
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7296807776936655083, guid: 179077fb98e014a489c4d203a0a2e12d, type: 3}
       propertyPath: playerRespawn

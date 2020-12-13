@@ -159,4 +159,5 @@ public class MovingPlatform : MonoBehaviour
         endPos = endWaypoint.transform.position;
 
     }
+
 }

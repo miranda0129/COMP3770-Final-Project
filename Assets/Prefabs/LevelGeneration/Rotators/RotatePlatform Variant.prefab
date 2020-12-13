@@ -75,7 +75,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3295494703669984874, guid: 3169e0706a002ad4d91750387e661c6b, type: 3}
       propertyPath: spawnPoint.x
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3295494703669984874, guid: 3169e0706a002ad4d91750387e661c6b, type: 3}
       propertyPath: platformRenderer

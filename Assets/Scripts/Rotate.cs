@@ -34,4 +34,8 @@ public class Rotate : MonoBehaviour
     }
 
     public void SetRotation(Vector3 eulerRotation) { targetRotation = Quaternion.Euler(eulerRotation); }
+    public void SwitchDirection() {
+        Vector3 oppositeDirection = eulerRotation * -1;
+        SetRotation(oppositeDirection);
+    }
 }

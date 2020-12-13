@@ -10,6 +10,8 @@ public class Platform : MonoBehaviour
     [Header("Spawn Location")]
     public Vector3 spawnPoint;          // Relative position of the spawn point.
     private Vector3 spawnPosition;      // world position of the spawn point.   (needed so we aren't constantly transforming the point out of position)
+    public bool hasSpawnedSomething = false;
+    public bool canSpawnAdd = true;
 
     [Header("Attachment Points")]
     public Vector3 leftAnchor;

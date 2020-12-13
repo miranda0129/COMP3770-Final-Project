@@ -57,7 +57,6 @@ public class LevelGenerator : MonoBehaviour
         nextSection = newSection;
         currentSections.Add(newSection);
         sectionCount++;
-
         
     }
 
@@ -125,14 +124,14 @@ public class LevelGenerator : MonoBehaviour
        
 
         // Set the active section to the next section in line
-        if(nextSection != null) {
-            activeSection = nextSection;
-            nextSection = null;
-        }
+        activeSection = nextSection;
+        nextSection = null;
+        
     }
 
     public void PlayerHitCheckpoint() {
         if(nextSection != null) playerSpawn = nextSection.playerSpawn;
+        else playerSpawn = nextSectionSpawnPosition + Vector3.right * 1 + Vector3.up * 2;
     }
 
     public void SetFirstSpawnPosition(Vector3 spawn) { nextSectionSpawnPosition = spawn; }

@@ -26,5 +26,5 @@ public class RotatePlatform : Rotate
         platform.SetRightAnchor(platform.GetRightAnchor() - (Vector3.right * platform.GetWidth()));
     }
 
-
+    
 }

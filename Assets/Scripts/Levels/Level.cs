@@ -14,13 +14,15 @@ public class Level : MonoBehaviour
 
     // keeps track of players collectable score
     public Color midPointShow;
-    private SmoothFollowCam cam;
     public GameObject playerPrefab;
     public Player player;
     public static int score;
 
-    private LevelGenerator levelGenerator;
     public GameObject floorPrefab;
+    private SmoothFollowCam cam;
+    private LevelGenerator levelGenerator;
+    private bool keepPolling = true;
+    private bool levelLoaded = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,20 +34,22 @@ public class Level : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(levelGenerator.GetActiveSection() != null) {
+        if(levelLoaded && keepPolling) {
 
-            // Delete old sections and update playerSpawn
-            
+            // When the player has passed the current section's end point
             if(levelGenerator.GetActiveSection().GetRightAnchor().x < player.transform.position.x) {
 
+                // delete the last section after camera can't see it.
                 if(levelGenerator.GetActiveSection().GetRightAnchor().x + 10 < cam.transform.position.x) 
                     levelGenerator.DeleteLastSections();
 
+
+                // Update player spawn position to the new section
                 else levelGenerator.PlayerHitCheckpoint();
 
             }
 
-            // Spawn new section when passing the midpoint
+            // Spawn new section when passing the midpoint of the current section
             if(player.transform.position.x > levelGenerator.GetCurrentMidpoint().x) {
 
                 // Spawn special section (levelcomplete)
@@ -59,6 +63,8 @@ public class Level : MonoBehaviour
 
                 }
             }
+
+            if(levelGenerator.GetSectionCount() >= 10 && levelGenerator.GetActiveSection() != null) keepPolling = false;
         }
         
     }
@@ -80,6 +86,8 @@ public class Level : MonoBehaviour
         floorPos.y -= 50;
         GameObject levelFloor = Instantiate(floorPrefab);
         levelFloor.transform.position = floorPos;
+
+        levelLoaded = true;
 	}
 
     public void RespawnPlayer() {
