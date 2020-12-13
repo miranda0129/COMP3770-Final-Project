@@ -37,7 +37,7 @@ public class TestSpawner : MonoBehaviour
 
 
     // Editor things
-    void OnDrawGizmosSelected() {
+    void OnDrawGizmos() {
         foreach(GeometryTestObject obj in testObjects) {
             Gizmos.DrawIcon(obj.spawnPosition, "geometry.tif", true);
         }
