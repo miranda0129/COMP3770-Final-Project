@@ -36,11 +36,6 @@ public class Player : MonoBehaviour
         inputManager = gameObject.GetComponent<PlayerInput>();
     }
 
-    void Update()
-    {
-
-    }
-
     void FixedUpdate() {
 
         // Apply movement
