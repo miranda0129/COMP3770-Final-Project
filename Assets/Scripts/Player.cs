@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public float jumpTime = 0.3f;
     private float currentJumpTime;
     public int nJumps = 0;
+    public int invincibilityTimeOnHit;
 
     private Rigidbody rb;
     public bool isSafe = false;
@@ -74,6 +75,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Player was damaged by projectile.");
             Destroy(col.gameObject);
+            //StartCoroutine(iFrames());
         }
 
         if (col.gameObject.name == "HeadHitbox") // Destroy an enemy if we jump on it's head
@@ -85,6 +87,8 @@ public class Player : MonoBehaviour
         {
             // Damage the player
             Debug.Log("Player was damaged by enemy contact.");
+
+            //StartCoroutine(iFrames());
         }
 
 
@@ -194,6 +198,17 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(30);
         inputManager.SwitchCurrentActionMap("Normal (No Powerups)");
         Debug.Log("Laserbeam powerup time out");
+    }
+
+    /* Invincibility Frames - still a WIP*/
+    IEnumerator iFrames()
+    {
+        Debug.Log("Invincibility period started");
+        gameObject.layer = 10; // Changes the players layer to ignore enemies/projectiles during the invincibility period
+        yield return new WaitForSeconds(invincibilityTimeOnHit);
+        gameObject.layer = 8; // Invincibility ends
+
+        Debug.Log("Invincibility period ended");
     }
 
 }
