@@ -16,10 +16,10 @@ TagManager:
   - 
   - Player
   - Level Geometry
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Bullet
+  - Death Zone
+  - Collectible
   - 
   - 
   - 
