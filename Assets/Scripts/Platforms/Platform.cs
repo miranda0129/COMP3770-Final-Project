@@ -24,7 +24,7 @@ public class Platform : MonoBehaviour
     public float height = 1;
 
     public Renderer platformRenderer;
-    public Renderer optionalRenderer;
+    public Renderer optionalRenderer;   // objects with two pieces of geometry will need this
 
     // Start is called before the first frame update
     void Start()

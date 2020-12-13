@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlatformGenerator : MonoBehaviour {
+
+    /// <summary>
+    /// A small struct used in the process of organizing the random chance to spawn %s of a category.
+    /// </summary>
     struct RandomSelectionType {
-        public int id;
-        public float chanceToSpawn;
-        public string name;
+        public int id;                      // index of category --> lines up with switch case in GenerateRandomPlatform for example.
+        public float chanceToSpawn;         // the normalized chance to spawn
+        public string name;                 // a human readable label
 
         public RandomSelectionType(int id, float chanceToSpawn, string name) {
             this.id = id;
@@ -363,6 +367,7 @@ public class PlatformGenerator : MonoBehaviour {
 
         // Normalize platforms
         totalChance = staticChance + elevatorChance + movingPlatformChance + rotatingChance + gapChance + deathChance;
+        totalChance = Mathf.Max(0.001f, totalChance);
         staticChance /= totalChance;
         elevatorChance /= totalChance;
         movingPlatformChance /= totalChance;
@@ -381,6 +386,7 @@ public class PlatformGenerator : MonoBehaviour {
 
         // Normalize platform additions
         totalChance = emptySCPP + collectibleSCPP + enemySCPP;
+        totalChance = Mathf.Max(0.001f, totalChance);
         emptySCPP /= totalChance;
         collectibleSCPP /= totalChance;
         enemySCPP /= totalChance;
@@ -394,6 +400,7 @@ public class PlatformGenerator : MonoBehaviour {
         // Normalize enemy Chances
         totalChance = 0;
         for(int i = 0; i < enemyChances.Length; i++) totalChance += enemyChances[i];
+        totalChance = Mathf.Max(0.001f, totalChance);
         for(int i = 0; i < enemyChances.Length; i++) enemyChances[i] /= totalChance;
 
         enemyList = new[] {
@@ -403,6 +410,7 @@ public class PlatformGenerator : MonoBehaviour {
         // Normalize Collectible Chances
         totalChance = 0;
         for(int i = 0; i < collectibleChances.Length; i++) totalChance += collectibleChances[i];
+        totalChance = Mathf.Max(0.001f, totalChance);
         for(int i = 0; i < collectibleChances.Length; i++) collectibleChances[i] /= totalChance;
 		
 
