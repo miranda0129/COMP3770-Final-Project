@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public float jumpTime = 0.3f;
     private float currentJumpTime;
     public int nJumps = 0;
+    public int invincibilityTimeOnHit;
 
     private Rigidbody rb;
     public bool isSafe = false;
@@ -31,13 +32,9 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         currentJumpTime = jumpTime;
-        lineRenderer = GameObject.Find("Line Renderer").GetComponent<LineRenderer>();
+        lineRenderer = gameObject.GetComponent<LineRenderer>();
+        lineRenderer.enabled = false;
         inputManager = gameObject.GetComponent<PlayerInput>();
-    }
-
-    void Update()
-    {
-
     }
 
     void FixedUpdate() {
@@ -68,11 +65,29 @@ public class Player : MonoBehaviour
     void OnCollisionEnter(Collision col) {
 
         nJumps = 0;     // TODO: this will change as we have different colliders to do different things.
-        // rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+     // rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
-        
+        if (col.gameObject.layer == 11) // Originally had this in the bullet script but moved it here to have them all in one place.
+        {
+            Debug.Log("Player was damaged by projectile.");
+            Destroy(col.gameObject);
+            //StartCoroutine(iFrames());
+        }
 
-        
+        if (col.gameObject.name == "HeadHitbox") // Destroy an enemy if we jump on it's head
+        {
+            Destroy(col.transform.parent.gameObject);
+        }
+
+        else if (col.gameObject.name == "DamageHitbox")
+        {
+            // Damage the player
+            Debug.Log("Player was damaged by enemy contact.");
+
+            //StartCoroutine(iFrames());
+        }
+
+
     }
 
     void OnTriggerEnter(Collider col) {
@@ -92,7 +107,10 @@ public class Player : MonoBehaviour
             GameObject.Destroy(col.gameObject);
 
             StartCoroutine(LazerTimer());
+
         }
+        
+       
     }
 
     /* Controls */
@@ -176,6 +194,17 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(30);
         inputManager.SwitchCurrentActionMap("Normal (No Powerups)");
         Debug.Log("Laserbeam powerup time out");
+    }
+
+    /* Invincibility Frames - still a WIP*/
+    IEnumerator iFrames()
+    {
+        Debug.Log("Invincibility period started");
+        gameObject.layer = 10; // Changes the players layer to ignore enemies/projectiles during the invincibility period
+        yield return new WaitForSeconds(invincibilityTimeOnHit);
+        gameObject.layer = 8; // Invincibility ends
+
+        Debug.Log("Invincibility period ended");
     }
 
 }
