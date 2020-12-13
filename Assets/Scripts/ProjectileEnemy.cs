@@ -15,7 +15,8 @@ public class ProjectileEnemy : MonoBehaviour
     private bool reloading;
     private GameObject bullet;
 
-    Vector3 playerPosition;
+    Level levelManager;
+    Transform player;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,9 @@ public class ProjectileEnemy : MonoBehaviour
         aimLine = GetComponent<LineRenderer>();
         aimLine.positionCount = 2;
         reloading = false;
+
+        levelManager = GameObject.Find("Level").GetComponent<Level>();
+        player = levelManager.GetPlayer();
 
     }
     IEnumerator FireGun(Ray ray) // Fires a bullet along the raycast line which bounces
@@ -40,15 +44,18 @@ public class ProjectileEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerPosition = GameObject.Find("Player").transform.position;
 
+        if(player == null) player = levelManager.GetPlayer();
+        aimLine.enabled = false;
         RaycastHit hit = new RaycastHit();
-        Ray ray = new Ray(transform.position, playerPosition - transform.position); // Raycasts towards player position
-        aimLine.SetPosition(0, transform.position);
+        Ray ray = new Ray(transform.position, player.position - transform.position); // Raycasts towards player position
+        
 
-        if (Physics.Raycast(ray, out hit, aggroDistance, ~layersToIgnore) && hit.collider.name == "Player") // If no obstacles between enemy and player, start shooting
-        {           
-            aimLine.SetPosition(1, playerPosition);
+        if (Physics.Raycast(ray, out hit, aggroDistance, ~layersToIgnore) && hit.collider.tag == "Player") // If no obstacles between enemy and player, start shooting
+        {
+            aimLine.enabled = true;
+            aimLine.SetPosition(0, transform.position);
+            aimLine.SetPosition(1, hit.point);
 
             if (reloading == false)
             {                           
