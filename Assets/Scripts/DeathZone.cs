@@ -4,24 +4,32 @@ using UnityEngine;
 
 public class DeathZone : MonoBehaviour
 {
-    public Level levelScript;
+        public GameObject playerPrefab;
+        public Vector3 playerStart;
+
+    void Awake() {
+          
+    }
 
     void OnTriggerStay(Collider col) {
 
+            if (col.gameObject.name == "Player") {
 
-        if(levelScript == null) levelScript = GameObject.Find("Level").GetComponent<Level>();
+		        //if (!col.gameObject.GetComponent<MovePlayer>().isSafe) {          // O.G
+		        if(!col.gameObject.GetComponent<Player>().isSafe) {                 // For Final playground
 
-		if(!col.gameObject.GetComponent<Player>().isSafe) {
+			
+                        Debug.Log("Player is dead!");
+                        GameObject.Destroy(col.gameObject);
+                        GameObject newPlayer = GameObject.Instantiate<GameObject>(playerPrefab);
+                        newPlayer.name = "Player";
+                        newPlayer.transform.position = playerStart;
 
-            Debug.Log("Player is dead!");
-            Destroy(col.gameObject);
-            levelScript.RespawnPlayer();
+                } else {
+                    Debug.Log("Can't kill player, they are safe!");
+                }
 
-        } else {
-            Debug.Log("Can't kill player, they are safe!");
-        }
-
-        
+            }
 
     }
 }
