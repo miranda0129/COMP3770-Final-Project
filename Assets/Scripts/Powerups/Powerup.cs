@@ -5,11 +5,14 @@ using UnityEngine.InputSystem;
 
 public class Powerup : MonoBehaviour
 {
-    private PlayerInput inputManager;
+    protected Player player;
+    protected PlayerInput inputManager;
+
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         inputManager = gameObject.GetComponent<PlayerInput>();
+        player = gameObject.GetComponent<Player>();
     }
 
     //used to disable a powerup

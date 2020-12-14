@@ -405,7 +405,8 @@ public class PlatformGenerator : MonoBehaviour {
 
         enemyList = new[] {
             new RandomSelectionType(0, enemyChances[0], "projectile"),
-            new RandomSelectionType(1, enemyChances[1], "teleporting")
+            new RandomSelectionType(1, enemyChances[1], "teleporting"),
+            new RandomSelectionType(2, enemyChances[2], "Movement")
         };
 
         // Normalize Collectible Chances
@@ -417,7 +418,9 @@ public class PlatformGenerator : MonoBehaviour {
 
         collectibleList = new[] {
             new RandomSelectionType(0, collectibleChances[0], "Coin"),
-            new RandomSelectionType(1, collectibleChances[1], "Lazer")
+            new RandomSelectionType(1, collectibleChances[1], "Lazer"),
+            new RandomSelectionType(2, collectibleChances[2], "Jump"),
+            new RandomSelectionType(3, collectibleChances[3], "Teleport")
         };
 
         // sort the arrays from largest to smallest chance

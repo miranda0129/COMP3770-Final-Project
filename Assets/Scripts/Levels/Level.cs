@@ -51,7 +51,7 @@ public class Level : MonoBehaviour
             if(player.transform.position.x > levelGenerator.GetCurrentMidpoint().x) {
 
                 // Spawn special section (levelcomplete)
-                if(levelGenerator.GetSectionCount() == 9) {
+                if(levelGenerator.GetSectionCount() == 10) {
                     levelGenerator.SpawnEndingSection();
 
                 // Regular section spawn everywhere else 
@@ -62,7 +62,7 @@ public class Level : MonoBehaviour
                 }
             }
 
-            if(levelGenerator.GetSectionCount() > 10 && levelGenerator.GetActiveSection() != null) keepPolling = false;
+            if(levelGenerator.GetSectionCount() > 10) keepPolling = false;
         }
         
     }

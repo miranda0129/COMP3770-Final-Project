@@ -10,26 +10,22 @@ public class LazerBeamPowerup : Powerup
     private Vector3 direction;
     private float maxDistance;
     private Vector3 mousePosition;
-    private PlayerInput inputManager;
+    private Level levelManager;
 
-    private void Start()
+    new void Start()
     {
+        base.Start();
         pew = Resources.Load<AudioClip>("Audio Clips/laser_pew"); //load audio clip
 
         //line renderer prep
-        lineRenderer = GameObject.Find("Player").GetComponent<LineRenderer>();
+        lineRenderer = gameObject.GetComponent<LineRenderer>();
         lineRenderer.startColor = Color.red;
         lineRenderer.endColor = Color.red;
         lineRenderer.enabled = false;
         lineRenderer.useWorldSpace = true;
-
-        //do when player picks up powerup
-        if (gameObject.name == "Player")
-        {
-            inputManager = gameObject.GetComponent<PlayerInput>();
-            inputManager.SwitchCurrentActionMap("LazerMode");
-            StartCoroutine(Timer(30));
-        }
+        inputManager.SwitchCurrentActionMap("LazerMode");
+        StartCoroutine(Timer(30));
+        
     }
 
     //click input handled for laser mode - shoot laser when clicked

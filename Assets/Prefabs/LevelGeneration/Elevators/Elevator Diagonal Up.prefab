@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8769612586847034790}
   - component: {fileID: 8769612586847034789}
   - component: {fileID: 8769612586847034788}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Elevator Diagonal Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {x: 1.5, y: 2, z: 0}
   hasSpawnedSomething: 0
+  canSpawnAdd: 1
   leftAnchor: {x: 0, y: 0, z: 0}
   rightAnchor: {x: 13, y: 10, z: 0}
   moveWaypointToAnchor: 0
@@ -88,7 +89,7 @@ GameObject:
   - component: {fileID: 8769612587278133589}
   - component: {fileID: 8769612587278133588}
   - component: {fileID: 8769612587278133591}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8769612587376412782}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: StartWaypoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +223,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8769612587986302359}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EndWaypoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

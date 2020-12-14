@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6243475956871363438}
   - component: {fileID: 6243475956871363439}
   - component: {fileID: 6243475956871363436}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 6243475957461675532}
   - component: {fileID: 6243475957461675533}
   - component: {fileID: 6243475957461675530}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6243475957490285757}
   - component: {fileID: 6243475957490285754}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Gap 2x1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,6 +236,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {x: 1, y: 2, z: 0}
+  hasSpawnedSomething: 0
+  canSpawnAdd: 1
   leftAnchor: {x: 0, y: 0, z: 0}
   rightAnchor: {x: 6, y: 0, z: 0}
   moveWaypointToAnchor: 0

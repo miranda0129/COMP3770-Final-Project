@@ -18,10 +18,11 @@ public class Player : MonoBehaviour
 
     private Vector3 movementVec;
     private Vector3 jumpVec;
+    private Vector3 mousePosition;
     public float jumpTime = 0.3f;
     private float currentJumpTime;
     public int nJumps = 0;
-
+    public int teleCountRemaining = 5;
     private Rigidbody rb;
     public bool isSafe = false;
     private LineRenderer lineRenderer;
@@ -78,10 +79,10 @@ public class Player : MonoBehaviour
 	}
 
 	void OnCollisionEnter(Collision col) {
-
-        nJumps = 0;     // TODO: this will change as we have different colliders to do different things.
-     // rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-
+        
+        if(col.gameObject.layer == LayerMask.NameToLayer("Level Geometry")) {
+            nJumps = 0;
+		}
         if (col.gameObject.layer == 11) // Originally had this in the bullet script but moved it here to have them all in one place.
         {
             Debug.Log("Player was damaged by projectile.");
@@ -113,7 +114,7 @@ public class Player : MonoBehaviour
     void OnTriggerEnter(Collider col) {
 
         // Teleport Pickup
-        if(col.gameObject.name == "Teleport Powerup") {
+        if(col.gameObject.name == "Teleport Powerup(Clone)") {
             Debug.Log("Player hit teleport powerup");
             gameObject.AddComponent<TeleportPowerup>();
             currentPowerup = gameObject.GetComponent<TeleportPowerup>();
@@ -123,25 +124,21 @@ public class Player : MonoBehaviour
         // Lazer Pickup
         if(col.gameObject.name == "Lazerbeam Powerup(Clone)") {
 
-        if(col.gameObject.name == "Lazerbeam Powerup") {
-           
-
-        if(col.gameObject.name == "Lazerbeam Powerup(Clone)") {
-
             Debug.Log("Player hit lazerbeam powerup");
             gameObject.AddComponent<LazerBeamPowerup>();
             currentPowerup = gameObject.GetComponent<LazerBeamPowerup>();
             Destroy(col.gameObject);
         }
+
         //Extra jumps powerup
-        if (col.gameObject.name == "Jump Powerup") {
+        if (col.gameObject.name == "Jump Powerup(Clone)") {
             Debug.Log("Player hit jump powerup");
             gameObject.AddComponent<JumpPowerup>();
             currentPowerup = gameObject.GetComponent<JumpPowerup>();
             Destroy(col.gameObject);
         }
         //Throwable powerup
-        if (col.gameObject.name == "Throwable Powerup")
+        if (col.gameObject.name == "Throwable Powerup(Clone)")
         {
             Debug.Log("Player hit throwable powerup");
             gameObject.AddComponent<ThrowablePowerup>();
@@ -209,22 +206,6 @@ public class Player : MonoBehaviour
             lineRenderer.enabled = false;
 		}
     }
-
-    public void OnTeleport() {
-        //play audio clip if available
-        // if(pop != null) { AudioSource.PlayClipAtPoint(pop, transform.position); }
-
-        //get mouse position and set transform there
-        mousePosition = Mouse.current.position.ReadValue();
-        Vector3 clickPosition = Camera.main.ScreenToWorldPoint(mousePosition + new Vector3(0, 0, 10)); //get click position
-        Debug.Log(clickPosition);
-        transform.position = clickPosition;
-        teleCountRemaining--;
-
-        if(teleCountRemaining <= 0) {
-            inputManager.SwitchCurrentActionMap("Normal (No Powerups)");
-        }
-    } 
 
     /* Powerup Timers */
     IEnumerator LazerTimer() {

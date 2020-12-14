@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6658914508133655478}
   - component: {fileID: 545348868043136814}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Gap 3x1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {x: 1.5, y: 2, z: 0}
+  hasSpawnedSomething: 0
+  canSpawnAdd: 1
   leftAnchor: {x: 0, y: 0, z: 0}
   rightAnchor: {x: 9, y: 0, z: 0}
   moveWaypointToAnchor: 0
@@ -65,7 +67,7 @@ GameObject:
   - component: {fileID: 4208342150714308062}
   - component: {fileID: 5820107622448689494}
   - component: {fileID: 6645864404767611882}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +162,7 @@ GameObject:
   - component: {fileID: 3774756940865478696}
   - component: {fileID: 3117996579258833870}
   - component: {fileID: 6076302766485314798}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
