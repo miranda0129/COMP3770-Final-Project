@@ -10,4 +10,21 @@ public class SheildPowerup : Powerup
     {
         
     }
+
+    void OnCollisionEnter(Collision col)
+    {
+
+        
+        if (col.gameObject.layer == 11)
+        {
+            Debug.Log("Blocked by sheild");
+            RemovePowerup(gameObject.GetComponent<SheildPowerup>());
+        }
+
+        else if (col.gameObject.name == "DamageHitbox")
+        {
+            Debug.Log("Blocked by sheild");
+            RemovePowerup(gameObject.GetComponent<SheildPowerup>());
+        }
+    }
 }
