@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
 
     private int teleCountRemaining;
     private PlayerInput inputManager;
+    private Level levelManager;
 
     void Start()
     {
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
         lineRenderer = gameObject.GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
         inputManager = gameObject.GetComponent<PlayerInput>();
+        levelManager = GameObject.Find("Level").GetComponent<Level>();
     }
 
     void FixedUpdate() {
@@ -83,7 +85,10 @@ public class Player : MonoBehaviour
         if (col.gameObject.layer == 11) // Originally had this in the bullet script but moved it here to have them all in one place.
         {
             Debug.Log("Player was damaged by projectile.");
+            rb.constraints = RigidbodyConstraints.None;
             Destroy(col.gameObject);
+            StartCoroutine(DieIn(2f));
+            
             //StartCoroutine(iFrames(invincibilityTimeOnHit));
         }
 
@@ -101,6 +106,7 @@ public class Player : MonoBehaviour
             // Damage the player
             Debug.Log("Player was damaged by enemy contact.");
 
+            
             //StartCoroutine(iFrames(invincibilityTimeOnHit));
         }
 
@@ -223,5 +229,11 @@ public class Player : MonoBehaviour
 
         Debug.Log("Invincibility period ended");
     }
+
+    public IEnumerator DieIn(float seconds) {
+        yield return new WaitForSeconds(seconds);
+        levelManager.RespawnPlayer();
+        Destroy(gameObject);
+	}
 
 }

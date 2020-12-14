@@ -55,14 +55,14 @@ public class Level : MonoBehaviour
                     levelGenerator.SpawnEndingSection();
 
                 // Regular section spawn everywhere else 
-                } else if(levelGenerator.GetSectionCount() < 10) {
+                } else if(levelGenerator.GetSectionCount() <= 10) {
 
                     levelGenerator.SpawnNewSection();
 
                 }
             }
 
-            if(levelGenerator.GetSectionCount() >= 10 && levelGenerator.GetActiveSection() != null) keepPolling = false;
+            if(levelGenerator.GetSectionCount() > 10 && levelGenerator.GetActiveSection() != null) keepPolling = false;
         }
         
     }
