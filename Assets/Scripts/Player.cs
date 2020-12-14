@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     public Powerup currentPowerup;
-
+    public Material defaultPlayerMat;
+    public Material[] powerupMats;
     public float speed = 10;
     public float JumpSpeed = 100.0f;
     public int maxJumps = 2;
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
     public float lowJumpMultiplier = 2.0f;
     public float runMultiplier = 1.2f;
     private float runAdjustment = 1.0f;
+
 
     private Vector3 movementVec;
     private Vector3 jumpVec;
@@ -27,9 +29,14 @@ public class Player : MonoBehaviour
     private Rigidbody rb;
     public bool isSafe = false;
     private LineRenderer lineRenderer;
+    private MeshRenderer renderer;
 
     private PlayerInput inputManager;
     private Level levelManager;
+
+    private int hpRemaining;
+    private int hpMax;
+
 
     void Start()
     {
@@ -39,6 +46,7 @@ public class Player : MonoBehaviour
         lineRenderer.enabled = false;
         inputManager = gameObject.GetComponent<PlayerInput>();
         levelManager = GameObject.Find("Level").GetComponent<Level>();
+        renderer = gameObject.GetComponent<MeshRenderer>();
     }
 
     void FixedUpdate() {
@@ -81,15 +89,18 @@ public class Player : MonoBehaviour
 
 	void OnCollisionEnter(Collision col) {
         
+        // Reset jumps after touching the ground ( You can kind of wall jump while you still have momentum)
+
         if(col.gameObject.layer == LayerMask.NameToLayer("Level Geometry")) {
             nJumps = 0;
 		}
+
         if (col.gameObject.layer == 11) // Originally had this in the bullet script but moved it here to have them all in one place.
         {
             Debug.Log("Player was damaged by projectile.");
-            rb.constraints = RigidbodyConstraints.None;
+            
             Destroy(col.gameObject);
-            StartCoroutine(DieIn(2f));
+            TakeDamage();
             
             //StartCoroutine(iFrames(invincibilityTimeOnHit));
         }
@@ -108,8 +119,9 @@ public class Player : MonoBehaviour
         {
             // Damage the player
             Debug.Log("Player was damaged by enemy contact.");
-            //StartCoroutine(iFrames(invincibilityTimeOnHit));
+            TakeDamage();
         }
+
     }
 
     //handle different powerups (and enemy?) collisions
@@ -149,7 +161,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    /* Controls */
+    /* Normal Controls -- Powerups contain their own addtional controls*/
     public void OnJump(InputValue input) {
 
         float jumpState = (input.Get<float>());     // 1 = is jumping, 0 = done
@@ -172,50 +184,8 @@ public class Player : MonoBehaviour
 
         if(input.isPressed) runAdjustment = runMultiplier;
         else runAdjustment = 1.0f;
+
 	}
-
-
-    public void OnLazer(InputValue input) {
-
-        if(input.isPressed) {
-            lineRenderer.enabled = true;
-            mousePosition = Mouse.current.position.ReadValue();
-            Vector3 clickPosition = Camera.main.ScreenToWorldPoint(mousePosition + new Vector3(0, 0, 10)); //get click position
-            clickPosition = new Vector3(clickPosition.x, clickPosition.y, 0);
-            Vector3 direction = clickPosition - transform.position; //calculate ray direction from player to click point
-            float maxDistance = direction.magnitude; // distance from player to click for raycast maxDistance
-
-            //render laser 
-            lineRenderer.SetPosition(0, transform.position);
-            lineRenderer.SetPosition(1, clickPosition);
-            lineRenderer.enabled = true;
-
-            //play audio clip if available
-            // if(pew != null) { AudioSource.PlayClipAtPoint(pew, transform.position); }
-
-            //stores all hit objects
-            RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, maxDistance); //cast ray
-
-            //destory every enemy hit in between player & max distance
-            for(int i = 0; i < hits.Length; i++) {
-                RaycastHit hit = hits[i];
-                Debug.Log("Hit object: " + hit.collider.gameObject.name);
-
-                //destory only if tagged as enemy
-                if(hit.collider.gameObject.tag == "Enemy") { Destroy(hit.collider.gameObject); }
-            }
-        } else {
-            lineRenderer.enabled = false;
-		}
-    }
-
-    /* Powerup Timers */
-    IEnumerator LazerTimer() {
-        inputManager.SwitchCurrentActionMap("LazerMode");
-        yield return new WaitForSeconds(30);
-        inputManager.SwitchCurrentActionMap("Normal (No Powerups)");
-        Debug.Log("Laserbeam powerup time out");
-    }
 
     /* Invincibility Frames - still a WIP*/
     IEnumerator iFrames(float invincibilityTime)
@@ -235,4 +205,19 @@ public class Player : MonoBehaviour
 	}
 
 
+    public void TakeDamage() {
+        hpRemaining--;
+
+
+        if(hpRemaining <= 0) {
+            rb.constraints = RigidbodyConstraints.None;
+            StartCoroutine(DieIn(1));
+        }
+	}
+    public void AddHP() { if(hpRemaining < hpMax) hpRemaining++; }
+    public void SetCurrentPowerup(Powerup newPowerup) { 
+        currentPowerup = newPowerup;
+    }
+    public void SetMaterial(Material mat) { renderer.material = mat; }
+    public void ResetMaterial() { renderer.material = defaultPlayerMat; }
 }

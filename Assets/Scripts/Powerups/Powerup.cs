@@ -13,6 +13,7 @@ public class Powerup : MonoBehaviour
     {
         inputManager = gameObject.GetComponent<PlayerInput>();
         player = gameObject.GetComponent<Player>();
+        player.SetCurrentPowerup(this);
     }
 
     //used to disable a powerup

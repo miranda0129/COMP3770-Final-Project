@@ -12,8 +12,7 @@ public class JumpPowerup : Powerup
         base.Start();
 
         inputManager.SwitchCurrentActionMap("ExtraJumpMode");
-        
-        player.maxJumps = 5;//change max jumps
+        player.maxJumps = 3;//change max jumps
         StartCoroutine(Timer(30));
         
     }

@@ -6,7 +6,6 @@ public class TeleportPowerup : Powerup
     public static int count = 5;
     public Vector3 clickPosition;
     public AudioClip pop;
-    private Player player;
 
     new void Start()
     {

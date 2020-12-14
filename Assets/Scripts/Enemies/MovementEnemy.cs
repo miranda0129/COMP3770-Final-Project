@@ -38,4 +38,8 @@ public class MovementEnemy : MonoBehaviour
             moveForward = !moveForward;
         }
     }
+
+    private void OnApplicationQuit() {
+        Destroy(gameObject);
+	}
 }
