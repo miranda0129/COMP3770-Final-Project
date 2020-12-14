@@ -58,7 +58,7 @@ public class ExplosionEnemy : MonoBehaviour
         StartCoroutine(waitSeconds(1f));
     }
 
-    //waits any number of seconds
+    //waits any number of seconds, then explodes
     IEnumerator waitSeconds(float seconds) { 
         yield return new WaitForSeconds(seconds);
 
