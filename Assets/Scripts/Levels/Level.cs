@@ -16,9 +16,7 @@ public class Level : MonoBehaviour
     public Color midPointShow;
     public GameObject playerPrefab;
     public Player player;
-    public static int score;
-
-    public GameObject floorPrefab;
+    public int score;
     private SmoothFollowCam cam;
     private LevelGenerator levelGenerator;
     private bool keepPolling = true;
@@ -81,12 +79,6 @@ public class Level : MonoBehaviour
         levelGenerator.SpawnNewSection();
         RespawnPlayer();
         cam.gameObject.SetActive(true);
-
-        Vector3 floorPos = transform.position;
-        floorPos.y -= 50;
-        GameObject levelFloor = Instantiate(floorPrefab);
-        levelFloor.transform.position = floorPos;
-
         levelLoaded = true;
 	}
 
@@ -114,5 +106,7 @@ public class Level : MonoBehaviour
         if(player != null) return player.transform;
         else return null;
     }
+
+    public void IncreaseScore(int newScore) { score += newScore; }
 
 }

@@ -62,7 +62,20 @@ public class Player : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision col) {
+	private void LateUpdate() {
+
+        // Clamp player to screen
+        Vector3 minScreenBounds = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 10));
+        Vector3 maxScreenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, 10));
+
+        Vector3 viewPos = transform.position;
+        viewPos.x = Mathf.Clamp(viewPos.x, minScreenBounds.x, maxScreenBounds.x);
+        viewPos.y = Mathf.Clamp(viewPos.y, minScreenBounds.y, maxScreenBounds.y);
+        transform.position = viewPos;
+
+	}
+
+	void OnCollisionEnter(Collision col) {
 
         nJumps = 0;     // TODO: this will change as we have different colliders to do different things.
      // rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
@@ -71,20 +84,24 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Player was damaged by projectile.");
             Destroy(col.gameObject);
-            //StartCoroutine(iFrames());
+            //StartCoroutine(iFrames(invincibilityTimeOnHit));
         }
 
-        if (col.gameObject.name == "HeadHitbox") // Destroy an enemy if we jump on it's head
+        if (col.gameObject.name == "HeadHitbox" ) // Destroy an enemy if we jump on it's head
         {
             Destroy(col.transform.parent.gameObject);
         }
+
+        if(col.gameObject.layer == LayerMask.NameToLayer("Weak Point")) {
+            Destroy(col.gameObject);
+		}
 
         else if (col.gameObject.name == "DamageHitbox")
         {
             // Damage the player
             Debug.Log("Player was damaged by enemy contact.");
 
-            //StartCoroutine(iFrames());
+            //StartCoroutine(iFrames(invincibilityTimeOnHit));
         }
     }
 
@@ -100,8 +117,12 @@ public class Player : MonoBehaviour
         }
 
         // Lazer Pickup
+<<<<<<< HEAD
         if(col.gameObject.name == "Lazerbeam Powerup") {
            
+=======
+        if(col.gameObject.name == "Lazerbeam Powerup(Clone)") {
+>>>>>>> f53dc7e4879119ccf917107735d11b64639d3b53
             Debug.Log("Player hit lazerbeam powerup");
             gameObject.AddComponent<LazerBeamPowerup>();
             currentPowerup = gameObject.GetComponent<LazerBeamPowerup>();
@@ -148,4 +169,77 @@ public class Player : MonoBehaviour
         if(input.isPressed) runAdjustment = runMultiplier;
         else runAdjustment = 1.0f;
 	}
+<<<<<<< HEAD
+=======
+
+    public void OnLazer(InputValue input) {
+
+        if(input.isPressed) {
+            lineRenderer.enabled = true;
+            mousePosition = Mouse.current.position.ReadValue();
+            Vector3 clickPosition = Camera.main.ScreenToWorldPoint(mousePosition + new Vector3(0, 0, 10)); //get click position
+            clickPosition = new Vector3(clickPosition.x, clickPosition.y, 0);
+            Vector3 direction = clickPosition - transform.position; //calculate ray direction from player to click point
+            float maxDistance = direction.magnitude; // distance from player to click for raycast maxDistance
+
+            //render laser 
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(1, clickPosition);
+            lineRenderer.enabled = true;
+
+            //play audio clip if available
+            // if(pew != null) { AudioSource.PlayClipAtPoint(pew, transform.position); }
+
+            //stores all hit objects
+            RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, maxDistance); //cast ray
+
+            //destory every enemy hit in between player & max distance
+            for(int i = 0; i < hits.Length; i++) {
+                RaycastHit hit = hits[i];
+                Debug.Log("Hit object: " + hit.collider.gameObject.name);
+
+                //destory only if tagged as enemy
+                if(hit.collider.gameObject.tag == "Enemy") { Destroy(hit.collider.gameObject); }
+            }
+        } else {
+            lineRenderer.enabled = false;
+		}
+    }
+
+    public void OnTeleport() {
+        //play audio clip if available
+        // if(pop != null) { AudioSource.PlayClipAtPoint(pop, transform.position); }
+
+        //get mouse position and set transform there
+        mousePosition = Mouse.current.position.ReadValue();
+        Vector3 clickPosition = Camera.main.ScreenToWorldPoint(mousePosition + new Vector3(0, 0, 10)); //get click position
+        Debug.Log(clickPosition);
+        transform.position = clickPosition;
+        teleCountRemaining--;
+
+        if(teleCountRemaining <= 0) {
+            inputManager.SwitchCurrentActionMap("Normal (No Powerups)");
+        }
+    } 
+
+    /* Powerup Timers */
+    IEnumerator LazerTimer() {
+        inputManager.SwitchCurrentActionMap("LazerMode");
+        yield return new WaitForSeconds(30);
+        inputManager.SwitchCurrentActionMap("Normal (No Powerups)");
+        Debug.Log("Laserbeam powerup time out");
+    }
+
+    /* Invincibility Frames - still a WIP*/
+    IEnumerator iFrames(float invincibilityTime)
+    {
+        Debug.Log("Invincibility period started");
+        gameObject.layer = 10; // Changes the players layer to ignore enemies/projectiles during the invincibility period           TODO: Change from layer int to LayerMask.LayerFromName() or w.e.
+        yield return new WaitForSeconds(invincibilityTime);
+        gameObject.layer = 8; // Invincibility ends
+
+        Debug.Log("Invincibility period ended");
+    }
+
+>>>>>>> f53dc7e4879119ccf917107735d11b64639d3b53
 }

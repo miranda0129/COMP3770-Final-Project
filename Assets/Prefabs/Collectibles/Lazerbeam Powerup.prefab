@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3481285224532774931}
   - component: {fileID: 3481285224532774941}
   - component: {fileID: 3481285224532774940}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Lazerbeam Powerup
   m_TagString: Powerup
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3481285224532774942}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b4cb1fce70ba437d9a6925e3815ee6b, type: 3}
   m_Name: 
@@ -105,7 +105,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3481285224532774942}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5.053201, y: 14.258, z: 21.633606}

@@ -45,7 +45,9 @@ public class ProjectileEnemy : MonoBehaviour
     void Update()
     {
 
-        if(player == null) player = levelManager.GetPlayer();
+        if(player == null && levelManager != null) player = levelManager.GetPlayer();
+        else if(levelManager == null) player = GameObject.Find("Player").transform;
+
         aimLine.enabled = false;
         RaycastHit hit = new RaycastHit();
         Ray ray = new Ray(transform.position, player.position - transform.position); // Raycasts towards player position
