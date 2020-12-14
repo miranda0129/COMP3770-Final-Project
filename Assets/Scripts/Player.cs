@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     private int hpRemaining = 3;
     private int hpMax = 3;
 
-    private bool isShielded = false;
+    public bool isShielded = false;
     private bool isInvincible = false;
 
 
@@ -103,8 +103,11 @@ public class Player : MonoBehaviour
             Debug.Log("Player was damaged by projectile.");
             
             Destroy(col.gameObject);
-            TakeDamage();
-            
+            if (!isShielded)
+            {
+                TakeDamage();
+            }
+
             //StartCoroutine(iFrames(invincibilityTimeOnHit));
         }
 
@@ -122,7 +125,10 @@ public class Player : MonoBehaviour
         {
             // Damage the player
             Debug.Log("Player was damaged by enemy contact.");
-            TakeDamage();
+            if (!isShielded)
+            {
+                TakeDamage();
+            }
         }
 
     }
@@ -162,14 +168,14 @@ public class Player : MonoBehaviour
             currentPowerup = gameObject.GetComponent<ThrowablePowerup>();
             Destroy(col.gameObject);
         }
-        if (col.gameObject.name == "Sheild Powerup(Clone)")
+        //Shield powerup
+        if(col.gameObject.name == "Shield Powerup(Clone)")
         {
-            Debug.Log("Player hit sheild powerup");
+            Debug.Log("Player hit shield powerup");
             gameObject.AddComponent<SheildPowerup>();
             currentPowerup = gameObject.GetComponent<SheildPowerup>();
             Destroy(col.gameObject);
         }
-
     }
 
     /* Normal Controls -- Powerups contain their own addtional controls*/

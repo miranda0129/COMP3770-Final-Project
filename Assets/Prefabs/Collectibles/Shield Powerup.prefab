@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 2475450855479492533}
   - component: {fileID: 7910626369560239699}
   - component: {fileID: 2476439651179503700}
-  - component: {fileID: 6367359858622905872}
   m_Layer: 0
-  m_Name: Sheild Powerup
+  m_Name: Shield Powerup
   m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 69b66beea468b4e5e9dadb122f36f22d, type: 2}
+  - {fileID: 2100000, guid: b078fa2abdf2542e3b5e6ceb3db8748f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,15 +95,3 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6367359858622905872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2843405790653002517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4138e7ef203934982bda9830606d96b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
