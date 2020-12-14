@@ -67,7 +67,7 @@ public class ExplosionEnemy : MonoBehaviour
 
         if(explosionCollider.playerInSphere) {
             Rigidbody rb = player.GetComponent<Rigidbody>();
-            player.TakeDamage();
+            player.GetComponent<Player>().TakeDamage();
             rb.AddExplosionForce(5000f, transform.position, 1.5f, 1.0f);
         }
 

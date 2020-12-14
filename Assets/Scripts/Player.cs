@@ -34,8 +34,11 @@ public class Player : MonoBehaviour
     private PlayerInput inputManager;
     private Level levelManager;
 
-    private int hpRemaining;
-    private int hpMax;
+    private int hpRemaining = 3;
+    private int hpMax = 3;
+
+    private bool isShielded = false;
+    private bool isInvincible = false;
 
 
     void Start()
@@ -95,7 +98,7 @@ public class Player : MonoBehaviour
             nJumps = 0;
 		}
 
-        if (col.gameObject.layer == 11) // Originally had this in the bullet script but moved it here to have them all in one place.
+        if (col.gameObject.layer == LayerMask.NameToLayer("Bullet")) // Originally had this in the bullet script but moved it here to have them all in one place.
         {
             Debug.Log("Player was damaged by projectile.");
             
@@ -191,9 +194,9 @@ public class Player : MonoBehaviour
     IEnumerator iFrames(float invincibilityTime)
     {
         Debug.Log("Invincibility period started");
-        gameObject.layer = 10; // Changes the players layer to ignore enemies/projectiles during the invincibility period           TODO: Change from layer int to LayerMask.LayerFromName() or w.e.
+        isInvincible = true;
         yield return new WaitForSeconds(invincibilityTime);
-        gameObject.layer = 8; // Invincibility ends
+        isInvincible = false;
 
         Debug.Log("Invincibility period ended");
     }
@@ -206,14 +209,15 @@ public class Player : MonoBehaviour
 
 
     public void TakeDamage() {
-        hpRemaining--;
-
+        if(isShielded)              isShielded = false;
+        else if (!isInvincible)      hpRemaining--;
 
         if(hpRemaining <= 0) {
             rb.constraints = RigidbodyConstraints.None;
             StartCoroutine(DieIn(1));
         }
 	}
+
     public void AddHP() { if(hpRemaining < hpMax) hpRemaining++; }
     public void SetCurrentPowerup(Powerup newPowerup) { 
         currentPowerup = newPowerup;

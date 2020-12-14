@@ -114,6 +114,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentPowerup: {fileID: 0}
   defaultPlayerMat: {fileID: 2100000, guid: c34ee2dbb63c33441be72c9e223da005, type: 2}
+  powerupMats:
+  - {fileID: 2100000, guid: b60cd6a0c6971f8458bfe7efa101ab9f, type: 2}
+  - {fileID: 2100000, guid: c4a8e7a8a46a760478dde2ed92633473, type: 2}
+  - {fileID: 2100000, guid: 69b66beea468b4e5e9dadb122f36f22d, type: 2}
+  - {fileID: 2100000, guid: 0d3a26e0a8a754230a015507521f22c4, type: 2}
   speed: 50
   JumpSpeed: 3.16
   maxJumps: 2

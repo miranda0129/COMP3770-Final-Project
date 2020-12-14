@@ -20,9 +20,10 @@ public class Powerup : MonoBehaviour
     //pass gameObject.getCompnet<>() reference as parameter
     public void RemovePowerup(Powerup disable)
     {
-        Destroy(disable);
+        player.ResetMaterial();
         inputManager.SwitchCurrentActionMap("Normal (No Powerups)");
         Debug.Log("Powerup removed");
+        Destroy(disable);
     }
 
     //powerup timer will destory powerup after set time

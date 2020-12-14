@@ -15,7 +15,7 @@ public class ThrowablePowerup : Powerup
         base.Start();
         inputManager.SwitchCurrentActionMap("ThrowableMode");
         throwable = Instantiate(throwablePrefab, new Vector3(20, 10, 1), Quaternion.identity);
-        
+        player.SetMaterial(player.powerupMats[3]);
     }
 
     void OnThrow(InputValue input)

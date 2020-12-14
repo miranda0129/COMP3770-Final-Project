@@ -12,6 +12,7 @@ public class TeleportPowerup : Powerup
         base.Start();
         pop = Resources.Load<AudioClip>("Audio Clips/teleport_pop");
         inputManager.SwitchCurrentActionMap("TeleportMode");
+        player.SetMaterial(player.powerupMats[2]);
         
     }
 
