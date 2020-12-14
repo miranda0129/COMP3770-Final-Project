@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     private Vector3 movementVec;
     private Vector3 jumpVec;
     private Vector3 mousePosition;
+    private Vector3 forceVec = new Vector3(0, 10, 0);
     public float jumpTime = 0.3f;
     private float currentJumpTime;
     public int nJumps = 0;
@@ -96,6 +97,7 @@ public class Player : MonoBehaviour
         if (col.gameObject.name == "HeadHitbox" ) // Destroy an enemy if we jump on it's head
         {
             Destroy(col.transform.parent.gameObject);
+            GetComponent<Rigidbody>().AddForce(forceVec, ForceMode.Impulse); // Gives the player a slight "bounce" effect after killing an enemy
         }
 
         if(col.gameObject.layer == LayerMask.NameToLayer("Weak Point")) {
