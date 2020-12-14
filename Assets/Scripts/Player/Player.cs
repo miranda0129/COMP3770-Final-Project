@@ -162,6 +162,12 @@ public class Player : MonoBehaviour
             currentPowerup = gameObject.GetComponent<ThrowablePowerup>();
             Destroy(col.gameObject);
         }
+
+        // Healthup powerup
+        if(col.gameObject.name == "Healthup") {
+            Destroy(col.gameObject);
+            AddHP();
+		}
     }
 
     /* Normal Controls -- Powerups contain their own addtional controls*/
