@@ -67,10 +67,8 @@ public class ExplosionEnemy : MonoBehaviour
 
         if(explosionCollider.playerInSphere) {
             Rigidbody rb = player.GetComponent<Rigidbody>();
-            rb.constraints = RigidbodyConstraints.None;
-            rb.AddExplosionForce(10000f, transform.position, 1.5f, 1.0f);
-           
-            StartCoroutine(player.GetComponent<Player>().DieIn(2f));
+            player.GetComponent<Player>().TakeDamage();
+            rb.AddExplosionForce(5000f, transform.position, 1.5f, 1.0f);
         }
 
         enemyRenderer.material = mats[1];
