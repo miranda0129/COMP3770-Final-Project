@@ -74,7 +74,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: enemies.Array.size
-    value: 3
+    value: 5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: enemies.Array.data[0]
@@ -89,12 +89,20 @@ Preset:
     value: 
     objectReference: {fileID: 5933782159455206769, guid: 7797e52cad2eb9a45a01af2e0a4a48f7, type: 3}
   - target: {fileID: 0}
+    propertyPath: enemies.Array.data[3]
+    value: 
+    objectReference: {fileID: 8415951178713972755, guid: 4e7078a97cb731e4b9d9a6937afc2dc5, type: 3}
+  - target: {fileID: 0}
+    propertyPath: enemies.Array.data[4]
+    value: 
+    objectReference: {fileID: 5933782159455206769, guid: e37288c29f6798e49b85f3c22811377e, type: 3}
+  - target: {fileID: 0}
     propertyPath: enemyChances.Array.size
-    value: 3
+    value: 5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: enemyChances.Array.data[0]
-    value: 0.5
+    value: 0.25
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: enemyChances.Array.data[1]
@@ -102,6 +110,14 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: enemyChances.Array.data[2]
+    value: 0.25
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: enemyChances.Array.data[3]
+    value: 0.25
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: enemyChances.Array.data[4]
     value: 0.25
     objectReference: {fileID: 0}
   - target: {fileID: 0}

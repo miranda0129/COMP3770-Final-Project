@@ -406,7 +406,9 @@ public class PlatformGenerator : MonoBehaviour {
         enemyList = new[] {
             new RandomSelectionType(0, enemyChances[0], "projectile"),
             new RandomSelectionType(1, enemyChances[1], "teleporting"),
-            new RandomSelectionType(2, enemyChances[2], "Movement")
+            new RandomSelectionType(2, enemyChances[2], "Movement"),
+            new RandomSelectionType(3, enemyChances[3], "Falling"),
+            new RandomSelectionType(4, enemyChances[4], "Split")
         };
 
         // Normalize Collectible Chances

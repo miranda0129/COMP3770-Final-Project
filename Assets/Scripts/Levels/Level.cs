@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(LevelGenerator))]
 public class Level : MonoBehaviour
@@ -12,6 +13,8 @@ public class Level : MonoBehaviour
     10 sections before level complete section. (Level 3 must have boss section first)
      */
 
+    static int levels = 0;
+    static int totalLevels = 3;
     // keeps track of players collectable score
     public Color midPointShow;
     public GameObject playerPrefab;
@@ -21,10 +24,12 @@ public class Level : MonoBehaviour
     private LevelGenerator levelGenerator;
     private bool keepPolling = true;
     private bool levelLoaded = false;
+    private bool levelComplete = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        levels++;
         levelGenerator = gameObject.GetComponent<LevelGenerator>();
         LoadLevel();
     }
@@ -82,6 +87,14 @@ public class Level : MonoBehaviour
         levelLoaded = true;
 	}
 
+    public void LevelComplete() {
+
+        if(!levelComplete) {
+            levelComplete = true;
+            StartCoroutine(LoadNextLevel());
+        }
+	}
+
     public void RespawnPlayer() {
 
         GameObject newObj = Instantiate(playerPrefab);
@@ -109,4 +122,17 @@ public class Level : MonoBehaviour
 
     public void IncreaseScore(int newScore) { score += newScore; }
 
+    // Load the next level after a few seconds.
+    private IEnumerator LoadNextLevel() {
+
+        yield return new WaitForSeconds(4f);
+
+        if (levels < totalLevels) SceneManager.LoadScene(levels);
+        else SceneManager.LoadScene(0);
+    }
+
+    public void LoadMainMenu() {
+
+        SceneManager.LoadScene(0);
+	}
 }

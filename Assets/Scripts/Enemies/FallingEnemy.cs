@@ -20,6 +20,7 @@ public class FallingEnemy : MonoBehaviour
 
         coll = GetComponent<Collider>();
         coll.attachedRigidbody.useGravity = false;
+        levelScript = GameObject.Find("Level").GetComponent<Level>();
     }
 
     // Update is called once per frame
@@ -31,7 +32,7 @@ public class FallingEnemy : MonoBehaviour
 
             //move to position
             rend.sharedMaterial = materials[1];
-            transform.position = GameObject.Find("Player").transform.position + new Vector3(0, 5, 0);
+            transform.position = levelScript.GetPlayer().transform.position + new Vector3(0, 5, 0);
 
             StartCoroutine(FallDown());
         }

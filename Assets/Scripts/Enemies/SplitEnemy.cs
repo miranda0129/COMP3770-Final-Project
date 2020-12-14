@@ -23,7 +23,11 @@ public class SplitEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        // Spawn the two enemies when the main enemy is defeated
+        splitEnemy1 = Instantiate(splitEnemy, transform.position, transform.rotation);
+        splitEnemy1.SetActive(false);
+        splitEnemy2 = Instantiate(splitEnemy, transform.position, transform.rotation);
+        splitEnemy2.SetActive(false);
     }
 
     // Update is called once per frame
@@ -51,12 +55,16 @@ public class SplitEnemy : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Spawn the two enemies when the main enemy is defeated
-        splitEnemy1 = Instantiate(splitEnemy, transform.position, transform.rotation);
-        splitEnemy2 = Instantiate(splitEnemy, transform.position, transform.rotation);
 
         // Add velocity to them to they "pop out" instead of just appearing
-        splitEnemy1.GetComponent<Rigidbody>().velocity = splitVelocityRight;
-        splitEnemy2.GetComponent<Rigidbody>().velocity = splitVelocityLeft;
+        if(splitEnemy1 != null) { 
+            splitEnemy1.SetActive(true); 
+            splitEnemy1.GetComponent<Rigidbody>().velocity = splitVelocityRight;
+        }
+
+        if(splitEnemy2 != null) {
+            splitEnemy2.SetActive(true);
+            splitEnemy2.GetComponent<Rigidbody>().velocity = splitVelocityLeft;
+        }
     }
 }
