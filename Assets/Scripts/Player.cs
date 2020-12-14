@@ -5,8 +5,11 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public Powerup currentPowerup;
+
     public float speed = 10;
     public float JumpSpeed = 100.0f;
+    public int maxJumps = 2;
 
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2.0f;
@@ -18,14 +21,11 @@ public class Player : MonoBehaviour
     public float jumpTime = 0.3f;
     private float currentJumpTime;
     public int nJumps = 0;
-    public int invincibilityTimeOnHit;
 
     private Rigidbody rb;
     public bool isSafe = false;
     private LineRenderer lineRenderer;
-    private Vector3 mousePosition;
 
-    private int teleCountRemaining;
     private PlayerInput inputManager;
     private Level levelManager;
 
@@ -105,35 +105,49 @@ public class Player : MonoBehaviour
         {
             // Damage the player
             Debug.Log("Player was damaged by enemy contact.");
-
-            
             //StartCoroutine(iFrames(invincibilityTimeOnHit));
         }
-
-
     }
 
+    //handle different powerups (and enemy?) collisions
     void OnTriggerEnter(Collider col) {
 
         // Teleport Pickup
         if(col.gameObject.name == "Teleport Powerup") {
             Debug.Log("Player hit teleport powerup");
-            GameObject.Destroy(col.gameObject);
-
-            teleCountRemaining = 5;
-            inputManager.SwitchCurrentActionMap("TeleportMode");
+            gameObject.AddComponent<TeleportPowerup>();
+            currentPowerup = gameObject.GetComponent<TeleportPowerup>();
+            Destroy(col.gameObject);
         }
 
         // Lazer Pickup
         if(col.gameObject.name == "Lazerbeam Powerup(Clone)") {
+
+        if(col.gameObject.name == "Lazerbeam Powerup") {
+           
+
+        if(col.gameObject.name == "Lazerbeam Powerup(Clone)") {
+
             Debug.Log("Player hit lazerbeam powerup");
-            GameObject.Destroy(col.gameObject);
-
-            StartCoroutine(LazerTimer());
-
+            gameObject.AddComponent<LazerBeamPowerup>();
+            currentPowerup = gameObject.GetComponent<LazerBeamPowerup>();
+            Destroy(col.gameObject);
         }
-        
-       
+        //Extra jumps powerup
+        if (col.gameObject.name == "Jump Powerup") {
+            Debug.Log("Player hit jump powerup");
+            gameObject.AddComponent<JumpPowerup>();
+            currentPowerup = gameObject.GetComponent<JumpPowerup>();
+            Destroy(col.gameObject);
+        }
+        //Throwable powerup
+        if (col.gameObject.name == "Throwable Powerup")
+        {
+            Debug.Log("Player hit throwable powerup");
+            gameObject.AddComponent<ThrowablePowerup>();
+            currentPowerup = gameObject.GetComponent<ThrowablePowerup>();
+            Destroy(col.gameObject);
+        }
     }
 
     /* Controls */
@@ -141,7 +155,7 @@ public class Player : MonoBehaviour
 
         float jumpState = (input.Get<float>());     // 1 = is jumping, 0 = done
         
-        if(jumpState == 1 && nJumps < 2) {
+        if(jumpState == 1 && nJumps < maxJumps) {
             jumpVec = Vector3.up;
             currentJumpTime = 0.0f;
             nJumps++;
@@ -160,6 +174,7 @@ public class Player : MonoBehaviour
         if(input.isPressed) runAdjustment = runMultiplier;
         else runAdjustment = 1.0f;
 	}
+
 
     public void OnLazer(InputValue input) {
 
@@ -235,5 +250,6 @@ public class Player : MonoBehaviour
         levelManager.RespawnPlayer();
         Destroy(gameObject);
 	}
+
 
 }
