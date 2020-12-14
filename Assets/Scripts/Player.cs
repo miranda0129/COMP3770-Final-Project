@@ -147,6 +147,14 @@ public class Player : MonoBehaviour
             currentPowerup = gameObject.GetComponent<ThrowablePowerup>();
             Destroy(col.gameObject);
         }
+        if (col.gameObject.name == "Sheild Powerup(Clone)")
+        {
+            Debug.Log("Player hit sheild powerup");
+            gameObject.AddComponent<SheildPowerup>();
+            currentPowerup = gameObject.GetComponent<SheildPowerup>();
+            Destroy(col.gameObject);
+        }
+
     }
 
     /* Controls */
