@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(LevelGenerator))]
 public class Level : MonoBehaviour
@@ -17,13 +18,15 @@ public class Level : MonoBehaviour
     public GameObject playerPrefab;
     public Player player;
     public int score;
+    public int enemiesKilled;
     private SmoothFollowCam cam;
     private LevelGenerator levelGenerator;
     private bool keepPolling = true;
     private bool levelLoaded = false;
+    private bool isPaused = false;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         levelGenerator = gameObject.GetComponent<LevelGenerator>();
         LoadLevel();
@@ -108,5 +111,26 @@ public class Level : MonoBehaviour
     }
 
     public void IncreaseScore(int newScore) { score += newScore; }
+
+    public void IncreaseKilled(int newScore) { enemiesKilled += newScore; }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("Scenes/Main Menu");
+    }
+
+    public void PauseButton()
+    {
+        if (!isPaused)
+        {
+            Time.timeScale = 0;
+            isPaused = true;
+        }
+        if (isPaused)
+        {
+            Time.timeScale = 1;
+            isPaused = false;
+        }
+    }
 
 }

@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     private PlayerInput inputManager;
     private Level levelManager;
 
-    private int hpRemaining = 3;
+    public int hpRemaining = 3;
     private int hpMax = 3;
 
     public bool isShielded = false;
@@ -113,6 +113,7 @@ public class Player : MonoBehaviour
 
         if (col.gameObject.name == "HeadHitbox" ) // Destroy an enemy if we jump on it's head
         {
+            levelManager.IncreaseKilled(1);
             Destroy(col.transform.parent.gameObject);
             GetComponent<Rigidbody>().AddForce(forceVec, ForceMode.Impulse); // Gives the player a slight "bounce" effect after killing an enemy
         }
@@ -158,14 +159,6 @@ public class Player : MonoBehaviour
             Debug.Log("Player hit jump powerup");
             gameObject.AddComponent<JumpPowerup>();
             currentPowerup = gameObject.GetComponent<JumpPowerup>();
-            Destroy(col.gameObject);
-        }
-        //Throwable powerup
-        if (col.gameObject.name == "Throwable Powerup(Clone)")
-        {
-            Debug.Log("Player hit throwable powerup");
-            gameObject.AddComponent<ThrowablePowerup>();
-            currentPowerup = gameObject.GetComponent<ThrowablePowerup>();
             Destroy(col.gameObject);
         }
         //Shield powerup

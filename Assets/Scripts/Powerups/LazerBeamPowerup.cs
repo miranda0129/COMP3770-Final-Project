@@ -17,6 +17,7 @@ public class LazerBeamPowerup : Powerup
         base.Start();
         pew = Resources.Load<AudioClip>("Audio Clips/laser_pew"); //load audio clip
         player.SetMaterial(player.powerupMats[1]);
+        levelManager = GameObject.Find("Level").GetComponent<Level>();
 
         //line renderer prep
         lineRenderer = gameObject.GetComponent<LineRenderer>();
@@ -60,7 +61,10 @@ public class LazerBeamPowerup : Powerup
                 Debug.Log("Hit object: " + hit.collider.gameObject.name);
 
                 //destory only if tagged as enemy
-                if (hit.collider.gameObject.tag == "Enemy") { Destroy(hit.collider.gameObject); }
+                if (hit.collider.gameObject.tag == "Enemy") {
+                    levelManager.IncreaseKilled(1);
+                    Destroy(hit.collider.gameObject);
+                }
             }
         }
         else

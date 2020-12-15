@@ -6,6 +6,7 @@ public class FallingEnemy : MonoBehaviour
 {
     public Material[] materials;
     public Level levelScript;
+    Level levelManager;
 
     private Renderer rend;
     private Collider coll;
@@ -15,6 +16,8 @@ public class FallingEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        levelManager = GameObject.Find("Level").GetComponent<Level>();
+
         rend = GetComponent<Renderer>();
         rend.enabled = true;
 
@@ -66,9 +69,12 @@ public class FallingEnemy : MonoBehaviour
         Vector3 contact = collision.contacts[0].normal;
 
         //if enemy is hit on top, destroyy
-        if(contact == -(transform.up))   Destroy(gameObject);
+        if (contact == -(transform.up)){
+            levelManager.IncreaseKilled(1);
+            Destroy(gameObject);
+        }
         
-
+        
         if (contact == (transform.up) && collision.gameObject.name == "Player")
         {
             //for playground testing
