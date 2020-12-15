@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
-        coinsText.text = "TODO";
+        coinsText.text = "0";
     }
 
 }

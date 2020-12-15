@@ -13,8 +13,9 @@ public class Level : MonoBehaviour
     10 sections before level complete section. (Level 3 must have boss section first)
      */
 
-    static int levels = 1;
+    public static int levels = 1;
     static int totalLevels = 3;
+
     // keeps track of players collectable score
     public Color midPointShow;
     public GameObject playerPrefab;
