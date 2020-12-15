@@ -4970,6 +4970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   damage: 0
+  levelManager: {fileID: 0}
   explodingRadiusRenderer: {fileID: 4116355368381233087}
   explosionCollider: {fileID: 958645465}
   boom: {fileID: 4116355366587881378}
