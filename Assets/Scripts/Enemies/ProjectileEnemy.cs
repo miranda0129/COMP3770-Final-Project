@@ -41,30 +41,28 @@ public class ProjectileEnemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
 
         if(player == null && levelManager != null) player = levelManager.GetPlayer();
-      
 
-        aimLine.enabled = false;
-        RaycastHit hit = new RaycastHit();
-        Ray ray = new Ray(transform.position, player.position - transform.position); // Raycasts towards player position
-        
+        if(player != null) {
+            aimLine.enabled = false;
+            RaycastHit hit = new RaycastHit();
+            Ray ray = new Ray(transform.position, player.position - transform.position); // Raycasts towards player position
 
-        if (Physics.Raycast(ray, out hit, aggroDistance, ~layersToIgnore) && hit.collider.tag == "Player") // If no obstacles between enemy and player, start shooting
-        {
-            aimLine.enabled = true;
-            aimLine.SetPosition(0, transform.position);
-            aimLine.SetPosition(1, hit.point);
 
-            if (reloading == false)
-            {                           
-                StartCoroutine(FireGun(ray));
+            if(Physics.Raycast(ray, out hit, aggroDistance, ~layersToIgnore) && hit.collider.tag == "Player") // If no obstacles between enemy and player, start shooting
+            {
+                aimLine.enabled = true;
+                aimLine.SetPosition(0, transform.position);
+                aimLine.SetPosition(1, hit.point);
+
+                if(reloading == false) {
+                    StartCoroutine(FireGun(ray));
+                }
+
             }
-                                             
         }
-
     }
 
 }

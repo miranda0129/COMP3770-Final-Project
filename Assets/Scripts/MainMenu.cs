@@ -20,4 +20,7 @@ public class MainMenu : MonoBehaviour
         coinsText.text = PlayerPrefs.GetInt("coins").ToString();
     }
 
+    public void QuitApplication() {
+        Application.Quit();
+	}
 }

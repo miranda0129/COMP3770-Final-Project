@@ -26,6 +26,8 @@ public class FallingEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(levelScript == null) levelScript = GameObject.Find("Level").GetComponent<Level>();
         if (!startedEnemy)
         {
             startedEnemy = true;

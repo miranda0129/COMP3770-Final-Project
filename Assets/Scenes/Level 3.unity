@@ -889,6 +889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6195b28826e514765ba16a85690e19c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManager: {fileID: 1997828352}
   player: {fileID: 0}
   health: 
   score: 

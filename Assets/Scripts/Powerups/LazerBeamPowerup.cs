@@ -61,8 +61,7 @@ public class LazerBeamPowerup : Powerup
                 Debug.Log("Hit object: " + hit.collider.gameObject.name);
 
                 //destory only if tagged as enemy
-                if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Weak Point")) Destroy(hit.collider.gameObject);
-                else if(hit.collider.gameObject.layer == LayerMask.NameToLayer("HeadHitbox")) Destroy(hit.collider.transform.parent.gameObject);
+                if(hit.collider.gameObject.tag == "Enemy") { Destroy(hit.collider.gameObject); }
 
             }
         }

@@ -20,7 +20,7 @@ public class UiDisplay : MonoBehaviour
 
     private void Start()
     {
-        levelManager = GameObject.Find("Level").GetComponent<Level>();
+        //levelManager = GameObject.Find("Level").GetComponent<Level>();
         
 
     }

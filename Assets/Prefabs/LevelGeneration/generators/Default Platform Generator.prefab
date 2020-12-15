@@ -51,10 +51,12 @@ MonoBehaviour:
   - {fileID: 8931228102978913325, guid: 5e361964eaf3f4346a80ffbd981ee4bb, type: 3}
   - {fileID: 8931228102978913325, guid: 5e361964eaf3f4346a80ffbd981ee4bb, type: 3}
   - {fileID: 8931228102978913325, guid: 5e361964eaf3f4346a80ffbd981ee4bb, type: 3}
+  - {fileID: 8931228102978913325, guid: 5e361964eaf3f4346a80ffbd981ee4bb, type: 3}
   collectibleChances:
   - 0.8
   - 0.05
   - 0.05
+  - 0.1
   - 0.1
   - 0.1
   - 0.1

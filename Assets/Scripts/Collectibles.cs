@@ -20,7 +20,7 @@ public class Collectibles : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        levelManager.IncreaseScore(1);
         Destroy(gameObject);
+        levelManager.IncreaseScore(1);
     }
 }
