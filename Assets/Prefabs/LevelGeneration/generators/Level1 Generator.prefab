@@ -51,6 +51,7 @@ MonoBehaviour:
   - {fileID: 8931228102978913325, guid: 5e361964eaf3f4346a80ffbd981ee4bb, type: 3}
   - {fileID: 8931228102978913325, guid: 2e7a607633ffe6044b7395b5a61cb930, type: 3}
   - {fileID: 6993995924221815017, guid: 8f9614358c0f39c4a9df5777de36bc7d, type: 3}
+  - {fileID: 2843405790653002517, guid: 736bc4848fb4868458b0e8643a52eba8, type: 3}
   collectibleChances:
   - 0.95
   - 0.02
@@ -58,6 +59,7 @@ MonoBehaviour:
   - 0
   - 0.02
   - 0.01
+  - 0.068
   collectibleSCPP: 0.45
   enemies:
   - {fileID: 5933782159455206769, guid: c04cb62f124bdb147a9749292a2d90a1, type: 3}
@@ -71,7 +73,7 @@ MonoBehaviour:
   - 0.686
   - 0.057
   - 0.312
-  enemySCPP: 0.05
+  enemySCPP: 0.065
   staticPlatforms:
   - {fileID: 7825709659395962790, guid: 999d4091080dc4643a30eeae121d9dfd, type: 3}
   - {fileID: 7246088422011410858, guid: bf048c80fa0c20b4eab040e510daea19, type: 3}

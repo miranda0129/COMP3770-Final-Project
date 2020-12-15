@@ -422,7 +422,8 @@ public class PlatformGenerator : MonoBehaviour {
             new RandomSelectionType(2, collectibleChances[2], "Jump"),
             new RandomSelectionType(3, collectibleChances[3], "Teleport"),
             new RandomSelectionType(4, collectibleChances[4], "Health"),
-            new RandomSelectionType(5, collectibleChances[5], "Magnet")
+            new RandomSelectionType(5, collectibleChances[5], "Magnet"),
+            new RandomSelectionType(6, collectibleChances[6], "Shield")
         };
 
         // sort the arrays from largest to smallest chance

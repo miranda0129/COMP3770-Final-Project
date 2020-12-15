@@ -21,13 +21,13 @@ public class UiDisplay : MonoBehaviour
     private void Start()
     {
         levelManager = GameObject.Find("Level").GetComponent<Level>();
-        player = levelManager.GetPlayer().GetComponent<Player>();
+       
 
     }
 
     private void Update()
     {
-        
+        player = levelManager.GetPlayer().GetComponent<Player>();
         health = player.hpRemaining.ToString();
         score = levelManager.score.ToString();
         enemiesKilled = levelManager.enemiesKilled.ToString();

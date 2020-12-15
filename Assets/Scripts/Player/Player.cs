@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     private PlayerInput inputManager;
     private Level levelManager;
 
-    private int hpRemaining = 3;
+    public int hpRemaining = 3;
     private int hpMax = 3;
 
     public bool isShielded = false;

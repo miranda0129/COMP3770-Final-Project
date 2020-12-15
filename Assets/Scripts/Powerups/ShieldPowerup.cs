@@ -11,7 +11,7 @@ public class SheildPowerup : Powerup
         base.Start();
 
         //set player material and shield flag in player script
-        player.SetMaterial(player.powerupMats[4]);
+        player.SetMaterial(player.powerupMats[3]);
         player.isShielded = true;
         shieldBlock = Resources.Load<AudioClip>("Audio Clips/shield"); //load audio clip
         Debug.Log("shield equipped");
@@ -25,16 +25,14 @@ public class SheildPowerup : Powerup
         {
             Debug.Log("Blocked by sheild");
             if (shieldBlock != null) { AudioSource.PlayClipAtPoint(shieldBlock, transform.position); }
-            player.isShielded = false;
-            RemovePowerup(gameObject.GetComponent<SheildPowerup>());//destory after block
+            RemovePowerup(this);//destory after block
         }
         //block enemy contact damage
         else if (col.gameObject.name == "DamageHitbox")
         {
             Debug.Log("Blocked by sheild");
             if (shieldBlock != null) { AudioSource.PlayClipAtPoint(shieldBlock, transform.position); }
-            player.isShielded = false;
-            RemovePowerup(gameObject.GetComponent<SheildPowerup>());//destory after block
+            RemovePowerup(this);//destory after block
         }
     }
 }

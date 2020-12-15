@@ -1219,7 +1219,7 @@ PrefabInstance:
     - target: {fileID: 8176540328645883160, guid: 1f193b3fa0569b145a12b86b993ee99b, type: 3}
       propertyPath: emptySectionPrefab
       value: 
-      objectReference: {fileID: 5974990554420347699, guid: 2d47988dbd5f38e468dacb2dc7485481, type: 3}
+      objectReference: {fileID: 5974990554420347699, guid: d993618bf82a9cf4682eb2e762e77988, type: 3}
     - target: {fileID: 8176540328645883163, guid: 1f193b3fa0569b145a12b86b993ee99b, type: 3}
       propertyPath: m_Name
       value: Level
