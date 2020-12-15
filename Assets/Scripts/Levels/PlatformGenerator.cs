@@ -102,7 +102,7 @@ public class PlatformGenerator : MonoBehaviour {
     public GameObject GenerateRandomAddition() {
 
         GameObject newObject = null;
-        float rand = Random.value;
+        float rand = Random.value + 0.001f;
 
 
         if(!chancesNormalized) NormalizeChances();
@@ -136,16 +136,14 @@ public class PlatformGenerator : MonoBehaviour {
 
     private GameObject GenerateRandomCollectible() {
         GameObject newCollectible = null;
-        float rand = Random.value;
+        float rand = Random.value + 0.001f;
 
        
         for(int i = 0; i < collectibleList.Length; i++) {
 
             if(rand <= collectibleList[i].chanceToSpawn) {
 
-
-                newCollectible = Instantiate(collectibles[i]);
-
+                newCollectible = Instantiate(collectibles[collectibleList[i].id]);
                 break;
             } else {
                 rand -= collectibleList[i].chanceToSpawn;
@@ -166,7 +164,7 @@ public class PlatformGenerator : MonoBehaviour {
             if(rand <= enemyList[i].chanceToSpawn) {
 
 
-                newEnemy = Instantiate(enemies[i]);
+                newEnemy = Instantiate(enemies[enemyList[i].id]);
 
                 break;
             } else {
@@ -405,7 +403,10 @@ public class PlatformGenerator : MonoBehaviour {
 
         enemyList = new[] {
             new RandomSelectionType(0, enemyChances[0], "projectile"),
-            new RandomSelectionType(1, enemyChances[1], "teleporting")
+            new RandomSelectionType(1, enemyChances[1], "teleporting"),
+            new RandomSelectionType(2, enemyChances[2], "Movement"),
+            new RandomSelectionType(3, enemyChances[3], "Falling"),
+            new RandomSelectionType(4, enemyChances[4], "Split")
         };
 
         // Normalize Collectible Chances
@@ -417,7 +418,9 @@ public class PlatformGenerator : MonoBehaviour {
 
         collectibleList = new[] {
             new RandomSelectionType(0, collectibleChances[0], "Coin"),
-            new RandomSelectionType(1, collectibleChances[1], "Lazer")
+            new RandomSelectionType(1, collectibleChances[1], "Lazer"),
+            new RandomSelectionType(2, collectibleChances[2], "Jump"),
+            new RandomSelectionType(3, collectibleChances[3], "Teleport")
         };
 
         // sort the arrays from largest to smallest chance

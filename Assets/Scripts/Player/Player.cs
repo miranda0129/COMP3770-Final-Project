@@ -5,28 +5,41 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public Powerup currentPowerup;
+    public Material defaultPlayerMat;
+    public Material[] powerupMats;
     public float speed = 10;
     public float JumpSpeed = 100.0f;
+    public int maxJumps = 2;
 
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2.0f;
     public float runMultiplier = 1.2f;
     private float runAdjustment = 1.0f;
 
+
     private Vector3 movementVec;
     private Vector3 jumpVec;
+    private Vector3 mousePosition;
+    private Vector3 forceVec = new Vector3(0, 10, 0);
     public float jumpTime = 0.3f;
     private float currentJumpTime;
     public int nJumps = 0;
-    public int invincibilityTimeOnHit;
-
+    public int teleCountRemaining = 5;
     private Rigidbody rb;
     public bool isSafe = false;
     private LineRenderer lineRenderer;
-    private Vector3 mousePosition;
+    private MeshRenderer renderer;
 
-    private int teleCountRemaining;
     private PlayerInput inputManager;
+    private Level levelManager;
+
+    private int hpRemaining = 3;
+    private int hpMax = 3;
+
+    private bool isShielded = false;
+    private bool isInvincible = false;
+
 
     void Start()
     {
@@ -35,6 +48,8 @@ public class Player : MonoBehaviour
         lineRenderer = gameObject.GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
         inputManager = gameObject.GetComponent<PlayerInput>();
+        levelManager = GameObject.Find("Level").GetComponent<Level>();
+        renderer = gameObject.GetComponent<MeshRenderer>();
     }
 
     void FixedUpdate() {
@@ -76,20 +91,27 @@ public class Player : MonoBehaviour
 	}
 
 	void OnCollisionEnter(Collision col) {
+        
+        // Reset jumps after touching the ground ( You can kind of wall jump while you still have momentum)
 
-        nJumps = 0;     // TODO: this will change as we have different colliders to do different things.
-     // rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        if(col.gameObject.layer == LayerMask.NameToLayer("Level Geometry")) {
+            nJumps = 0;
+		}
 
-        if (col.gameObject.layer == 11) // Originally had this in the bullet script but moved it here to have them all in one place.
+        if (col.gameObject.layer == LayerMask.NameToLayer("Bullet")) // Originally had this in the bullet script but moved it here to have them all in one place.
         {
             Debug.Log("Player was damaged by projectile.");
+            
             Destroy(col.gameObject);
+            TakeDamage();
+            
             //StartCoroutine(iFrames(invincibilityTimeOnHit));
         }
 
         if (col.gameObject.name == "HeadHitbox" ) // Destroy an enemy if we jump on it's head
         {
             Destroy(col.transform.parent.gameObject);
+            GetComponent<Rigidbody>().AddForce(forceVec, ForceMode.Impulse); // Gives the player a slight "bounce" effect after killing an enemy
         }
 
         if(col.gameObject.layer == LayerMask.NameToLayer("Weak Point")) {
@@ -100,42 +122,70 @@ public class Player : MonoBehaviour
         {
             // Damage the player
             Debug.Log("Player was damaged by enemy contact.");
-
-            //StartCoroutine(iFrames(invincibilityTimeOnHit));
+            TakeDamage();
         }
-
 
     }
 
+    //handle different powerups (and enemy?) collisions
     void OnTriggerEnter(Collider col) {
 
         // Teleport Pickup
-        if(col.gameObject.name == "Teleport Powerup") {
+        if(col.gameObject.name == "Teleport Powerup(Clone)") {
             Debug.Log("Player hit teleport powerup");
-            GameObject.Destroy(col.gameObject);
-
-            teleCountRemaining = 5;
-            inputManager.SwitchCurrentActionMap("TeleportMode");
+            gameObject.AddComponent<TeleportPowerup>();
+            currentPowerup = gameObject.GetComponent<TeleportPowerup>();
+            Destroy(col.gameObject);
         }
 
         // Lazer Pickup
         if(col.gameObject.name == "Lazerbeam Powerup(Clone)") {
+
             Debug.Log("Player hit lazerbeam powerup");
-            GameObject.Destroy(col.gameObject);
-
-            StartCoroutine(LazerTimer());
-
+            gameObject.AddComponent<LazerBeamPowerup>();
+            currentPowerup = gameObject.GetComponent<LazerBeamPowerup>();
+            Destroy(col.gameObject);
         }
-        
-       
+
+        //Extra jumps powerup
+        if (col.gameObject.name == "Jump Powerup(Clone)") {
+            Debug.Log("Player hit jump powerup");
+            gameObject.AddComponent<JumpPowerup>();
+            currentPowerup = gameObject.GetComponent<JumpPowerup>();
+            Destroy(col.gameObject);
+        }
+
+        //Throwable powerup
+        if (col.gameObject.name == "Throwable Powerup(Clone)")
+        {
+            Debug.Log("Player hit throwable powerup");
+            gameObject.AddComponent<ThrowablePowerup>();
+            currentPowerup = gameObject.GetComponent<ThrowablePowerup>();
+            Destroy(col.gameObject);
+        }
+
+        // Healthup powerup
+        if(col.gameObject.name == "HealthUp") {
+            Destroy(col.gameObject);
+            AddHP();
+		}
+
+        //Magnet
+        if (col.gameObject.name == "Magnet" || col.gameObject.name == "Magnet(Clone)")     
+        {
+            Debug.Log("Player hit magnet powerup");
+            gameObject.AddComponent<MagnetPowerup>();
+            currentPowerup = gameObject.GetComponent<MagnetPowerup>();
+            Destroy(col.gameObject);
+        }
     }
 
-    /* Controls */
+    /* Normal Controls -- Powerups contain their own addtional controls*/
     public void OnJump(InputValue input) {
 
         float jumpState = (input.Get<float>());     // 1 = is jumping, 0 = done
         
-        if(jumpState == 1 && nJumps < 2) {
+        if(jumpState == 1 && nJumps < maxJumps) {
             jumpVec = Vector3.up;
             currentJumpTime = 0.0f;
             nJumps++;
@@ -153,75 +203,41 @@ public class Player : MonoBehaviour
 
         if(input.isPressed) runAdjustment = runMultiplier;
         else runAdjustment = 1.0f;
+
 	}
-
-    public void OnLazer(InputValue input) {
-
-        if(input.isPressed) {
-            lineRenderer.enabled = true;
-            mousePosition = Mouse.current.position.ReadValue();
-            Vector3 clickPosition = Camera.main.ScreenToWorldPoint(mousePosition + new Vector3(0, 0, 10)); //get click position
-            clickPosition = new Vector3(clickPosition.x, clickPosition.y, 0);
-            Vector3 direction = clickPosition - transform.position; //calculate ray direction from player to click point
-            float maxDistance = direction.magnitude; // distance from player to click for raycast maxDistance
-
-            //render laser 
-            lineRenderer.SetPosition(0, transform.position);
-            lineRenderer.SetPosition(1, clickPosition);
-            lineRenderer.enabled = true;
-
-            //play audio clip if available
-            // if(pew != null) { AudioSource.PlayClipAtPoint(pew, transform.position); }
-
-            //stores all hit objects
-            RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, maxDistance); //cast ray
-
-            //destory every enemy hit in between player & max distance
-            for(int i = 0; i < hits.Length; i++) {
-                RaycastHit hit = hits[i];
-                Debug.Log("Hit object: " + hit.collider.gameObject.name);
-
-                //destory only if tagged as enemy
-                if(hit.collider.gameObject.tag == "Enemy") { Destroy(hit.collider.gameObject); }
-            }
-        } else {
-            lineRenderer.enabled = false;
-		}
-    }
-
-    public void OnTeleport() {
-        //play audio clip if available
-        // if(pop != null) { AudioSource.PlayClipAtPoint(pop, transform.position); }
-
-        //get mouse position and set transform there
-        mousePosition = Mouse.current.position.ReadValue();
-        Vector3 clickPosition = Camera.main.ScreenToWorldPoint(mousePosition + new Vector3(0, 0, 10)); //get click position
-        Debug.Log(clickPosition);
-        transform.position = clickPosition;
-        teleCountRemaining--;
-
-        if(teleCountRemaining <= 0) {
-            inputManager.SwitchCurrentActionMap("Normal (No Powerups)");
-        }
-    } 
-
-    /* Powerup Timers */
-    IEnumerator LazerTimer() {
-        inputManager.SwitchCurrentActionMap("LazerMode");
-        yield return new WaitForSeconds(30);
-        inputManager.SwitchCurrentActionMap("Normal (No Powerups)");
-        Debug.Log("Laserbeam powerup time out");
-    }
 
     /* Invincibility Frames - still a WIP*/
     IEnumerator iFrames(float invincibilityTime)
     {
         Debug.Log("Invincibility period started");
-        gameObject.layer = 10; // Changes the players layer to ignore enemies/projectiles during the invincibility period           TODO: Change from layer int to LayerMask.LayerFromName() or w.e.
+        isInvincible = true;
         yield return new WaitForSeconds(invincibilityTime);
-        gameObject.layer = 8; // Invincibility ends
+        isInvincible = false;
 
         Debug.Log("Invincibility period ended");
     }
 
+    public IEnumerator DieIn(float seconds) {
+        yield return new WaitForSeconds(seconds);
+        levelManager.RespawnPlayer();
+        Destroy(gameObject);
+	}
+
+
+    public void TakeDamage() {
+        if(isShielded)              isShielded = false;
+        else if (!isInvincible)      hpRemaining--;
+
+        if(hpRemaining <= 0) {
+            rb.constraints = RigidbodyConstraints.None;
+            StartCoroutine(DieIn(1));
+        }
+	}
+
+    public void AddHP() { if(hpRemaining < hpMax) hpRemaining++; }
+    public void SetCurrentPowerup(Powerup newPowerup) {
+        currentPowerup = newPowerup;
+    }
+    public void SetMaterial(Material mat) { renderer.material = mat; }
+    public void ResetMaterial() { renderer.material = defaultPlayerMat; }
 }

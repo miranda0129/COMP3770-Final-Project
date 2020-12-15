@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4099795287734840982}
   - component: {fileID: 4099795287734840981}
   - component: {fileID: 4099795287734840980}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rotating Deathzone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 4099795288404453288}
   - component: {fileID: 4099795288404453287}
   - component: {fileID: 4099795288404453286}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -45,12 +45,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {x: 0.5, y: 1.25, z: 0}
+  hasSpawnedSomething: 0
+  canSpawnAdd: 1
   leftAnchor: {x: 0, y: 0, z: 0}
   rightAnchor: {x: 1, y: 0, z: 0}
   moveWaypointToAnchor: 0
   width: 1
   height: 0.5
   platformRenderer: {fileID: 6362030963229697320}
+  optionalRenderer: {fileID: 0}
 --- !u!1 &8177716279196881582
 GameObject:
   m_ObjectHideFlags: 0

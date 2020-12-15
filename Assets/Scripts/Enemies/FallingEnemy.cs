@@ -20,6 +20,7 @@ public class FallingEnemy : MonoBehaviour
 
         coll = GetComponent<Collider>();
         coll.attachedRigidbody.useGravity = false;
+        levelScript = GameObject.Find("Level").GetComponent<Level>();
     }
 
     // Update is called once per frame
@@ -31,7 +32,7 @@ public class FallingEnemy : MonoBehaviour
 
             //move to position
             rend.sharedMaterial = materials[1];
-            transform.position = GameObject.Find("Player").transform.position + new Vector3(0, 5, 0);
+            transform.position = levelScript.GetPlayer().transform.position + new Vector3(0, 5, 0);
 
             StartCoroutine(FallDown());
         }
@@ -53,9 +54,10 @@ public class FallingEnemy : MonoBehaviour
             coll.attachedRigidbody.useGravity = true;
 
             yield return new WaitForSeconds(2f);
+            gameObject.layer = LayerMask.NameToLayer("Weak Point");
             rend.sharedMaterial = materials[0];
             yield return new WaitForSeconds(2f);
-            
+            gameObject.layer = LayerMask.NameToLayer("Enemy");
             coll.attachedRigidbody.useGravity = false;
             startedEnemy = false;
         }
@@ -65,21 +67,19 @@ public class FallingEnemy : MonoBehaviour
     {
         Vector3 contact = collision.contacts[0].normal;
 
-        //if enemy is hit on top, destroyy
-        if(contact == -(transform.up))   Destroy(gameObject);
         
-
-        if (contact == (transform.up) && collision.gameObject.name == "Player")
+        
+        // Hurt player when actively dropping
+        if (collision.gameObject.name == "Player(Clone)" && gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             //for playground testing
             //REMOVE later
             //pls
-            collision.gameObject.transform.position += new Vector3(0, 5, 0);
+            collision.gameObject.transform.position += new Vector3(0,1, 0);
 
             //for level stuff
-            if (levelScript == null) levelScript = GameObject.Find("Level").GetComponent<Level>();
-            Destroy(collision.gameObject);
-            levelScript.RespawnPlayer();
+            collision.gameObject.GetComponent<Player>().TakeDamage();
+            
         }
     }
     
