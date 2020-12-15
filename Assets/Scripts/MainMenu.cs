@@ -10,12 +10,14 @@ public class MainMenu : MonoBehaviour
 
     public void LoadLevel(int level)
     {
+        PlayerPrefs.SetInt("currentLevel", level);
+        PlayerPrefs.SetInt("coins", 0);
         SceneManager.LoadScene(level);
     }
 
     void Start()
     {
-        coinsText.text = "0";
+        coinsText.text = PlayerPrefs.GetInt("coins").ToString();
     }
 
 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UiDisplay : MonoBehaviour
 {
-    Level levelManager;
+    public Level levelManager;
     public Player player;
 
     public string health;
@@ -21,13 +21,15 @@ public class UiDisplay : MonoBehaviour
     private void Start()
     {
         levelManager = GameObject.Find("Level").GetComponent<Level>();
-       
+        
 
     }
 
     private void Update()
     {
-        player = levelManager.GetPlayer().GetComponent<Player>();
+
+        if(levelManager == null) levelManager = GameObject.Find("Level").GetComponent<Level>();
+        if(player == null) player = levelManager.GetPlayer().GetComponent<Player>();
         health = player.hpRemaining.ToString();
         score = levelManager.score.ToString();
         enemiesKilled = levelManager.enemiesKilled.ToString();
