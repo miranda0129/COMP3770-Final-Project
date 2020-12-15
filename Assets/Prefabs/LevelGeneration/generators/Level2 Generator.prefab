@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8672841060902999841}
   - component: {fileID: 8672841060902999854}
   m_Layer: 0
-  m_Name: Level1 Generator
+  m_Name: Level2 Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,13 +47,15 @@ MonoBehaviour:
   collectibles:
   - {fileID: 7177518784024305024, guid: 123b33eae1209884c9a6e1e568809550, type: 3}
   - {fileID: 8767078669636929600, guid: de4b1d1ae76e2fb4fb09e66d6d9f886c, type: 3}
-  - {fileID: 8767078669636929600, guid: de4b1d1ae76e2fb4fb09e66d6d9f886c, type: 3}
-  - {fileID: 8767078669636929600, guid: de4b1d1ae76e2fb4fb09e66d6d9f886c, type: 3}
+  - {fileID: 3481285224532774942, guid: b35ef3c5203314019afd89cb734a2517, type: 3}
+  - {fileID: 8931228102978913325, guid: 5e361964eaf3f4346a80ffbd981ee4bb, type: 3}
+  - {fileID: 8931228102978913325, guid: 2e7a607633ffe6044b7395b5a61cb930, type: 3}
   collectibleChances:
-  - 0.9
+  - 0.7
+  - 0.5
+  - 0.1
   - 0
-  - 0.407
-  - 0
+  - 0.15
   collectibleSCPP: 0.3
   enemies:
   - {fileID: 5933782159455206769, guid: c04cb62f124bdb147a9749292a2d90a1, type: 3}
@@ -78,17 +80,17 @@ MonoBehaviour:
   - {fileID: 2307758895635479960, guid: 3169e0706a002ad4d91750387e661c6b, type: 3}
   - {fileID: 5736057811185428383, guid: 2ad460880d2cb4345a497cab55adfcba, type: 3}
   - {fileID: 3086496886497976997, guid: a5feb921978c1704a8cdb43e5ad3e400, type: 3}
-  staticChance: 0.8
+  staticChance: 0.4
   elevators:
   - {fileID: 3807745375750042311, guid: 317960a4734563f4c9e564b8fb14250a, type: 3}
   - {fileID: 8769612586847034787, guid: b27e76e7c8e478b4b9b348291fb1e87a, type: 3}
   - {fileID: 9139199975993903753, guid: b741a150ed834b74182033b70e88e968, type: 3}
   - {fileID: 9139199975993903753, guid: e95a41acbc78bd641b40cff80d5e8957, type: 3}
-  elevatorChance: 0
+  elevatorChance: 0.2
   movingPlatforms:
   - {fileID: 9139199975993903753, guid: 744e40ef13364df4ba6e032d4e569b92, type: 3}
   - {fileID: 9139199975993903753, guid: 4f6c6da187a6cb84b8ff34114c405ebb, type: 3}
-  movingPlatformChance: 0.05
+  movingPlatformChance: 0.2
   rotators:
   - {fileID: 32146821441832098, guid: 94cc90eae11543946877ae592b058a6c, type: 3}
   - {fileID: 7294525417436125564, guid: 2074c1e69e792c34e87f40775a183a6a, type: 3}
@@ -102,7 +104,7 @@ MonoBehaviour:
   - {fileID: 7296807776936655094, guid: 9f8993d05b0a4bd44936cafaca5edc85, type: 3}
   - {fileID: 7296807776936655094, guid: 179077fb98e014a489c4d203a0a2e12d, type: 3}
   - {fileID: 3786784105130331017, guid: 0f608ee4bfcb0b84096ad80c83927712, type: 3}
-  deathChance: 0.01
+  deathChance: 0.05
   minTime: 0.5
   maxTime: 5
   minPause: 0

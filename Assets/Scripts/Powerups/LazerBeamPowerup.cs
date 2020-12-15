@@ -30,7 +30,7 @@ public class LazerBeamPowerup : Powerup
     }
 
     //click input handled for laser mode - shoot laser when clicked
-    void OnLazer(InputValue input)
+    public void OnLazer(InputValue input)
     {
         Debug.Log("lazer shot");
         if (input.isPressed)

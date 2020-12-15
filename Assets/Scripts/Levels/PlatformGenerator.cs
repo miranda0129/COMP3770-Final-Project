@@ -102,7 +102,7 @@ public class PlatformGenerator : MonoBehaviour {
     public GameObject GenerateRandomAddition() {
 
         GameObject newObject = null;
-        float rand = Random.value;
+        float rand = Random.value + 0.001f;
 
 
         if(!chancesNormalized) NormalizeChances();
@@ -136,16 +136,14 @@ public class PlatformGenerator : MonoBehaviour {
 
     private GameObject GenerateRandomCollectible() {
         GameObject newCollectible = null;
-        float rand = Random.value;
+        float rand = Random.value + 0.001f;
 
        
         for(int i = 0; i < collectibleList.Length; i++) {
 
             if(rand <= collectibleList[i].chanceToSpawn) {
 
-
-                newCollectible = Instantiate(collectibles[i]);
-
+                newCollectible = Instantiate(collectibles[collectibleList[i].id]);
                 break;
             } else {
                 rand -= collectibleList[i].chanceToSpawn;
@@ -166,7 +164,7 @@ public class PlatformGenerator : MonoBehaviour {
             if(rand <= enemyList[i].chanceToSpawn) {
 
 
-                newEnemy = Instantiate(enemies[i]);
+                newEnemy = Instantiate(enemies[enemyList[i].id]);
 
                 break;
             } else {

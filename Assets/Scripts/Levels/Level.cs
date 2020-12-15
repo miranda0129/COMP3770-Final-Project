@@ -13,7 +13,7 @@ public class Level : MonoBehaviour
     10 sections before level complete section. (Level 3 must have boss section first)
      */
 
-    static int levels = 0;
+    static int levels = 1;
     static int totalLevels = 3;
     // keeps track of players collectable score
     public Color midPointShow;
@@ -97,6 +97,7 @@ public class Level : MonoBehaviour
 
     public void RespawnPlayer() {
 
+        if(player != null) Destroy(player.gameObject);
         GameObject newObj = Instantiate(playerPrefab);
         player = newObj.GetComponent<Player>();
         newObj.transform.position = levelGenerator.GetPlayerSpawnPosition();

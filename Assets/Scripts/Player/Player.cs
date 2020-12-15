@@ -154,6 +154,7 @@ public class Player : MonoBehaviour
             currentPowerup = gameObject.GetComponent<JumpPowerup>();
             Destroy(col.gameObject);
         }
+
         //Throwable powerup
         if (col.gameObject.name == "Throwable Powerup(Clone)")
         {
@@ -164,7 +165,7 @@ public class Player : MonoBehaviour
         }
 
         // Healthup powerup
-        if(col.gameObject.name == "Healthup") {
+        if(col.gameObject.name == "HealthUp") {
             Destroy(col.gameObject);
             AddHP();
 		}
@@ -225,7 +226,7 @@ public class Player : MonoBehaviour
 	}
 
     public void AddHP() { if(hpRemaining < hpMax) hpRemaining++; }
-    public void SetCurrentPowerup(Powerup newPowerup) { 
+    public void SetCurrentPowerup(Powerup newPowerup) {
         currentPowerup = newPowerup;
     }
     public void SetMaterial(Material mat) { renderer.material = mat; }

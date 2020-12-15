@@ -54,9 +54,10 @@ public class FallingEnemy : MonoBehaviour
             coll.attachedRigidbody.useGravity = true;
 
             yield return new WaitForSeconds(2f);
+            gameObject.layer = LayerMask.NameToLayer("Weak Point");
             rend.sharedMaterial = materials[0];
             yield return new WaitForSeconds(2f);
-            
+            gameObject.layer = LayerMask.NameToLayer("Enemy");
             coll.attachedRigidbody.useGravity = false;
             startedEnemy = false;
         }
@@ -66,21 +67,19 @@ public class FallingEnemy : MonoBehaviour
     {
         Vector3 contact = collision.contacts[0].normal;
 
-        //if enemy is hit on top, destroyy
-        if(contact == -(transform.up))   Destroy(gameObject);
         
-
-        if (contact == (transform.up) && collision.gameObject.name == "Player")
+        
+        // Hurt player when actively dropping
+        if (collision.gameObject.name == "Player(Clone)" && gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             //for playground testing
             //REMOVE later
             //pls
-            collision.gameObject.transform.position += new Vector3(0, 5, 0);
+            collision.gameObject.transform.position += new Vector3(0,1, 0);
 
             //for level stuff
-            if (levelScript == null) levelScript = GameObject.Find("Level").GetComponent<Level>();
-            Destroy(collision.gameObject);
-            levelScript.RespawnPlayer();
+            collision.gameObject.GetComponent<Player>().TakeDamage();
+            
         }
     }
     

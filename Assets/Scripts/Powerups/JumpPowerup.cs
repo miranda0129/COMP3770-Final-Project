@@ -26,7 +26,7 @@ public class JumpPowerup : Powerup
         Debug.Log("timer finished");
 
         player.maxJumps = 2;//revert max jumps
-        RemovePowerup(gameObject.GetComponent<Powerup>());
+        RemovePowerup(gameObject.GetComponent<JumpPowerup>());
     }
 
 }

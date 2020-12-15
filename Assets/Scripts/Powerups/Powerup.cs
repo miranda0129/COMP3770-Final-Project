@@ -32,6 +32,7 @@ public class Powerup : MonoBehaviour
         Debug.Log("timer started");
         yield return new WaitForSeconds(time);
         Debug.Log("timer finished");
+        player.ResetMaterial();
         RemovePowerup(gameObject.GetComponent<Powerup>());
     }
 

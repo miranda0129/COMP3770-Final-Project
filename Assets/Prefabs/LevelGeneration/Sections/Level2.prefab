@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2245891783492316958}
   - component: {fileID: 1051529834813510058}
   m_Layer: 0
-  m_Name: Level1
+  m_Name: Level2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,5 +53,5 @@ MonoBehaviour:
   midpoint: {x: -Infinity, y: -Infinity, z: -Infinity}
   lowestPoint: {x: 0, y: 0, z: 0}
   platformsPerSection: 15
-  platformGeneratorPrefab: {fileID: 8672841060902999855, guid: 015963dda9f7a384c9cf740b8ea239a1, type: 3}
+  platformGeneratorPrefab: {fileID: 8672841060902999855, guid: 0b7266496f01e444fb7f531997622583, type: 3}
   floorPrefab: {fileID: 2310224893705447164, guid: c32f8c74c270e2743a27af4cff9bdec6, type: 3}
