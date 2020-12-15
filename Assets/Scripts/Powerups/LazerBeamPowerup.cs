@@ -25,7 +25,7 @@ public class LazerBeamPowerup : Powerup
         lineRenderer.enabled = false;
         lineRenderer.useWorldSpace = true;
         inputManager.SwitchCurrentActionMap("LazerMode");
-        StartCoroutine(Timer(30));
+        StartCoroutine(Timer(30, this));
         
     }
 
@@ -60,7 +60,9 @@ public class LazerBeamPowerup : Powerup
                 Debug.Log("Hit object: " + hit.collider.gameObject.name);
 
                 //destory only if tagged as enemy
-                if (hit.collider.gameObject.tag == "Enemy") { Destroy(hit.collider.gameObject); }
+                if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Weak Point")) Destroy(hit.collider.gameObject);
+                else if(hit.collider.gameObject.layer == LayerMask.NameToLayer("HeadHitbox")) Destroy(hit.collider.transform.parent.gameObject);
+
             }
         }
         else

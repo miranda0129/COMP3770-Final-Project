@@ -6,7 +6,7 @@ Preset:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DefaultPlatformGenerator
+  m_Name: Level2
   m_TargetType:
     m_NativeTypeID: 114
     m_ManagedTypePPtr: {fileID: 11500000, guid: 22edadf1b151de145a1a1ce7a044f298, type: 3}
@@ -26,7 +26,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: emptySCPP
-    value: 0.75
+    value: 0.4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: collectibles.Array.size
@@ -39,11 +39,11 @@ Preset:
   - target: {fileID: 0}
     propertyPath: collectibles.Array.data[1]
     value: 
-    objectReference: {fileID: 3481285224532774942, guid: b35ef3c5203314019afd89cb734a2517, type: 3}
+    objectReference: {fileID: 8767078669636929600, guid: de4b1d1ae76e2fb4fb09e66d6d9f886c, type: 3}
   - target: {fileID: 0}
     propertyPath: collectibles.Array.data[2]
     value: 
-    objectReference: {fileID: 8767078669636929600, guid: de4b1d1ae76e2fb4fb09e66d6d9f886c, type: 3}
+    objectReference: {fileID: 3481285224532774942, guid: b35ef3c5203314019afd89cb734a2517, type: 3}
   - target: {fileID: 0}
     propertyPath: collectibles.Array.data[3]
     value: 
@@ -51,42 +51,42 @@ Preset:
   - target: {fileID: 0}
     propertyPath: collectibles.Array.data[4]
     value: 
-    objectReference: {fileID: 8931228102978913325, guid: 5e361964eaf3f4346a80ffbd981ee4bb, type: 3}
+    objectReference: {fileID: 8931228102978913325, guid: 2e7a607633ffe6044b7395b5a61cb930, type: 3}
   - target: {fileID: 0}
     propertyPath: collectibles.Array.data[5]
     value: 
-    objectReference: {fileID: 8931228102978913325, guid: 5e361964eaf3f4346a80ffbd981ee4bb, type: 3}
+    objectReference: {fileID: 6993995924221815017, guid: 8f9614358c0f39c4a9df5777de36bc7d, type: 3}
   - target: {fileID: 0}
     propertyPath: collectibleChances.Array.size
     value: 6
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: collectibleChances.Array.data[0]
-    value: 0.8
+    value: 0.7
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: collectibleChances.Array.data[1]
-    value: 0.05
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: collectibleChances.Array.data[2]
-    value: 0.05
+    value: 0.2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: collectibleChances.Array.data[3]
-    value: 0.1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: collectibleChances.Array.data[4]
-    value: 0.1
+    value: 0.05
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: collectibleChances.Array.data[5]
-    value: 0.1
+    value: 0.05
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: collectibleSCPP
-    value: 0.2
+    value: 0.45
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: enemies.Array.size
@@ -118,27 +118,27 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: enemyChances.Array.data[0]
-    value: 0.25
+    value: 0.8
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: enemyChances.Array.data[1]
-    value: 0.25
+    value: 0.2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: enemyChances.Array.data[2]
-    value: 0.25
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: enemyChances.Array.data[3]
-    value: 0.25
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: enemyChances.Array.data[4]
-    value: 0.01
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: enemySCPP
-    value: 0.05
+    value: 0.1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: staticPlatforms.Array.size
@@ -182,7 +182,7 @@ Preset:
     objectReference: {fileID: 3086496886497976997, guid: a5feb921978c1704a8cdb43e5ad3e400, type: 3}
   - target: {fileID: 0}
     propertyPath: staticChance
-    value: 0.7
+    value: 0.3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: elevators.Array.size
@@ -206,7 +206,7 @@ Preset:
     objectReference: {fileID: 9139199975993903753, guid: e95a41acbc78bd641b40cff80d5e8957, type: 3}
   - target: {fileID: 0}
     propertyPath: elevatorChance
-    value: 0.1
+    value: 0.2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: movingPlatforms.Array.size
@@ -222,7 +222,7 @@ Preset:
     objectReference: {fileID: 9139199975993903753, guid: 4f6c6da187a6cb84b8ff34114c405ebb, type: 3}
   - target: {fileID: 0}
     propertyPath: movingPlatformChance
-    value: 0.1
+    value: 0.2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: rotators.Array.size
@@ -258,11 +258,11 @@ Preset:
     objectReference: {fileID: 6667452474056321980, guid: f6b52acdb184028468d9d7e19ed6893e, type: 3}
   - target: {fileID: 0}
     propertyPath: gapChance
-    value: 0.025
+    value: 0.2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: deathzones.Array.size
-    value: 4
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: deathzones.Array.data[0]
@@ -277,16 +277,12 @@ Preset:
     value: 
     objectReference: {fileID: 3786784105130331017, guid: 0f608ee4bfcb0b84096ad80c83927712, type: 3}
   - target: {fileID: 0}
-    propertyPath: deathzones.Array.data[3]
-    value: 
-    objectReference: {fileID: 4099795287734840979, guid: 533ee10db42012f479c3a1ee8d45f608, type: 3}
-  - target: {fileID: 0}
     propertyPath: deathChance
-    value: 0.025
+    value: 0.05
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: minTime
-    value: 0.5
+    value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: maxTime
@@ -307,43 +303,43 @@ Preset:
   - target: {fileID: 0}
     propertyPath: sectionMaterials.Array.data[0]
     value: 
-    objectReference: {fileID: 2100000, guid: fbfa38410bd2bed49927c9698ba3f411, type: 2}
+    objectReference: {fileID: 2100000, guid: 426d75481732c4c46b88ea9db49ad4a8, type: 2}
   - target: {fileID: 0}
     propertyPath: sectionMaterials.Array.data[1]
     value: 
-    objectReference: {fileID: 2100000, guid: 2bb0684c2ca30204fbfe63f7949f0ec0, type: 2}
+    objectReference: {fileID: 2100000, guid: b0eb0894ab7f96841b470a02b57faa94, type: 2}
   - target: {fileID: 0}
     propertyPath: sectionMaterials.Array.data[2]
     value: 
-    objectReference: {fileID: 2100000, guid: d734a05060a04504cbb2eb57fe8bc50f, type: 2}
+    objectReference: {fileID: 2100000, guid: 426d75481732c4c46b88ea9db49ad4a8, type: 2}
   - target: {fileID: 0}
     propertyPath: sectionMaterials.Array.data[3]
     value: 
-    objectReference: {fileID: 2100000, guid: f2b072a2c6139d747ab1bf42decd32cc, type: 2}
+    objectReference: {fileID: 2100000, guid: c60ca73fb9ffa7045bf85adf4c161a7d, type: 2}
   - target: {fileID: 0}
     propertyPath: sectionMaterials.Array.data[4]
     value: 
-    objectReference: {fileID: 2100000, guid: 9a19f1c1126ea8347b4783106e3df53d, type: 2}
+    objectReference: {fileID: 2100000, guid: 426d75481732c4c46b88ea9db49ad4a8, type: 2}
   - target: {fileID: 0}
     propertyPath: sectionMaterials.Array.data[5]
     value: 
-    objectReference: {fileID: 2100000, guid: 2a5a6bfab21999c4c84404d36558378b, type: 2}
+    objectReference: {fileID: 2100000, guid: b0eb0894ab7f96841b470a02b57faa94, type: 2}
   - target: {fileID: 0}
     propertyPath: sectionMaterials.Array.data[6]
     value: 
-    objectReference: {fileID: 2100000, guid: 0b9f2a2e35189ea4a968308eff0e400c, type: 2}
+    objectReference: {fileID: 2100000, guid: c60ca73fb9ffa7045bf85adf4c161a7d, type: 2}
   - target: {fileID: 0}
     propertyPath: sectionMaterials.Array.data[7]
     value: 
-    objectReference: {fileID: 2100000, guid: 19ab2ca5f50414642b7fe67358065696, type: 2}
+    objectReference: {fileID: 2100000, guid: b0eb0894ab7f96841b470a02b57faa94, type: 2}
   - target: {fileID: 0}
     propertyPath: sectionMaterials.Array.data[8]
     value: 
-    objectReference: {fileID: 2100000, guid: 2ad726cf552e874489b98d66a6bb3905, type: 2}
+    objectReference: {fileID: 2100000, guid: 426d75481732c4c46b88ea9db49ad4a8, type: 2}
   - target: {fileID: 0}
     propertyPath: sectionMaterials.Array.data[9]
     value: 
-    objectReference: {fileID: 2100000, guid: 075f4ba1bb0c394429674856ce6cc450, type: 2}
+    objectReference: {fileID: 2100000, guid: c60ca73fb9ffa7045bf85adf4c161a7d, type: 2}
   - target: {fileID: 0}
     propertyPath: followsSpawn
     value: 1

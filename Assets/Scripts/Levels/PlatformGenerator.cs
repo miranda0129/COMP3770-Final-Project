@@ -420,7 +420,9 @@ public class PlatformGenerator : MonoBehaviour {
             new RandomSelectionType(0, collectibleChances[0], "Coin"),
             new RandomSelectionType(1, collectibleChances[1], "Lazer"),
             new RandomSelectionType(2, collectibleChances[2], "Jump"),
-            new RandomSelectionType(3, collectibleChances[3], "Teleport")
+            new RandomSelectionType(3, collectibleChances[3], "Teleport"),
+            new RandomSelectionType(4, collectibleChances[4], "Health"),
+            new RandomSelectionType(5, collectibleChances[5], "Magnet")
         };
 
         // sort the arrays from largest to smallest chance
@@ -430,7 +432,6 @@ public class PlatformGenerator : MonoBehaviour {
         System.Array.Sort<RandomSelectionType>(platformFill, (x, y) => y.chanceToSpawn.CompareTo(x.chanceToSpawn));
         chancesNormalized = true;
         
-       
     }
 
     private void SetRandomColor(GameObject platform) {

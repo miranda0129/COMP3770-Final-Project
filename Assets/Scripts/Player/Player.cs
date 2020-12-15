@@ -156,7 +156,7 @@ public class Player : MonoBehaviour
         }
 
         // Healthup powerup
-        if(col.gameObject.name == "HealthUp") {
+        if(col.gameObject.name == "HealthUp(Clone)") {
             Destroy(col.gameObject);
             AddHP();
 		}

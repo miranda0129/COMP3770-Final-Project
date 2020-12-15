@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class MagnetPowerup : Powerup
 {
-    private float updated = 1;
+    private float timeToDestination = 15f;
+    private float elapsedTime = 0;
     // Start is called before the first frame update
     void Start()
     {
         base.Start();
-        StartCoroutine(Timer(30));
+        player.SetMaterial(player.powerupMats[4]);
+        StartCoroutine(Timer(30, this));
     }
 
     // Update is called once per frame
@@ -20,7 +22,9 @@ public class MagnetPowerup : Powerup
         {
             if (coll.gameObject.name.Contains("Coin")) 
             {
-                coll.gameObject.transform.position = Vector3.Lerp(coll.transform.position, transform.position, updated++/0.1f);
+                elapsedTime += Time.deltaTime;
+                coll.gameObject.transform.position = Vector3.Lerp(coll.transform.position, transform.position, (elapsedTime/timeToDestination));
+                if(elapsedTime >= timeToDestination) elapsedTime = 0;
             }
         }
     }

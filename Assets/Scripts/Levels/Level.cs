@@ -21,7 +21,7 @@ public class Level : MonoBehaviour
     public Player player;
     public int score;
 
-    public int playerLives = 5;
+    public int playerLives = 10;
 
     private SmoothFollowCam cam;
     private LevelGenerator levelGenerator;
@@ -99,8 +99,8 @@ public class Level : MonoBehaviour
 	}
 
     public void RespawnPlayer() {
-        if(player.gameObject != null) Destroy(player.gameObject);
-        else playerLives--;
+        
+        playerLives--;
 
         // Game Over
         if(playerLives <= 0) {
@@ -134,7 +134,7 @@ public class Level : MonoBehaviour
     // Load the next level after a few seconds.
     private IEnumerator LoadNextLevel() {
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
 
         if (levels < totalLevels) SceneManager.LoadScene(levels);
         else SceneManager.LoadScene(0);

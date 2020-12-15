@@ -27,13 +27,13 @@ public class Powerup : MonoBehaviour
     }
 
     //powerup timer will destory powerup after set time
-    public IEnumerator Timer(float time)
+    public IEnumerator Timer(float time, Powerup type)
     {
         Debug.Log("timer started");
         yield return new WaitForSeconds(time);
         Debug.Log("timer finished");
         player.ResetMaterial();
-        RemovePowerup(gameObject.GetComponent<Powerup>());
+        RemovePowerup(type);
     }
 
 

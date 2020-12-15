@@ -119,6 +119,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: c4a8e7a8a46a760478dde2ed92633473, type: 2}
   - {fileID: 2100000, guid: 69b66beea468b4e5e9dadb122f36f22d, type: 2}
   - {fileID: 2100000, guid: 0d3a26e0a8a754230a015507521f22c4, type: 2}
+  - {fileID: 2100000, guid: 7067bccb54bf1fa478424f8ad5ca2abe, type: 2}
   speed: 50
   JumpSpeed: 3.16
   maxJumps: 2

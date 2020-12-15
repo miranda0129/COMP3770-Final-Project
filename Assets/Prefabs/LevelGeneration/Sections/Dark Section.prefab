@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2245891783492316958}
   - component: {fileID: 1051529834813510058}
   m_Layer: 0
-  m_Name: Playground Section
+  m_Name: Dark Section
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,6 +52,6 @@ MonoBehaviour:
   rightAnchor: {x: 0, y: 0, z: 0}
   midpoint: {x: -Infinity, y: -Infinity, z: -Infinity}
   lowestPoint: {x: 0, y: 0, z: 0}
-  platformsPerSection: 15
-  platformGeneratorPrefab: {fileID: 8672841060902999855, guid: ca0b6185e33b57945a4b254c252b89c0, type: 3}
+  platformsPerSection: 25
+  platformGeneratorPrefab: {fileID: 8672841060902999855, guid: 7a0f2abedd16fcd438e6c46581b1ce8e, type: 3}
   floorPrefab: {fileID: 2310224893705447164, guid: c32f8c74c270e2743a27af4cff9bdec6, type: 3}
