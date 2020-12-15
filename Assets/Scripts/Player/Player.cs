@@ -169,6 +169,15 @@ public class Player : MonoBehaviour
             Destroy(col.gameObject);
             AddHP();
 		}
+
+        //Magnet
+        if (col.gameObject.name == "Magnet" || col.gameObject.name == "Magnet(Clone)")     
+        {
+            Debug.Log("Player hit magnet powerup");
+            gameObject.AddComponent<MagnetPowerup>();
+            currentPowerup = gameObject.GetComponent<MagnetPowerup>();
+            Destroy(col.gameObject);
+        }
     }
 
     /* Normal Controls -- Powerups contain their own addtional controls*/
