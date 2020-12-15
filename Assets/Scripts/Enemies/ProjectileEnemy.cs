@@ -32,7 +32,6 @@ public class ProjectileEnemy : MonoBehaviour
     IEnumerator FireGun(Ray ray) // Fires a bullet along the raycast line which bounces
     {
         bullet = Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.LookRotation(ray.direction));
-        //bullet.GetComponent<Rigidbody>().AddForce(ray.direction * bulletSpeed);
         bullet.GetComponent<Rigidbody>().velocity = ray.direction * bulletSpeed;
         reloading = true;
 
@@ -46,7 +45,7 @@ public class ProjectileEnemy : MonoBehaviour
     {
 
         if(player == null && levelManager != null) player = levelManager.GetPlayer();
-        else if(levelManager == null) player = GameObject.Find("Player").transform;
+      
 
         aimLine.enabled = false;
         RaycastHit hit = new RaycastHit();

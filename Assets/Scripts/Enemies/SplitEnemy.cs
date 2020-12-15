@@ -26,8 +26,10 @@ public class SplitEnemy : MonoBehaviour
         // Spawn the two enemies when the main enemy is defeated
         splitEnemy1 = Instantiate(splitEnemy, transform.position, transform.rotation);
         splitEnemy1.SetActive(false);
+        splitEnemy1.transform.parent = transform.parent;
         splitEnemy2 = Instantiate(splitEnemy, transform.position, transform.rotation);
         splitEnemy2.SetActive(false);
+        splitEnemy2.transform.parent = transform.parent;
     }
 
     // Update is called once per frame

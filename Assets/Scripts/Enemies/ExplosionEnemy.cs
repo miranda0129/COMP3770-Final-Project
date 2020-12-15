@@ -41,7 +41,6 @@ public class ExplosionEnemy : MonoBehaviour
 
             //get player location and move there and show explosion radius
             if(player == null) player = levelManager.GetPlayer();
-            else if(levelManager == null) player = GameObject.Find("Player").transform;      // for playground
 
             transform.position = player.position;
             explodingRadiusRenderer.enabled = true;

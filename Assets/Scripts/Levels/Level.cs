@@ -13,8 +13,8 @@ public class Level : MonoBehaviour
     10 sections before level complete section. (Level 3 must have boss section first)
      */
 
-    public static int levels = 1;
-    static int totalLevels = 3;
+    public int levels = 1;
+    static int totalLevels = 4;
 
     // keeps track of players collectable score
     public Color midPointShow;
@@ -35,6 +35,8 @@ public class Level : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+
+        levels = PlayerPrefs.GetInt("level");
         levels++;
         levelGenerator = gameObject.GetComponent<LevelGenerator>();
         LoadLevel();
@@ -140,6 +142,7 @@ public class Level : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
+        PlayerPrefs.SetInt("level", levels);
         if (levels < totalLevels) SceneManager.LoadScene(levels);
         else SceneManager.LoadScene(0);
     }

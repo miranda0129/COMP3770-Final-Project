@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22edadf1b151de145a1a1ce7a044f298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emptySCPP: 0.5
+  emptySCPP: 0.49261084
   collectibles:
   - {fileID: 7177518784024305024, guid: 123b33eae1209884c9a6e1e568809550, type: 3}
   - {fileID: 8767078669636929600, guid: de4b1d1ae76e2fb4fb09e66d6d9f886c, type: 3}
@@ -53,14 +53,14 @@ MonoBehaviour:
   - {fileID: 6993995924221815017, guid: 8f9614358c0f39c4a9df5777de36bc7d, type: 3}
   - {fileID: 2843405790653002517, guid: 736bc4848fb4868458b0e8643a52eba8, type: 3}
   collectibleChances:
-  - 0.95
-  - 0.02
+  - 0.85354894
+  - 0.017969452
   - 0
   - 0
-  - 0.02
-  - 0.01
-  - 0.068
-  collectibleSCPP: 0.45
+  - 0.017969452
+  - 0.068283916
+  - 0.04222821
+  collectibleSCPP: 0.44334975
   enemies:
   - {fileID: 5933782159455206769, guid: c04cb62f124bdb147a9749292a2d90a1, type: 3}
   - {fileID: 4116355367953998636, guid: 21039a6c8caeaf8479295851d93e1248, type: 3}
@@ -70,10 +70,10 @@ MonoBehaviour:
   enemyChances:
   - 0
   - 0
-  - 0.686
-  - 0.057
-  - 0.312
-  enemySCPP: 0.065
+  - 0.65023696
+  - 0.05402844
+  - 0.2957346
+  enemySCPP: 0.06403941
   staticPlatforms:
   - {fileID: 7825709659395962790, guid: 999d4091080dc4643a30eeae121d9dfd, type: 3}
   - {fileID: 7246088422011410858, guid: bf048c80fa0c20b4eab040e510daea19, type: 3}
@@ -84,7 +84,7 @@ MonoBehaviour:
   - {fileID: 2307758895635479960, guid: 3169e0706a002ad4d91750387e661c6b, type: 3}
   - {fileID: 5736057811185428383, guid: 2ad460880d2cb4345a497cab55adfcba, type: 3}
   - {fileID: 3086496886497976997, guid: a5feb921978c1704a8cdb43e5ad3e400, type: 3}
-  staticChance: 0.8
+  staticChance: 0.7920792
   elevators:
   - {fileID: 3807745375750042311, guid: 317960a4734563f4c9e564b8fb14250a, type: 3}
   - {fileID: 8769612586847034787, guid: b27e76e7c8e478b4b9b348291fb1e87a, type: 3}
@@ -94,21 +94,21 @@ MonoBehaviour:
   movingPlatforms:
   - {fileID: 9139199975993903753, guid: 744e40ef13364df4ba6e032d4e569b92, type: 3}
   - {fileID: 9139199975993903753, guid: 4f6c6da187a6cb84b8ff34114c405ebb, type: 3}
-  movingPlatformChance: 0.05
+  movingPlatformChance: 0.04950495
   rotators:
   - {fileID: 32146821441832098, guid: 94cc90eae11543946877ae592b058a6c, type: 3}
   - {fileID: 7294525417436125564, guid: 2074c1e69e792c34e87f40775a183a6a, type: 3}
-  rotatingChance: 0.05
+  rotatingChance: 0.04950495
   gaps:
   - {fileID: 6243475957490285755, guid: 2cfe14f95e825b34faebbcdf86076e06, type: 3}
   - {fileID: 990716991285655340, guid: 5f81cce31a353ab40817be02e0cc3516, type: 3}
   - {fileID: 6667452474056321980, guid: f6b52acdb184028468d9d7e19ed6893e, type: 3}
-  gapChance: 0.1
+  gapChance: 0.0990099
   deathzones:
   - {fileID: 7296807776936655094, guid: 9f8993d05b0a4bd44936cafaca5edc85, type: 3}
   - {fileID: 7296807776936655094, guid: 179077fb98e014a489c4d203a0a2e12d, type: 3}
   - {fileID: 3786784105130331017, guid: 0f608ee4bfcb0b84096ad80c83927712, type: 3}
-  deathChance: 0.01
+  deathChance: 0.00990099
   minTime: 0.5
   maxTime: 5
   minPause: 0

@@ -111,12 +111,14 @@ public class Player : MonoBehaviour
 
         if (col.gameObject.name == "HeadHitbox" ) // Destroy an enemy if we jump on it's head
         {
+            levelManager.IncreaseKilled(1);
             Destroy(col.transform.parent.gameObject);
-            GetComponent<Rigidbody>().AddForce(forceVec, ForceMode.Impulse); // Gives the player a slight "bounce" effect after killing an enemy
+            rb.AddForce(forceVec, ForceMode.Impulse); // Gives the player a slight "bounce" effect after killing an enemy
         }
 
         if(col.gameObject.layer == LayerMask.NameToLayer("Weak Point")) {
             Destroy(col.gameObject);
+            levelManager.IncreaseKilled(1);
 		}
 
         else if (col.gameObject.name == "DamageHitbox")
