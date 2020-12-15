@@ -155,15 +155,6 @@ public class Player : MonoBehaviour
             Destroy(col.gameObject);
         }
 
-        //Throwable powerup
-        if (col.gameObject.name == "Throwable Powerup(Clone)")
-        {
-            Debug.Log("Player hit throwable powerup");
-            gameObject.AddComponent<ThrowablePowerup>();
-            currentPowerup = gameObject.GetComponent<ThrowablePowerup>();
-            Destroy(col.gameObject);
-        }
-
         // Healthup powerup
         if(col.gameObject.name == "HealthUp") {
             Destroy(col.gameObject);

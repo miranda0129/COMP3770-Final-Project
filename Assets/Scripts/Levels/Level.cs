@@ -20,6 +20,9 @@ public class Level : MonoBehaviour
     public GameObject playerPrefab;
     public Player player;
     public int score;
+
+    public int playerLives = 5;
+
     private SmoothFollowCam cam;
     private LevelGenerator levelGenerator;
     private bool keepPolling = true;
@@ -96,8 +99,13 @@ public class Level : MonoBehaviour
 	}
 
     public void RespawnPlayer() {
+        if(player.gameObject != null) Destroy(player.gameObject);
+        else playerLives--;
 
-        if(player != null) Destroy(player.gameObject);
+        // Game Over
+        if(playerLives <= 0) {
+            LoadMainMenu();         // can change..
+		}
         GameObject newObj = Instantiate(playerPrefab);
         player = newObj.GetComponent<Player>();
         newObj.transform.position = levelGenerator.GetPlayerSpawnPosition();
