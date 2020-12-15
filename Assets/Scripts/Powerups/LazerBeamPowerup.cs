@@ -17,6 +17,7 @@ public class LazerBeamPowerup : Powerup
         base.Start();
         pew = Resources.Load<AudioClip>("Audio Clips/laser_pew"); //load audio clip
         player.SetMaterial(player.powerupMats[1]);
+        levelManager = GameObject.Find("Level").GetComponent<Level>();
 
         //line renderer prep
         lineRenderer = gameObject.GetComponent<LineRenderer>();

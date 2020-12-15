@@ -20,6 +20,7 @@ public class Level : MonoBehaviour
     public GameObject playerPrefab;
     public Player player;
     public int score;
+    public int enemiesKilled;
 
     public int playerLives = 10;
 
@@ -28,9 +29,10 @@ public class Level : MonoBehaviour
     private bool keepPolling = true;
     private bool levelLoaded = false;
     private bool levelComplete = false;
+    private bool isPaused = false;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         levels++;
         levelGenerator = gameObject.GetComponent<LevelGenerator>();
@@ -139,9 +141,26 @@ public class Level : MonoBehaviour
         if (levels < totalLevels) SceneManager.LoadScene(levels);
         else SceneManager.LoadScene(0);
     }
+    
+    public void IncreaseKilled(int newScore) { enemiesKilled += newScore; }
 
-    public void LoadMainMenu() {
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("Scenes/Main Menu");
+    }
 
-        SceneManager.LoadScene(0);
-	}
+    public void PauseButton()
+    {
+        if (!isPaused)
+        {
+            Time.timeScale = 0;
+            isPaused = true;
+        }
+        if (isPaused)
+        {
+            Time.timeScale = 1;
+            isPaused = false;
+        }
+    }
+
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -103,10 +103,8 @@ public class Player : MonoBehaviour
             Debug.Log("Player was damaged by projectile.");
             
             Destroy(col.gameObject);
-            if (!isShielded)
-            {
-                TakeDamage();
-            }
+            TakeDamage();
+
 
             //StartCoroutine(iFrames(invincibilityTimeOnHit));
         }
@@ -125,10 +123,8 @@ public class Player : MonoBehaviour
         {
             // Damage the player
             Debug.Log("Player was damaged by enemy contact.");
-            if (!isShielded)
-            {
-                TakeDamage();
-            }
+            TakeDamage();
+          
         }
 
     }
