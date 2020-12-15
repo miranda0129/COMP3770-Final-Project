@@ -78,6 +78,7 @@ public class Level : MonoBehaviour
         
     }
 
+    // As in start up the level...
 	private void LoadLevel() {
 
         // Initialize camera
@@ -148,6 +149,7 @@ public class Level : MonoBehaviour
     public void LoadMainMenu()
     {
         SceneManager.LoadScene("Scenes/Main Menu");
+        PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + score);
     }
 
     public void PauseButton()
