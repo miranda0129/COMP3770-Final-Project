@@ -1,6 +1,8 @@
 # COMP3770-Final-Project
 *a side scroller platformer game similar to Super Mario made in Unity with C#*
 
+[link to our video presentation](https://www.youtube.com/watch?v=eY-oHh7rnyo)
+
 Main game elements include:
 ## The Player
 * moves with wasd
